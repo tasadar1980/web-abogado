@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BCTA | Bufete César Toloza & Asociados</title>
+    <style>
+        :root {
+            --azul-premium: #0a192f;
+            --azul-secundario: #112240;
+            --dorado-firma: #c5a059;
+            --gris-suave: #f5f7fa;
+            --blanco: #ffffff;
+            --texto-claro: #ccd6f6;
+            --texto-oscuro: #1f2937;
+            --gris-linea: #e5e7eb;
+            --sombra: 0 15px 35px rgba(0, 0, 0, 0.12);
+            --radio: 10px;
+            --ancho-max: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Roboto, sans-serif;
+            background: var(--gris-suave);
+            color: var(--texto-oscuro);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(92%, var(--ancho-max));
+            margin: 0 auto;
+        }
+
+        .navbar {
+            background: rgba(10, 25, 47, 0.98);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .navbar-inner {
+            min-height: 82px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .brand-mini {
+            color: var(--dorado-firma);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        .brand-name {
+            color: var(--blanco);
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .brand-name span {
+            color: var(--dorado-firma);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item {
+            color: var(--texto-claro);
+            font-size: 0.9rem;
+            padding: 12px 14px;
+            border-radius: 6px;
+            transition: 0.25s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--blanco);
+        }
+
+        .nav-cta {
+            border: 1px solid var(--dorado-firma);
+            color: var(--dorado-firma);
+            font-weight: 700;
+        }
+
+        .nav-cta:hover {
+            background: var(--dorado-firma);
+            color: var(--azul-premium);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: #fff;
+            border-radius: 3px;
+            transition: 0.3s ease;
+        }
+
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .hero {
+            background:
+                linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.88)),
+                linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+            color: var(--blanco);
+            padding: 90px 0 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: relative;
+            padding: 0 40px;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeSlide 1.15s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(22px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 8px 14px;
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            color: var(--dorado-firma);
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+
+        .hero h1 {
+            margin: 0 0 18px;
+            font-size: clamp(2.1rem, 5vw, 3.7rem);
+            line-height: 1.12;
+        }
+
+        .hero p {
+            margin: 0 0 30px;
+            max-width: 760px;
+            color: var(--texto-claro);
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: 0.25s ease;
+            text-transform: uppercase;
+            font-size: 0.88rem;
+            letter-spacing: 0.4px;
+        }
+
+        .btn-primary {
+            background: var(--dorado-firma);
+            color: var(--azul-premium);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.18);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--blanco);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-panel {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 3px solid var(--dorado-firma);
+            border-radius: var(--radio);
+            padding: 28px;
+            box-shadow: var(--sombra);
+        }
+
+        .hero-panel h3 {
+            margin-top: 0;
+            margin-bottom: 14px;
+            font-size: 1.15rem;
+        }
+
+        .hero-panel p {
+            margin-bottom: 0;
+            font-size: 0.98rem;
+            line-height: 1.65;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--blanco);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: 0.25s ease;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-btn:hover {
+            background: rgba(197, 160, 89, 0.18);
+            border-color: var(--dorado-firma);
+            color: var(--dorado-firma);
+        }
+
+        .slider-btn.prev {
+            left: -24px;
+        }
+
+        .slider-btn.next {
+            right: -24px;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.28);
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .dot.active {
+            background: var(--dorado-firma);
+            transform: scale(1.1);
+        }
+
+        .pause-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: var(--texto-claro);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s ease;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .pause-btn:hover {
+            border-color: var(--dorado-firma);
+            color: var(--dorado-firma);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .servicios-wrap {
+            margin-top: -55px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .grid-servicios {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--blanco);
+            padding: 34px 26px;
+            border-radius: var(--radio);
+            box-shadow: var(--sombra);
+            border-top: 5px solid var(--dorado-firma);
+            text-align: left;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: var(--azul-premium);
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            margin: 0;
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 42px;
+        }
+
+        .section-header .eyebrow {
+            color: var(--dorado-firma);
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .section-header h2 {
+            margin: 0 0 14px;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            color: var(--azul-premium);
+        }
+
+        .section-header p {
+            margin: 0;
+            color: #4b5563;
+            line-height: 1.75;
+        }
+
+        .diferenciales-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .diferencial {
+            background: #fff;
+            border: 1px solid var(--gris-linea);
+            border-radius: var(--radio);
+            padding: 24px;
+        }
+
+        .diferencial h4 {
+            margin: 0 0 10px;
+            color: var(--azul-premium);
+        }
+
+        .diferencial p {
+            margin: 0;
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        .cta-final {
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            color: var(--blanco);
+            border-radius: 18px;
+            padding: 42px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .cta-final h3 {
+            margin: 0 0 10px;
+            font-size: 1.8rem;
+        }
+
+        .cta-final p {
+            margin: 0;
+            color: var(--texto-claro);
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        footer {
+            margin-top: 80px;
+            background: var(--azul-premium);
+            color: var(--texto-claro);
+            padding: 50px 0 36px;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .footer-inner {
+            text-align: center;
+        }
+
+        .footer-brand {
+            color: var(--blanco);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .footer-brand span {
+            color: var(--dorado-firma);
+        }
+
+        .footer-copy {
+            margin-bottom: 16px;
+            color: var(--texto-claro);
+        }
+
+        .footer-admin {
+            color: var(--texto-claro);
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+
+        .footer-admin:hover {
+            opacity: 0.9;
+            color: var(--dorado-firma);
+        }
+
+        @media (max-width: 1100px) {
+            .slider-btn.prev {
+                left: -10px;
+            }
+
+            .slider-btn.next {
+                right: -10px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 82px;
+                left: 0;
+                width: 100%;
+                background: var(--azul-premium);
+                border-top: 1px solid rgba(255,255,255,0.05);
+                border-bottom: 1px solid rgba(197, 160, 89, 0.45);
+                flex-direction: column;
+                padding: 18px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-item {
+                width: 90%;
+                text-align: center;
+            }
+
+            .hero-grid,
+            .grid-servicios,
+            .diferenciales-grid,
+            .cta-final {
+                grid-template-columns: 1fr;
+                display: grid;
+            }
+
+            .cta-final {
+                text-align: center;
+            }
+
+            .hero-slider {
+                padding: 0 20px;
+            }
+
+            .slider-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 1rem;
+            }
+
+            .slider-btn.prev {
+                left: -2px;
+            }
+
+            .slider-btn.next {
+                right: -2px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 70px 0 100px;
+            }
+
+            .servicios-wrap {
+                margin-top: -35px;
+            }
+
+            .card,
+            .diferencial,
+            .hero-panel {
+                padding: 24px 20px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-slider {
+                padding: 0 10px;
+            }
+
+            .slider-btn {
+                top: auto;
+                bottom: -6px;
+                transform: none;
+            }
+
+            .slider-btn.prev {
+                left: 10px;
+            }
+
+            .slider-btn.next {
+                right: 10px;
+            }
+
+            .slider-controls {
+                margin-top: 34px;
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <div class="brand">
+                <div class="brand-mini">Estudio Jurídico</div>
+                <div class="brand-name">BCTA <span>| César Toloza & Asociados</span></div>
+            </div>
+
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-menu" id="nav-list">
+                <a href="#" class="nav-item">Inicio</a>
+                <a href="#servicios" class="nav-item">Servicios</a>
+                <a href="#areas" class="nav-item">Áreas de práctica</a>
+                <a href="#seguimiento" class="nav-item">Seguimiento</a>
+                <a href="/usuarios" class="nav-item nav-cta">Acceso clientes</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-slider" id="hero-slider">
+
+            <div class="slide active">
+                <div class="hero-grid">
+                    <div>
+                        <div class="hero-tag">Asesoría jurídica con seguimiento profesional</div>
+                        <h1>Defensa legal y gestión estratégica para personas y empresas</h1>
+                        <p>
+                            En BCTA combinamos experiencia jurídica, evaluación inicial de casos
+                            y una atención digital más ordenada para entregar respuestas claras
+                            y una mejor experiencia para cada cliente.
+                        </p>
+
+                        <div class="hero-actions">
+                            <a href="/usuarios" class="btn btn-primary">Evaluación inicial</a>
+                            <a href="#servicios" class="btn btn-secondary">Conocer servicios</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-panel">
+                        <h3>Defensa con criterio y estructura</h3>
+                        <p>
+                            Una propuesta jurídica que no solo busca responder técnicamente,
+                            sino también ordenar la atención, el seguimiento y la comunicación.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="hero-grid">
+                    <div>
+                        <div class="hero-tag">Seguimiento de causas</div>
+                        <h1>Control, trazabilidad y gestión profesional del trabajo jurídico</h1>
+                        <p>
+                            El estudio busca avanzar con una lógica más responsable:
+                            mejor organización documental, seguimiento interno y control
+                            de tareas clave para cada caso.
+                        </p>
+
+                        <div class="hero-actions">
+                            <a href="/usuarios" class="btn btn-primary">Ingresar caso</a>
+                            <a href="#seguimiento" class="btn btn-secondary">Ver enfoque</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-panel">
+                        <h3>Una forma más ordenada de trabajar</h3>
+                        <p>
+                            El objetivo es evitar olvidos, pérdida de información y desorden,
+                            fortaleciendo la calidad del servicio entregado al cliente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="hero-grid">
+                    <div>
+                        <div class="hero-tag">Portal de clientes y atención digital</div>
+                        <h1>Ingrese sus antecedentes y reciba una evaluación inicial</h1>
+                        <p>
+                            El cliente podrá crear su cuenta, describir su situación,
+                            adjuntar documentos y dar inicio a una revisión preliminar
+                            de su caso de manera más clara y estructurada.
+                        </p>
+
+                        <div class="hero-actions">
+                            <a href="/usuarios" class="btn btn-primary">Acceso clientes</a>
+                            <a href="#areas" class="btn btn-secondary">Áreas de práctica</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-panel">
+                        <h3>Primer contacto más simple</h3>
+                        <p>
+                            Una entrada digital ordenada permite revisar mejor los antecedentes
+                            y orientar de forma más profesional los siguientes pasos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="slider-btn prev" onclick="moveSlide(-1)" aria-label="Slide anterior">❮</button>
+            <button class="slider-btn next" onclick="moveSlide(1)" aria-label="Slide siguiente">❯</button>
+
+            <div class="slider-controls">
+                <div class="slider-dots">
+                    <span class="dot active" onclick="goToSlide(0)"></span>
+                    <span class="dot" onclick="goToSlide(1)"></span>
+                    <span class="dot" onclick="goToSlide(2)"></span>
+                </div>
+
+                <button class="pause-btn" id="pause-btn" onclick="toggleAutoSlide()" aria-label="Pausar o reanudar slider">❚❚</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="servicios-wrap container" id="servicios">
+        <div class="grid-servicios">
+            <article class="card">
+                <h3>Áreas de práctica</h3>
+                <p>
+                    Asesoría y representación en distintas materias jurídicas, con enfoque
+                    serio, estratégico y orientado a encontrar la mejor ruta para cada caso.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>Evaluación inicial</h3>
+                <p>
+                    Revisión preliminar del caso para orientar al cliente, solicitar
+                    antecedentes y definir si corresponde avanzar a consulta formal.
+                </p>
+            </article>
+
+            <article class="card" id="seguimiento">
+                <h3>Seguimiento y gestión</h3>
+                <p>
+                    Orden documental, control interno y trazabilidad básica para entregar
+                    una atención más responsable, clara y sostenida en el tiempo.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section" id="areas">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Diferenciadores</span>
+                <h2>Una atención jurídica más ordenada y más clara</h2>
+                <p>
+                    No se trata solo de atender un caso, sino de sostenerlo con criterio,
+                    organización y seguimiento. Esa mezcla entre capacidad jurídica y gestión
+                    profesional es parte del valor que el estudio busca entregar.
+                </p>
+            </div>
+
+            <div class="diferenciales-grid">
+                <article class="diferencial">
+                    <h4>Rigurosidad profesional</h4>
+                    <p>
+                        Cada consulta se analiza con enfoque técnico, cuidando forma, fondo
+                        y pertinencia según la materia jurídica involucrada.
+                    </p>
+                </article>
+
+                <article class="diferencial">
+                    <h4>Orden y trazabilidad</h4>
+                    <p>
+                        El proyecto apunta a evitar desorden, pérdida de documentos y falta
+                        de seguimiento, mejorando la experiencia del cliente y del estudio.
+                    </p>
+                </article>
+
+                <article class="diferencial">
+                    <h4>Atención digital estructurada</h4>
+                    <p>
+                        El uso de herramientas digitales busca facilitar el ingreso de casos,
+                        la revisión de antecedentes y la continuidad de la atención.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="cta-final">
+                <div>
+                    <h3>Cuéntenos su caso y reciba una evaluación inicial</h3>
+                    <p>
+                        Ingrese sus antecedentes de forma ordenada para que el estudio pueda
+                        revisar su situación y definir los próximos pasos.
+                    </p>
+                </div>
+                <div>
+                    <a href="/usuarios" class="btn btn-primary">Ingresar al portal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-brand">BCTA <span>| César Toloza & Asociados</span></div>
+            <div class="footer-copy">© 2026 BCTA - Bufete César Toloza & Asociados.</div>
+            <a href="/intranet" class="footer-admin">Acceso Administrativo 🔐</a>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenu = document.getElementById("mobile-menu");
+        const navList = document.getElementById("nav-list");
+
+        mobileMenu.addEventListener("click", () => {
+            mobileMenu.classList.toggle("open");
+            navList.classList.toggle("active");
+        });
+
+        const slider = document.getElementById("hero-slider");
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+        const pauseBtn = document.getElementById("pause-btn");
+
+        let currentSlide = 0;
+        let autoSlide = null;
+        let isPaused = false;
+        const slideInterval = 10000;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === index);
+            });
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle("active", i === index);
+            });
+
+            currentSlide = index;
+        }
+
+        function moveSlide(direction) {
+            let newIndex = currentSlide + direction;
+
+            if (newIndex < 0) {
+                newIndex = slides.length - 1;
+            }
+
+            if (newIndex >= slides.length) {
+                newIndex = 0;
+            }
+
+            showSlide(newIndex);
+
+            if (!isPaused) {
+                resetAutoSlide();
+            }
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+
+            if (!isPaused) {
+                resetAutoSlide();
+            }
+        }
+
+        function startAutoSlide() {
+            if (isPaused) return;
+
+            autoSlide = setInterval(() => {
+                let newIndex = currentSlide + 1;
+                if (newIndex >= slides.length) {
+                    newIndex = 0;
+                }
+                showSlide(newIndex);
+            }, slideInterval);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlide);
+            autoSlide = null;
+        }
+
+        function resetAutoSlide() {
+            stopAutoSlide();
+            startAutoSlide();
+        }
+
+        function toggleAutoSlide() {
+            isPaused = !isPaused;
+
+            if (isPaused) {
+                stopAutoSlide();
+                pauseBtn.textContent = "▶";
+                pauseBtn.setAttribute("aria-label", "Reanudar slider");
+            } else {
+                startAutoSlide();
+                pauseBtn.textContent = "❚❚";
+                pauseBtn.setAttribute("aria-label", "Pausar slider");
+            }
+        }
+
+        slider.addEventListener("mouseenter", () => {
+            if (!isPaused) {
+                stopAutoSlide();
+            }
+        });
+
+        slider.addEventListener("mouseleave", () => {
+            if (!isPaused) {
+                startAutoSlide();
+            }
+        });
+
+        showSlide(0);
+        startAutoSlide();
+    </script>
+</body>
+</html>
