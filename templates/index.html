@@ -507,6 +507,118 @@
             color: var(--dorado-firma);
         }
 
+        .cierre-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 10, 20, 0.82);
+            backdrop-filter: blur(10px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .cierre-card {
+            width: 100%;
+            max-width: 860px;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.98), rgba(17, 34, 64, 0.98));
+            border: 1px solid rgba(197, 160, 89, 0.30);
+            border-top: 4px solid var(--dorado-firma);
+            border-radius: 22px;
+            padding: 48px 38px;
+            text-align: center;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+            color: var(--blanco);
+        }
+
+        .cierre-badge {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 18px;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            border-radius: 999px;
+            color: var(--dorado-firma);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .cierre-card h1 {
+            margin: 0 0 18px;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1.15;
+        }
+
+        .cierre-card p {
+            margin: 0 auto 14px;
+            max-width: 720px;
+            color: var(--texto-claro);
+            font-size: 1.08rem;
+            line-height: 1.8;
+        }
+
+        .cierre-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 28px;
+        }
+
+        .cierre-input {
+            width: 100%;
+            max-width: 360px;
+            padding: 15px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--blanco);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .cierre-input::placeholder {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .cierre-input:focus {
+            border-color: var(--dorado-firma);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
+        }
+
+        .btn-cierre {
+            display: inline-block;
+            padding: 15px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            transition: 0.25s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-cierre-principal {
+            background: var(--dorado-firma);
+            color: var(--azul-premium);
+        }
+
+        .btn-cierre-principal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.25);
+        }
+
+        .cierre-error {
+            margin-top: 16px;
+            color: #fecaca;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
         @media (max-width: 1100px) {
             .slider-btn.prev {
                 left: -10px;
@@ -618,10 +730,57 @@
                 flex-direction: column;
                 gap: 12px;
             }
+
+            .cierre-card {
+                padding: 36px 22px;
+            }
+
+            .cierre-form {
+                flex-direction: column;
+            }
+
+            .cierre-input,
+            .btn-cierre {
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+
+    {% if mostrar_acceso %}
+    <div class="cierre-overlay">
+        <div class="cierre-card">
+            <div class="cierre-badge">Acceso temporalmente restringido</div>
+            <h1>Sitio principal temporalmente cerrado</h1>
+            <p>
+                Esta versión del sitio se encuentra en etapa de revisión, ajustes y carga interna.
+                Por el momento, la navegación principal queda bloqueada mientras se terminan las validaciones.
+            </p>
+            <p>
+                El objetivo es resguardar el acceso y evitar el uso de una versión aún en desarrollo.
+            </p>
+
+            <form class="cierre-form" method="post" action="/">
+                <input
+                    type="password"
+                    name="password"
+                    class="cierre-input"
+                    placeholder="Ingresar contraseña"
+                    autocomplete="current-password"
+                    required
+                >
+                <button type="submit" class="btn-cierre btn-cierre-principal">Ingresar</button>
+            </form>
+
+            {% if error %}
+                <div class="cierre-error">{{ error }}</div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
 
     <nav class="navbar">
         <div class="container navbar-inner">
@@ -637,7 +796,7 @@
             </div>
 
             <div class="nav-menu" id="nav-list">
-                <a href="#" class="nav-item">Inicio</a>
+                <a href="/home" class="nav-item">Inicio</a>
                 <a href="#servicios" class="nav-item">Servicios</a>
                 <a href="#areas" class="nav-item">Áreas de práctica</a>
                 <a href="#seguimiento" class="nav-item">Seguimiento</a>
@@ -842,10 +1001,12 @@
         const mobileMenu = document.getElementById("mobile-menu");
         const navList = document.getElementById("nav-list");
 
-        mobileMenu.addEventListener("click", () => {
-            mobileMenu.classList.toggle("open");
-            navList.classList.toggle("active");
-        });
+        if (mobileMenu && navList) {
+            mobileMenu.addEventListener("click", () => {
+                mobileMenu.classList.toggle("open");
+                navList.classList.toggle("active");
+            });
+        }
 
         const slider = document.getElementById("hero-slider");
         const slides = document.querySelectorAll(".slide");
@@ -896,7 +1057,9 @@
         }
 
         function startAutoSlide() {
-            if (isPaused) return;
+            if (isPaused || slides.length === 0) return;
+
+            stopAutoSlide();
 
             autoSlide = setInterval(() => {
                 let newIndex = currentSlide + 1;
@@ -908,8 +1071,10 @@
         }
 
         function stopAutoSlide() {
-            clearInterval(autoSlide);
-            autoSlide = null;
+            if (autoSlide) {
+                clearInterval(autoSlide);
+                autoSlide = null;
+            }
         }
 
         function resetAutoSlide() {
@@ -922,29 +1087,37 @@
 
             if (isPaused) {
                 stopAutoSlide();
-                pauseBtn.textContent = "▶";
-                pauseBtn.setAttribute("aria-label", "Reanudar slider");
+                if (pauseBtn) {
+                    pauseBtn.textContent = "▶";
+                    pauseBtn.setAttribute("aria-label", "Reanudar slider");
+                }
             } else {
                 startAutoSlide();
-                pauseBtn.textContent = "❚❚";
-                pauseBtn.setAttribute("aria-label", "Pausar slider");
+                if (pauseBtn) {
+                    pauseBtn.textContent = "❚❚";
+                    pauseBtn.setAttribute("aria-label", "Pausar slider");
+                }
             }
         }
 
-        slider.addEventListener("mouseenter", () => {
-            if (!isPaused) {
-                stopAutoSlide();
-            }
-        });
+        if (slider) {
+            slider.addEventListener("mouseenter", () => {
+                if (!isPaused) {
+                    stopAutoSlide();
+                }
+            });
 
-        slider.addEventListener("mouseleave", () => {
-            if (!isPaused) {
-                startAutoSlide();
-            }
-        });
+            slider.addEventListener("mouseleave", () => {
+                if (!isPaused) {
+                    startAutoSlide();
+                }
+            });
+        }
 
-        showSlide(0);
-        startAutoSlide();
+        if (slides.length > 0) {
+            showSlide(0);
+            startAutoSlide();
+        }
     </script>
 </body>
 </html>

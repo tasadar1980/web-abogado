@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Acceso privado | Sitio en construcción</title>
+    <title>Acceso privado | BCTA</title>
     <style>
         * {
             box-sizing: border-box;
@@ -11,7 +11,7 @@
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: "Segoe UI", Arial, sans-serif;
             background: linear-gradient(135deg, #081225 0%, #0f172a 100%);
             color: #f8fafc;
             min-height: 100vh;
@@ -29,6 +29,7 @@
         .card {
             background: rgba(17, 24, 39, 0.96);
             border: 1px solid rgba(148, 163, 184, 0.12);
+            border-top: 3px solid #c5a059;
             border-radius: 24px;
             padding: 56px 48px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
@@ -41,7 +42,7 @@
             border: 1px solid #334155;
             border-radius: 999px;
             margin-bottom: 26px;
-            color: #fbbf24;
+            color: #c5a059;
             font-weight: 700;
             font-size: 0.95rem;
             letter-spacing: 0.2px;
@@ -49,7 +50,7 @@
 
         h1 {
             margin: 0 0 22px;
-            font-size: clamp(2.2rem, 4vw, 3.6rem);
+            font-size: clamp(2.2rem, 4vw, 3.3rem);
             line-height: 1.15;
             color: #ffffff;
         }
@@ -57,7 +58,7 @@
         p {
             margin: 0 auto 16px;
             max-width: 720px;
-            font-size: 1.18rem;
+            font-size: 1.12rem;
             line-height: 1.75;
             color: #cbd5e1;
         }
@@ -87,15 +88,15 @@
         }
 
         .password-input:focus {
-            border-color: #fbbf24;
-            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.12);
+            border-color: #c5a059;
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
         }
 
         .btn {
             padding: 16px 24px;
             border: none;
             border-radius: 12px;
-            background: #fbbf24;
+            background: #c5a059;
             color: #111827;
             font-weight: 700;
             font-size: 1rem;
@@ -138,7 +139,7 @@
             }
 
             p {
-                font-size: 1.05rem;
+                font-size: 1.02rem;
             }
         }
     </style>
@@ -146,17 +147,17 @@
 <body>
     <div class="container">
         <div class="card">
-            <div class="tag">Sitio en construcción</div>
+            <div class="tag">Acceso privado</div>
 
-            <h1>Esta página web está en construcción</h1>
+            <h1>Acceso interno de revisión</h1>
 
             <p>
-                Para revisar los avances del desarrollo, por favor introduzca la contraseña
-                de ingreso en el campo inferior.
+                Esta versión del sitio corresponde a un entorno interno de trabajo
+                destinado a revisión y validación de avances.
             </p>
 
             <p>
-                Este acceso es privado y corresponde a una versión interna de trabajo del proyecto.
+                Para ingresar, utilice la contraseña de acceso habilitada para esta etapa.
             </p>
 
             <form class="form-box" method="post">
@@ -175,7 +176,7 @@
             {% endif %}
 
             <div class="note">
-                Acceso restringido solo para revisión de avances.
+                Acceso restringido para revisión interna.
             </div>
         </div>
     </div>

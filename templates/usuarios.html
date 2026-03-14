@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portal de Clientes | BCTA</title>
     <style>
         :root {
@@ -76,16 +76,24 @@
             display: inline-block;
             padding: 14px 22px;
             border: 1px solid var(--dorado);
+            background: transparent;
             color: var(--dorado);
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
+            font-family: inherit;
+            cursor: pointer;
             transition: 0.25s ease;
         }
 
         .btn:hover {
             background: var(--dorado);
             color: var(--azul);
+        }
+
+        .logout-form {
+            margin: 0;
         }
     </style>
 </head>
@@ -95,23 +103,46 @@
             <h1>Portal de Clientes</h1>
 
             <p>
-                Aquí los usuarios podrán crear su cuenta, ingresar su caso,
-                adjuntar antecedentes y hacer seguimiento de su solicitud.
+                Aquí los usuarios podrán ingresar sus antecedentes,
+                adjuntar documentación y dar seguimiento a su solicitud.
             </p>
 
             <p>
-                Esta pantalla será la base del futuro acceso de clientes del estudio.
+                Esta sección corresponde al acceso de clientes y se encuentra en etapa de preparación.
             </p>
 
             <div class="estado">
-                ESTADO: módulo en construcción
+                ESTADO: módulo en preparación
             </div>
 
             <div class="acciones">
                 <a class="btn" href="/home">← Volver al inicio</a>
-                <a class="btn" href="/salir">Cerrar acceso</a>
+
+                <form class="logout-form" id="logout-form" method="post" action="/salir">
+                    <button class="btn" type="submit">Cerrar acceso</button>
+                </form>
             </div>
         </div>
     </div>
+
+    <script>
+        const logoutForm = document.getElementById("logout-form");
+
+        if (logoutForm) {
+            logoutForm.addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                try {
+                    await fetch("/salir", {
+                        method: "POST",
+                        credentials: "same-origin"
+                    });
+                } catch (error) {
+                }
+
+                window.location.href = "/";
+            });
+        }
+    </script>
 </body>
 </html>

@@ -18,13 +18,15 @@ if not CLAVE_ACCESO:
 
 app.secret_key = SECRET_KEY
 
+MODO_CIERRE = True
+
 
 @app.route("/", methods=["GET", "POST"])
 def acceso():
-    error = None
-
     if session.get("autorizado"):
         return redirect(url_for("home"))
+
+    error = None
 
     if request.method == "POST":
         password = request.form.get("password", "").strip()
@@ -35,14 +37,23 @@ def acceso():
         else:
             error = "Contraseña incorrecta."
 
-    return render_template("web_abogado.html", error=error)
+    return render_template(
+        "index.html",
+        mostrar_acceso=MODO_CIERRE,
+        error=error
+    )
 
 
 @app.route("/home")
 def home():
     if not session.get("autorizado"):
         return redirect(url_for("acceso"))
-    return render_template("index.html")
+
+    return render_template(
+        "index.html",
+        mostrar_acceso=False,
+        error=None
+    )
 
 
 @app.route("/usuarios")
@@ -59,10 +70,10 @@ def intranet():
     return render_template("intranet.html")
 
 
-@app.route("/salir")
+@app.route("/salir", methods=["POST"])
 def salir():
     session.clear()
-    return redirect(url_for("acceso"))
+    return ("", 204)
 
 
 if __name__ == "__main__":
