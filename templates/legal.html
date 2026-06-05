@@ -1,0 +1,545 @@
+{% extends "base.html" %}
+{% block title %}Política de Privacidad y Condiciones de Uso | BCTA Abogados{% endblock %}
+{% block body_class %}legal-page-layout{% endblock %}
+
+{% block content %}
+<style>
+    .legal-page {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.08), transparent 60%),
+                    linear-gradient(135deg, var(--azul-premium) 0%, var(--azul-secundario) 100%);
+        padding: 120px 0 40px;
+        min-height: calc(100vh - 105px);
+        box-sizing: border-box;
+    }
+
+    .legal-shell {
+        width: min(92%, var(--ancho-max));
+        margin: 0 auto;
+    }
+
+    .legal-header {
+        text-align: center;
+        margin-bottom: clamp(18px, 2.4vw, 30px);
+    }
+
+    .legal-header h1 {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        color: var(--dorado-firma);
+        margin: 0 0 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .legal-header p {
+        color: var(--texto-claro);
+        font-size: clamp(1rem, 1.5vw, 1.15rem);
+        max-width: 760px;
+        margin: 0 auto;
+        opacity: 0.9;
+    }
+
+    .legal-layout {
+        display: grid;
+        grid-template-columns: minmax(260px, 340px) minmax(520px, 700px);
+        grid-template-areas:
+            "selector titulo"
+            "selector contenido"
+            ". cta";
+        gap: clamp(10px, 1.4vh, 16px) clamp(34px, 4vw, 58px);
+        align-items: start;
+        justify-content: center;
+        margin-top: clamp(34px, 4.8vh, 52px);
+    }
+
+    .legal-selector-wrap {
+        grid-area: selector;
+        width: 100%;
+        margin: 0;
+        padding-top: clamp(2px, 0.6vh, 8px);
+    }
+
+    .legal-selector-label {
+        display: block;
+        color: var(--dorado-firma);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        text-align: left;
+        opacity: 0.92;
+    }
+
+    .legal-selector-shell {
+        position: relative;
+    }
+
+    .legal-selector-shell::after {
+        content: "⌄";
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-54%);
+        color: var(--dorado-firma);
+        font-size: 1.1rem;
+        line-height: 1;
+        pointer-events: none;
+    }
+
+    .legal-topic-select {
+        width: 100%;
+        appearance: none;
+        -webkit-appearance: none;
+        background: rgba(10, 25, 47, 0.62);
+        border: 1px solid rgba(197, 160, 89, 0.42);
+        border-radius: 14px;
+        color: var(--blanco);
+        font-family: inherit;
+        font-size: clamp(0.92rem, 1vw, 1rem);
+        font-weight: 700;
+        line-height: 1.2;
+        padding: 15px 48px 15px 18px;
+        cursor: pointer;
+        outline: none;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+        transition: border-color 0.24s ease, background 0.24s ease, box-shadow 0.24s ease;
+    }
+
+    .legal-topic-select:hover,
+    .legal-topic-select:focus {
+        border-color: var(--dorado-firma);
+        background: rgba(10, 25, 47, 0.78);
+        box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
+    }
+
+    .legal-topic-select option {
+        background: var(--azul-premium);
+        color: var(--blanco);
+    }
+
+    .legal-fixed-title {
+        grid-area: titulo;
+        color: var(--blanco);
+        font-size: clamp(1.45rem, 2.25vw, 2.25rem);
+        line-height: 1.08;
+        margin: 0 0 clamp(8px, 1.2vh, 14px);
+        letter-spacing: -0.3px;
+    }
+
+    .legal-content-area {
+        grid-area: contenido;
+        position: relative;
+        width: 100%;
+        min-height: clamp(260px, 30vh, 340px);
+        height: clamp(260px, 30vh, 340px);
+        max-height: clamp(260px, 30vh, 340px);
+        display: block;
+        overflow: hidden;
+    }
+
+    .legal-content-item {
+        position: absolute;
+        inset: 0;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(8px);
+        pointer-events: none;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 14px;
+        padding-bottom: 12px;
+        box-sizing: border-box;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(197, 160, 89, 0.72) rgba(255, 255, 255, 0.06);
+        -ms-overflow-style: auto;
+        overscroll-behavior: contain;
+        transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0.28s;
+    }
+
+    .legal-content-item::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .legal-content-item::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 999px;
+    }
+
+    .legal-content-item::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, rgba(197, 160, 89, 0.88), rgba(197, 160, 89, 0.48));
+        border-radius: 999px;
+    }
+
+    .legal-content-item::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, rgba(212, 178, 113, 0.96), rgba(197, 160, 89, 0.62));
+    }
+
+    .legal-content-item.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+        transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0s;
+    }
+
+    .legal-content-item h2 {
+        display: none;
+    }
+
+    .legal-content-item p {
+        color: var(--texto-claro);
+        font-size: clamp(0.88rem, 1vw, 1rem);
+        line-height: 1.55;
+        margin: 0;
+        opacity: 0.92;
+    }
+
+    .legal-info-cta-wrap {
+        grid-area: cta;
+        text-align: left;
+        margin-top: clamp(8px, 1.2vh, 14px);
+    }
+
+    .legal-info-cta {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 8px;
+        background: var(--dorado-firma);
+        color: var(--azul-premium);
+        font-size: 0.92rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .legal-info-cta:hover {
+        background: #d4b271;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+    }
+
+
+    @keyframes legalFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (min-width: 981px) {
+        body.legal-page-layout {
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.legal-page-layout .legal-page {
+            flex: 1;
+            min-height: 0;
+            padding-top: 80px;
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        body.legal-page-layout .legal-shell {
+            transform: translateY(clamp(-32px, -3.6vh, -18px));
+        }
+    }
+
+    @media (min-width: 981px) and (max-width: 1536px), (min-width: 981px) and (max-height: 900px) {
+        body.legal-page-layout .legal-page {
+            padding-top: 72px;
+            padding-bottom: 16px;
+        }
+
+        body.legal-page-layout .legal-shell {
+            width: min(90%, 1080px);
+            transform: translateY(clamp(-26px, -3vh, -16px));
+        }
+
+        .legal-header {
+            margin-bottom: clamp(12px, 1.8vw, 22px);
+        }
+
+        .legal-header h1 {
+            font-size: clamp(1.82rem, 4vh, 2.68rem);
+            margin-bottom: 8px;
+        }
+
+        .legal-header p {
+            font-size: clamp(0.84rem, 1.7vh, 1rem);
+            line-height: 1.38;
+            max-width: 700px;
+        }
+
+        .legal-layout {
+            grid-template-columns: minmax(235px, 300px) minmax(460px, 640px);
+            gap: clamp(8px, 1.1vh, 13px) clamp(26px, 3vw, 42px);
+            margin-top: clamp(22px, 3.4vh, 38px);
+        }
+
+        .legal-selector-label {
+            font-size: 0.7rem;
+            margin-bottom: 8px;
+        }
+
+        .legal-topic-select {
+            font-size: clamp(0.82rem, 1.5vh, 0.92rem);
+            padding: 12px 42px 12px 15px;
+            border-radius: 12px;
+        }
+
+        .legal-fixed-title {
+            font-size: clamp(1.25rem, 2.8vh, 1.8rem);
+            margin-bottom: 8px;
+        }
+
+        .legal-content-area {
+            min-height: clamp(225px, 29vh, 300px);
+            height: clamp(225px, 29vh, 300px);
+            max-height: clamp(225px, 29vh, 300px);
+        }
+
+        .legal-content-item p {
+            font-size: clamp(0.78rem, 1.45vh, 0.9rem);
+            line-height: 1.44;
+        }
+
+        .legal-info-cta-wrap {
+            margin-top: clamp(6px, 1vh, 10px);
+        }
+
+        .legal-info-cta {
+            padding: 10px 20px;
+            font-size: 0.82rem;
+        }
+    }
+
+    @media (min-width: 981px) and (max-width: 1400px) and (max-height: 800px) {
+        body.legal-page-layout .legal-page {
+            padding-top: 66px;
+            padding-bottom: 12px;
+        }
+
+        body.legal-page-layout .legal-shell {
+            width: min(90%, 1010px);
+            transform: translateY(-16px);
+        }
+
+        .legal-header h1 {
+            font-size: 2rem;
+        }
+
+        .legal-header p {
+            font-size: 0.82rem;
+            line-height: 1.32;
+        }
+
+        .legal-layout {
+            grid-template-columns: minmax(220px, 280px) minmax(430px, 590px);
+            gap: 8px 30px;
+            margin-top: 24px;
+        }
+
+        .legal-content-area {
+            min-height: 218px;
+            height: 218px;
+            max-height: 218px;
+        }
+
+        .legal-content-item p {
+            font-size: 0.76rem;
+            line-height: 1.38;
+        }
+    }
+
+    @media (max-width: 980px) {
+        .legal-page {
+            padding: 110px 0 48px;
+        }
+
+        .legal-layout {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "selector"
+                "titulo"
+                "contenido"
+                "cta";
+            gap: 32px;
+        }
+
+        .legal-selector-wrap {
+            width: min(100%, 560px);
+            margin: 0 auto;
+            padding-top: 0;
+        }
+
+        .legal-selector-label {
+            text-align: center;
+        }
+
+        .legal-fixed-title {
+            text-align: left;
+            margin-bottom: 0;
+        }
+
+        .legal-content-area {
+            min-height: auto;
+            height: auto;
+            max-height: none;
+            overflow: visible;
+        }
+
+        .legal-content-item {
+            overflow: visible;
+            padding-right: 0;
+            padding-bottom: 0;
+        }
+
+
+        .legal-info-cta-wrap {
+            grid-area: cta;
+        }
+    }
+</style>
+
+<main class="legal-page">
+    <div class="legal-shell">
+        <div class="legal-header">
+            <h1>Política de Privacidad y Condiciones de Uso</h1>
+            <p>El uso de este sitio web implica el conocimiento y aceptación de la presente Política de Privacidad y Condiciones de Uso de BCTA Abogados.</p>
+        </div>
+
+        <div class="legal-layout">
+            <div class="legal-selector-wrap">
+                <label class="legal-selector-label" for="legal-topic-select">Tema de la Política de Privacidad</label>
+                <div class="legal-selector-shell">
+                    <select class="legal-topic-select" id="legal-topic-select" aria-label="Seleccionar sección de la Política de Privacidad">
+                        <option value="0">1. Identificación del Titular</option>
+                        <option value="1">2. Objeto del Sitio</option>
+                        <option value="2">3. Ausencia de Asesoría Jurídica</option>
+                        <option value="3">4. Relación Abogado-Cliente</option>
+                        <option value="4">5. Confidencialidad</option>
+                        <option value="5">6. Protección de Datos Personales</option>
+                        <option value="6">7. Propiedad Intelectual</option>
+                        <option value="7">8. Uso del Sitio</option>
+                        <option value="8">9. Disponibilidad del Sitio</option>
+                        <option value="9">10. Enlaces externos</option>
+                        <option value="10">11. Cookies</option>
+                        <option value="11">12. Legislación aplicable y jurisdicción</option>
+                        <option value="12">13. Contacto</option>
+                        <option value="13">14. Información Sensible</option>
+                    </select>
+                </div>
+            </div>
+
+            <h2 class="legal-fixed-title" id="legal-fixed-title">Identificación del Titular</h2>
+
+            <section class="legal-content-area" aria-live="polite">
+                <article class="legal-content-item active" data-legal-content="0">
+                    <h2>Identificación del Titular</h2>
+                    <p>El presente sitio web es operado por BCTA Abogados, en adelante “el sitio” o “este sitio”, nombre de fantasía de Estudio Jurídico Cesar Toloza & Asociados SpA, RUT 78.407.572-9, sociedad por acciones constituida en Chile y dedicada a servicios jurídicos y representación legal.<br><br>El inicio de actividades ante el Servicio de Impuestos Internos consta con fecha 13-05-2026.<br><br>Para efectos de identificación general, la sociedad registra comuna de Providencia, ciudad de Santiago, Región Metropolitana de Santiago, Chile.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="1">
+                    <h2>Objeto del Sitio</h2>
+                    <p>El sitio tiene por finalidad entregar información general sobre BCTA Abogados, sus áreas de práctica, servicios profesionales y canales de contacto habilitados para clientes, potenciales clientes y usuarios interesados.<br><br>La información publicada tiene carácter informativo y no constituye, por sí sola, una propuesta contractual, asesoría jurídica personalizada ni garantía de resultado profesional.<br><br>BCTA podrá modificar, actualizar o retirar contenidos del sitio cuando lo estime necesario.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="2">
+                    <h2>Ausencia de Asesoría Jurídica</h2>
+                    <p>Los contenidos publicados en este sitio no constituyen asesoría legal, recomendación jurídica específica ni sustituyen una consulta profesional personalizada.<br><br>Toda información disponible debe entenderse como orientación general y no como análisis aplicable automáticamente a un caso concreto.<br><br>El usuario deberá solicitar evaluación jurídica profesional antes de adoptar decisiones basadas en la información publicada.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="3">
+                    <h2>Relación Abogado-Cliente</h2>
+                    <p>El envío de formularios, correos electrónicos, mensajes o solicitudes de contacto a través del sitio no genera automáticamente una relación abogado-cliente entre BCTA y el usuario.<br><br>Dicha relación solo se entenderá formada cuando exista aceptación expresa por parte de BCTA y, cuando corresponda, se formalicen los términos del servicio profesional.<br><br>BCTA podrá solicitar antecedentes adicionales antes de aceptar una asesoría, representación o gestión jurídica.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="4">
+                    <h2>Confidencialidad</h2>
+                    <p>BCTA adopta medidas razonables para resguardar la confidencialidad de la información proporcionada por los usuarios a través del sitio.<br><br>La información recibida será tratada conforme a criterios compatibles con el ejercicio profesional de la abogacía, los deberes de reserva aplicables y la normativa vigente.<br><br>El usuario reconoce que las comunicaciones electrónicas pueden presentar riesgos técnicos propios de internet.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="5">
+                    <h2>Protección de Datos Personales</h2>
+                    <p>Los datos personales proporcionados voluntariamente por los usuarios serán tratados para gestionar consultas, contacto profesional, evaluación preliminar de servicios, comunicaciones vinculadas al estudio y cumplimiento de obligaciones legales.<br><br>El envío de formularios o comunicaciones a través del sitio implica autorización para tratar dichos datos conforme a las finalidades indicadas en esta Política de Privacidad y Condiciones de Uso.<br><br>BCTA no comercializa ni cede datos personales a terceros, salvo obligación legal, autorización expresa del titular o necesidad vinculada a la prestación del servicio solicitado.<br><br>Los datos serán conservados solo por el tiempo necesario para gestionar la consulta, mantener antecedentes profesionales o cumplir obligaciones legales aplicables. El titular podrá solicitar el ejercicio de sus derechos conforme a la legislación chilena vigente.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="6">
+                    <h2>Propiedad Intelectual</h2>
+                    <p>Todos los contenidos presentes en este sitio, incluyendo textos, imágenes, logotipos, signos distintivos, estructura visual, diseño e identidad corporativa de BCTA, se encuentran protegidos por las normas de propiedad intelectual e industrial aplicables.<br><br>Queda prohibida su reproducción, distribución, modificación, comunicación pública o utilización total o parcial sin autorización previa y expresa de BCTA.<br><br>El uso del sitio no confiere derechos sobre marcas, diseños, contenidos o elementos protegidos.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="7">
+                    <h2>Uso del Sitio</h2>
+                    <p>El usuario se obliga a utilizar este sitio de forma lícita, adecuada, responsable y conforme a la normativa vigente.<br><br>Queda prohibido emplear el sitio para actos que afecten su funcionamiento, seguridad, disponibilidad, reputación, integridad técnica o la experiencia de otros usuarios.<br><br>BCTA podrá restringir, suspender o bloquear accesos ante usos indebidos, automatizaciones no autorizadas o conductas contrarias a derecho.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="8">
+                    <h2>Disponibilidad del Sitio</h2>
+                    <p>BCTA realiza esfuerzos razonables para mantener la continuidad, seguridad y disponibilidad del sitio.<br><br>Sin embargo, no garantiza funcionamiento permanente, ausencia absoluta de errores, interrupciones, fallas técnicas, problemas de conectividad o eventos fuera de su control.<br><br>BCTA no será responsable por daños derivados del uso indebido del sitio, indisponibilidad temporal, fuerza mayor, caso fortuito o servicios tecnológicos prestados por terceros.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="9">
+                    <h2>Enlaces externos</h2>
+                    <p>El sitio podrá contener enlaces a plataformas, redes sociales, sitios institucionales, herramientas de contacto u otros recursos de terceros con fines informativos, operativos o referenciales.<br><br>BCTA no controla ni asume responsabilidad por el contenido, disponibilidad, políticas de privacidad, seguridad o prácticas de dichos sitios externos.<br><br>El acceso a enlaces de terceros será realizado bajo responsabilidad del usuario.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="10">
+                    <h2>Cookies</h2>
+                    <p>Este sitio podrá utilizar cookies y tecnologías similares con fines funcionales, estadísticos, de seguridad, medición de tráfico y mejora de experiencia del usuario.<br><br>El usuario podrá configurar su navegador para restringir, bloquear o eliminar cookies, sin perjuicio de que algunas funciones del sitio puedan verse limitadas.<br><br>Este sitio utiliza Cloudflare Turnstile como mecanismo de verificación automática de seguridad y prevención de spam en sus formularios. Esta herramienta permite distinguir usuarios humanos de bots y proteger el sitio frente a tráfico automatizado o malicioso.<br><br>Cloudflare Turnstile puede procesar señales técnicas necesarias para su funcionamiento, tales como dirección IP, información del navegador, encabezados técnicos, identificador del sitio y datos asociados al origen de la solicitud. De acuerdo con Cloudflare, dichas señales se utilizan con fines de seguridad, detección y bloqueo de bots, y no para identificar, perfilar o segmentar comercialmente a los usuarios.<br><br>El uso de Cloudflare Turnstile se encuentra sujeto al Turnstile Privacy Addendum y a las políticas de privacidad aplicables de Cloudflare.<br><br>Si se incorporan herramientas de analítica o seguimiento avanzado, BCTA procurará informar su uso conforme a la normativa vigente.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="11">
+                    <h2>Legislación aplicable y jurisdicción</h2>
+                    <p>La presente Política de Privacidad, el uso del sitio y cualquier controversia relacionada con su interpretación, aplicación o cumplimiento se regirán por las leyes de la República de Chile.<br><br>Toda diferencia será sometida a los tribunales ordinarios de justicia competentes en Chile, sin perjuicio de normas especiales aplicables según la materia.<br><br>El uso del sitio desde otros territorios no altera la aplicación preferente de la legislación chilena respecto de BCTA.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="12">
+                    <h2>Contacto</h2>
+                    <p>Para consultas relacionadas con esta Política de Privacidad y Condiciones de Uso, el tratamiento de datos personales, el funcionamiento del sitio o el ejercicio de derechos vinculados a la información entregada, los usuarios podrán utilizar el formulario de información habilitado por BCTA.<br><br>Las solicitudes recibidas serán revisadas según su naturaleza, antecedentes disponibles y normativa aplicable.<br><br>BCTA podrá requerir información adicional para verificar la identidad del solicitante o precisar el alcance de la solicitud.</p>
+                </article>
+                <article class="legal-content-item" data-legal-content="13">
+                    <h2>Información Sensible</h2>
+                    <p>BCTA recomienda no incluir en formularios de contacto antecedentes sensibles, reservados o estratégicos del caso, tales como documentos, claves, datos financieros, información médica, familiar, penal, laboral o cualquier antecedente que requiera especial confidencialidad.<br><br>Dicha información, en caso de ser necesaria para la evaluación o prestación de un servicio profesional, será solicitada por canales privados y adecuados, una vez establecido el contacto correspondiente.<br><br>Esta medida busca resguardar la privacidad del usuario, evitar exposiciones innecesarias y reducir riesgos asociados al envío de información sensible a través de formularios web.</p>
+                </article>
+            </section>
+            <div class="legal-info-cta-wrap">
+                <a href="/info" class="legal-info-cta">Solicitar información</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    const legalTopicSelect = document.getElementById('legal-topic-select');
+    const legalContents = document.querySelectorAll('.legal-content-item');
+    const legalFixedTitle = document.getElementById('legal-fixed-title');
+
+    function showLegalContent(index) {
+        const nextContent = document.querySelector(`.legal-content-item[data-legal-content="${index}"]`);
+
+        if (!nextContent) return;
+
+        if (legalFixedTitle) {
+            const title = nextContent.querySelector('h2');
+            legalFixedTitle.textContent = title ? title.textContent : '';
+        }
+
+        legalContents.forEach(content => {
+            const isActive = content.getAttribute('data-legal-content') === index;
+            content.classList.toggle('active', isActive);
+
+            if (isActive) {
+                content.scrollTop = 0;
+            }
+        });
+    }
+
+    if (legalTopicSelect) {
+        legalTopicSelect.addEventListener('change', () => showLegalContent(legalTopicSelect.value));
+    }
+</script>
+{% endblock %}

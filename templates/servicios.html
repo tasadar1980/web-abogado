@@ -1,0 +1,1729 @@
+{% extends "base.html" %}
+
+{% block title %}Servicios | BCTA Abogados{% endblock %}
+{% block body_class %}servicios-page-layout{% endblock %}
+
+{% block content %}
+<style>
+        .servicios-page {
+            background:
+                radial-gradient(circle at 18% 12%, rgba(197, 160, 89, 0.10), transparent 28%),
+                radial-gradient(circle at 82% 18%, rgba(122, 47, 59, 0.11), transparent 30%),
+                linear-gradient(135deg, var(--azul-premium) 0%, var(--azul-secundario) 54%, var(--azul-premium) 100%);
+            color: var(--texto-claro);
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding-top: 120px;
+            min-height: calc(100vh - 105px);
+            box-sizing: border-box;
+        }
+
+
+        .servicios-hero {
+            position: relative;
+            background: transparent;
+            color: var(--blanco);
+            padding: 24px 0 10px;
+            border-bottom: none;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .servicios-hero::before {
+            content: none;
+        }
+
+        .servicios-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .servicios-hero h1 {
+            margin: 0 0 10px;
+            color: var(--dorado-firma);
+            font-size: clamp(2rem, 3.1vw, 3rem);
+            line-height: 1.08;
+            letter-spacing: -0.8px;
+            text-shadow: 0 14px 30px rgba(0, 0, 0, 0.26);
+        }
+
+        .servicios-hero p {
+            max-width: 760px;
+            margin: 0 auto;
+            color: var(--texto-claro);
+            font-size: clamp(0.88rem, 1vw, 0.96rem);
+            line-height: 1.52;
+        }
+
+        .servicios-panel {
+            padding: clamp(10px, 2vw, 24px) 0;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .servicios-panel .container {
+            width: min(94%, 1500px); /* Adaptar a pantallas ultrawide */
+            transition: width 0.3s ease;
+        }
+
+        .servicios-layout {
+            display: grid;
+            grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+            gap: clamp(18px, 2.4vw, 34px);
+            align-items: stretch;
+        }
+
+        .servicios-selector {
+            position: relative;
+            border: 1px solid rgba(197, 160, 89, 0.26);
+            border-radius: 18px;
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.022)),
+                linear-gradient(145deg, rgba(10, 25, 47, 0.94), rgba(17, 34, 64, 0.90));
+            box-shadow:
+                0 18px 38px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .servicios-selector::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 12%, rgba(197, 160, 89, 0.10), transparent 28%),
+                radial-gradient(circle at 90% 90%, rgba(122, 47, 59, 0.10), transparent 30%);
+            pointer-events: none;
+        }
+
+        .selector-header {
+            position: relative;
+            z-index: 1;
+            padding: 16px 16px 11px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .selector-header span {
+            display: block;
+            color: var(--dorado-firma);
+            font-size: 0.74rem;
+            font-weight: 850;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+        }
+
+        .selector-lista {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 10px;
+            height: calc(100vh - 360px);
+            min-height: 360px;
+            max-height: 480px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(197, 160, 89, 0.55) rgba(255, 255, 255, 0.05);
+        }
+
+        .selector-item {
+            position: relative;
+            width: 100%;
+            border: 1px solid transparent;
+            border-radius: 11px;
+            background: transparent;
+            color: rgba(245, 247, 250, 0.80);
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 700;
+            line-height: 1.18;
+            text-align: left;
+            padding: 10px 30px 10px 11px;
+            cursor: pointer;
+            transition:
+                background-color 0.3s ease,
+                border-color 0.3s ease,
+                color 0.3s ease,
+                padding-left 0.3s ease,
+                transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .selector-item::after {
+            content: "→";
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-15px);
+            opacity: 0;
+            color: var(--dorado-firma);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            font-size: 1.1rem;
+        }
+
+        .selector-item:hover {
+            background: rgba(255, 255, 255, 0.055);
+            border-color: rgba(197, 160, 89, 0.18);
+            color: var(--blanco);
+        }
+
+        .selector-item.active {
+            background:
+                linear-gradient(90deg, rgba(197, 160, 89, 0.18), rgba(197, 160, 89, 0.055));
+            border-color: rgba(197, 160, 89, 0.48);
+            color: var(--blanco);
+            box-shadow: inset 3px 0 0 var(--dorado-firma);
+            padding-left: 18px;
+        }
+
+        .selector-item.active::after {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        .servicio-ficha {
+            position: relative;
+            isolation: isolate;
+            height: calc(100vh - 300px); /* Restar alturas de nav, hero y footer para evitar scroll */
+            min-height: 460px;
+            max-height: 600px;
+            display: flex;
+            align-items: center;
+            padding: clamp(24px, 3.4vw, 44px);
+            border: 1px solid rgba(197, 160, 89, 0.28);
+            border-radius: 24px;
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.022)),
+                linear-gradient(135deg, rgba(10, 25, 47, 0.97), rgba(17, 34, 64, 0.94));
+            box-shadow:
+                0 24px 54px rgba(0, 0, 0, 0.30),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10);
+            overflow: hidden;
+        }
+
+        .servicio-ficha::before {
+            content: "";
+            position: absolute;
+            inset: -38%;
+            z-index: -2;
+            background:
+                conic-gradient(
+                    from 180deg,
+                    transparent 0deg,
+                    rgba(197, 160, 89, 0.07) 70deg,
+                    rgba(197, 160, 89, 0.22) 125deg,
+                    transparent 180deg,
+                    rgba(122, 47, 59, 0.16) 245deg,
+                    transparent 330deg
+                );
+            opacity: 0.55;
+            animation: ficha-remolino 14s linear infinite;
+        }
+
+        .servicio-ficha::after {
+            content: "";
+            position: absolute;
+            inset: 1px;
+            z-index: -1;
+            border-radius: 23px;
+            background:
+                radial-gradient(circle at 16% 16%, rgba(255, 255, 255, 0.12), transparent 25%),
+                radial-gradient(circle at 86% 76%, rgba(197, 160, 89, 0.12), transparent 34%),
+                linear-gradient(145deg, rgba(10, 25, 47, 0.90), rgba(17, 34, 64, 0.94));
+        }
+
+        .servicio-ficha.modo-inicial::after {
+            z-index: 1;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background:
+                conic-gradient(
+                    from var(--borde-angulo, 0deg),
+
+                    transparent 0deg,
+                    transparent 30deg,
+
+                    rgba(197, 160, 89, 0.22) 46deg,
+                    rgba(197, 160, 89, 1) 62deg,
+                    rgba(197, 160, 89, 0.22) 78deg,
+
+                    transparent 96deg,
+                    transparent 208deg,
+
+                    rgba(197, 160, 89, 0.20) 224deg,
+                    rgba(197, 160, 89, 0.95) 240deg,
+                    rgba(197, 160, 89, 0.20) 256deg,
+
+                    transparent 274deg,
+                    transparent 360deg
+                );
+
+            filter:
+                drop-shadow(0 0 12px rgba(197, 160, 89, 0.48))
+                drop-shadow(0 0 24px rgba(197, 160, 89, 0.30));
+
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+            pointer-events: none;
+            animation: borde-luz-movil 5.8s linear infinite;
+        }
+
+        .servicio-ficha.modo-inicial .ficha-grid {
+            display: none;
+        }
+
+        .servicio-ficha:not(.modo-inicial) .ficha-inicial {
+            display: none;
+        }
+
+        .ficha-inicial {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ficha-inicial-panel {
+            position: relative;
+            width: min(640px, 100%);
+            min-height: 310px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(28px, 4vw, 52px);
+        }
+
+        .ficha-inicial-texto {
+            position: relative;
+            z-index: 1;
+            max-width: 520px;
+            text-align: center;
+            color: var(--blanco);
+        }
+
+        .ficha-inicial-texto span {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--dorado-firma);
+            font-size: 0.76rem;
+            font-weight: 850;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .ficha-inicial-texto h2 {
+            margin: 0 0 14px;
+            color: var(--blanco);
+            font-size: clamp(1.45rem, 2.2vw, 2.25rem);
+            line-height: 1.13;
+            letter-spacing: -0.7px;
+            text-shadow: 0 14px 30px rgba(0, 0, 0, 0.30);
+        }
+
+        .ficha-inicial-texto p {
+            margin: 0;
+            color: rgba(245, 247, 250, 0.80);
+            font-size: clamp(0.92rem, 1.05vw, 1rem);
+            line-height: 1.55;
+        }
+
+        .ficha-inicial-texto h2 {
+            position: relative;
+        }
+
+        .ficha-linea-espera {
+            position: relative;
+            width: min(240px, 72%);
+            height: 1px;
+            margin: 26px auto 0;
+            background: rgba(197, 160, 89, 0.18);
+            overflow: hidden;
+        }
+
+        .ficha-linea-espera::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -32%;
+            width: 32%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(197, 160, 89, 0.95),
+                transparent
+            );
+            animation: linea-espera-movimiento 3.2s ease-in-out infinite;
+        }
+
+        .servicio-ficha.modo-inicial::before {
+            animation: ficha-remolino 14s linear infinite;
+        }
+
+        .servicio-ficha.modo-inicial {
+            border-color: rgba(197, 160, 89, 0.42);
+            box-shadow:
+                0 24px 54px rgba(0, 0, 0, 0.30),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10),
+                0 0 0 1px rgba(197, 160, 89, 0.04);
+        }
+
+        @property --borde-angulo {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: 0deg;
+        }
+
+        @keyframes borde-luz-movil {
+            from {
+                --borde-angulo: 0deg;
+            }
+
+            to {
+                --borde-angulo: -360deg;
+            }
+        }
+
+        @keyframes linea-espera-movimiento {
+            0% {
+                left: 132%;
+            }
+
+            100% {
+                left: -32%;
+            }
+        }
+
+        @keyframes borde-espera {
+            0% {
+                filter: brightness(1);
+            }
+
+            25% {
+                filter: brightness(1.08);
+            }
+
+            50% {
+                filter: brightness(1.18);
+            }
+
+            75% {
+                filter: brightness(1.08);
+            }
+
+            100% {
+                filter: brightness(1);
+            }
+        }
+
+        @keyframes ficha-inicial-luz {
+            from {
+                transform: translate3d(-2%, -1%, 0) scale(1);
+            }
+
+            to {
+                transform: translate3d(2%, 1%, 0) scale(1.04);
+            }
+        }
+
+        .ficha-grid {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .ficha-header {
+            width: 100%;
+        }
+
+        .ficha-cuerpo {
+            width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr); /* Vuelve a las 2 columnas */
+            gap: clamp(24px, 4vw, 56px);
+            align-items: center; /* Centra verticalmente el contenido y la foto */
+            position: relative;
+            z-index: 2;
+        }
+
+        .ficha-contenido {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ficha-media {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            max-height: 85%; /* Evita que toque los bordes superior e inferior */
+            margin: auto 0; /* Centrado vertical */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 22px 44px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            /* Importante: para que no toque el borde derecho */
+            margin-right: clamp(10px, 2vw, 30px);
+        }
+
+        .ficha-media::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(135deg, rgba(10, 25, 47, 0.08), rgba(10, 25, 47, 0.40)),
+                radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.15), transparent 28%);
+            pointer-events: none;
+            border-radius: 20px;
+        }
+
+        .ficha-imagen {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.015);
+            filter: saturate(0.92) contrast(1.02);
+            transition: opacity 1.15s ease;
+            opacity: 1; 
+        }
+
+        .ficha-grid.animando {
+            animation: ficha-impacto 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .ficha-grid.animando .ficha-titulo {
+            animation-name: ficha-barrido;
+            animation-duration: 3.2s;
+            animation-delay: 0.15s;
+            animation-fill-mode: both;
+            animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .ficha-grid.animando .ficha-subtitulo,
+        .ficha-grid.animando .ficha-lista li {
+            animation-name: ficha-aparece;
+            animation-duration: 1.8s;
+            animation-delay: 0.3s;
+            animation-fill-mode: both;
+            animation-timing-function: cubic-bezier(0.2, 0.72, 0.22, 1);
+        }
+
+        .ficha-grid.animando .ficha-media {
+            animation-name: ficha-aparece;
+            animation-duration: 2.2s;
+            animation-fill-mode: both;
+            animation-timing-function: cubic-bezier(0.2, 0.72, 0.22, 1);
+        }
+
+        .ficha-grid.animando .ficha-imagen {
+            animation-name: ficha-imagen-zoom;
+            animation-duration: 3.5s;
+            animation-fill-mode: both;
+            animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .ficha-titulo {
+            width: 100%;
+            margin: 0;
+            color: var(--dorado-firma);
+            font-size: clamp(1.55rem, 3.15vw, 3.15rem);
+            line-height: 1.02;
+            letter-spacing: -1.6px;
+            text-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+            animation-delay: 0.04s;
+            white-space: normal;
+            max-width: 100%;
+            text-align: left;
+        }
+
+        .ficha-titulo.tracking-ajustado {
+            letter-spacing: -2.7px;
+        }
+
+        .ficha-subtitulo {
+            margin: 0 0 18px;
+            color: #F5F7FA;
+            font-size: clamp(0.98rem, 1.35vw, 1.14rem);
+            font-weight: 750;
+            line-height: 1.45;
+            animation-delay: 0.30s;
+        }
+
+        .ficha-lista {
+            margin: 0;
+            padding-left: 22px;
+            color: var(--texto-claro);
+            font-size: clamp(0.9rem, 1.04vw, 1.0rem);
+            line-height: 1.56;
+        }
+
+        .ficha-lista li {
+            margin-bottom: 7px;
+            padding-left: 2px;
+        }
+
+        .ficha-lista li:nth-child(1) { animation-delay: 0.58s; }
+        .ficha-lista li:nth-child(2) { animation-delay: 0.78s; }
+        .ficha-lista li:nth-child(3) { animation-delay: 0.98s; }
+        .ficha-lista li:nth-child(4) { animation-delay: 1.18s; }
+        .ficha-lista li:nth-child(5) { animation-delay: 1.38s; }
+        .ficha-lista li:nth-child(6) { animation-delay: 1.58s; }
+
+        .ficha-acciones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
+            animation-delay: 1.88s;
+        }
+
+        .ficha-media {
+            animation-delay: 0.46s;
+        }
+
+        .ficha-imagen {
+            animation-delay: 0.48s;
+        }
+
+        .ficha-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 214px;
+            padding: 15px 24px;
+            border-radius: 8px;
+            background: var(--dorado-firma);
+            color: var(--azul-premium);
+            font-size: 0.86rem;
+            font-weight: 850;
+            text-transform: uppercase;
+            letter-spacing: 0.15px;
+            border: 1px solid rgba(197, 160, 89, 0.76);
+            box-shadow: 0 14px 26px rgba(0, 0, 0, 0.18);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, background-color 0.24s ease;
+        }
+
+        .ficha-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(0, 0, 0, 0.26);
+            background: #d4af5d;
+        }
+
+        .ficha-btn.boton-animando {
+            animation-duration: 1.05s;
+            animation-delay: 0.55s;
+            animation-fill-mode: both;
+            animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .ficha-btn.boton-entrada-fondo {
+            animation-name: boton-entrada-fondo;
+        }
+
+        .ficha-btn.boton-entrada-derecha {
+            animation-name: boton-entrada-derecha;
+        }
+
+        .ficha-btn.boton-entrada-izquierda {
+            animation-name: boton-entrada-izquierda;
+        }
+
+        .ficha-btn.boton-entrada-abajo {
+            animation-name: boton-entrada-abajo;
+        }
+
+        .ficha-btn.boton-entrada-arriba {
+            animation-name: boton-entrada-arriba;
+        }
+
+        .ficha-btn.boton-entrada-blur {
+            animation-name: boton-entrada-blur;
+        }
+
+        .ficha-btn.boton-entrada-dorado {
+            animation-name: boton-entrada-dorado;
+        }
+
+        .ficha-btn.boton-entrada-diagonal {
+            animation-name: boton-entrada-diagonal;
+        }
+
+
+        @keyframes boton-entrada-fondo {
+            0% { opacity: 0; transform: scale(0.62); filter: blur(10px); }
+            58% { opacity: 1; transform: scale(1.045); filter: blur(0); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+
+        @keyframes boton-entrada-derecha {
+            0% { opacity: 0; transform: translateX(42px); filter: blur(6px); }
+            100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+        }
+
+        @keyframes boton-entrada-izquierda {
+            0% { opacity: 0; transform: translateX(-34px); filter: blur(5px); }
+            100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+        }
+
+        @keyframes boton-entrada-abajo {
+            0% { opacity: 0; transform: translateY(28px); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes boton-entrada-arriba {
+            0% { opacity: 0; transform: translateY(-24px); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes boton-entrada-blur {
+            0% { opacity: 0; transform: scale(0.96); filter: blur(12px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+
+        @keyframes boton-entrada-dorado {
+            0% { opacity: 0; transform: scaleX(0.72); filter: brightness(1.55) blur(7px); }
+            52% { opacity: 1; transform: scaleX(1.04); filter: brightness(1.18) blur(0); }
+            100% { opacity: 1; transform: scaleX(1); filter: brightness(1) blur(0); }
+        }
+
+        @keyframes boton-entrada-diagonal {
+            0% { opacity: 0; transform: translate(32px, 18px) scale(0.92); filter: blur(7px); }
+            100% { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0); }
+        }
+
+        @keyframes ficha-aparece {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+                filter: blur(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes ficha-barrido {
+            0% {
+                clip-path: inset(0 100% 0 0);
+                opacity: 0;
+                transform: translateX(-15px);
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes ficha-imagen-zoom {
+            0% {
+                opacity: 0;
+                transform: scale(1.1);
+                filter: blur(8px) saturate(0.5);
+            }
+            100% {
+                opacity: 0.85;
+                transform: scale(1.015);
+                filter: blur(0) saturate(0.92) contrast(1.02);
+            }
+        }
+
+        @keyframes ficha-impacto {
+            0% { transform: translateX(25px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes ficha-remolino {
+            from {
+                transform: rotate(0deg) scale(0.95);
+            }
+
+            to {
+                transform: rotate(360deg) scale(0.95);
+            }
+        }
+
+        @media (max-width: 1180px) {
+            .servicios-layout {
+                grid-template-columns: minmax(190px, 250px) minmax(0, 1fr);
+            }
+
+            .servicio-ficha {
+                min-height: 440px;
+                height: auto;
+            }
+
+            .ficha-cuerpo {
+                grid-template-columns: minmax(0, 1fr) minmax(220px, 0.72fr);
+            }
+        }
+
+        @media (max-width: 980px) {
+            .servicios-panel {
+                align-items: flex-start;
+            }
+
+            .servicios-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .servicios-selector {
+                border-radius: 16px;
+            }
+
+            .selector-header {
+                padding: 14px 14px 8px;
+            }
+
+            .selector-lista {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                max-height: none;
+                padding: 9px;
+            }
+
+            .selector-item {
+                text-align: center;
+                padding: 9px 8px;
+                font-size: 0.78rem;
+            }
+
+            .selector-item:hover {
+                transform: none;
+            }
+
+            .selector-item.active {
+                box-shadow: inset 0 -3px 0 var(--dorado-firma);
+            }
+
+            .servicio-ficha {
+                min-height: auto;
+                height: auto;
+                border-radius: 20px;
+            }
+
+            .servicio-ficha::after {
+                border-radius: 19px;
+            }
+
+            .ficha-cuerpo {
+                grid-template-columns: minmax(0, 1fr) minmax(230px, 0.72fr);
+                gap: 24px;
+            }
+
+            .ficha-media {
+                position: relative;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .ficha-cuerpo {
+                grid-template-columns: 1fr;
+            }
+
+            .ficha-media {
+                order: -1;
+                max-height: 220px;
+                aspect-ratio: 16 / 9;
+                margin: 0 auto;
+            }
+
+            .ficha-titulo {
+                font-size: clamp(1.45rem, 6.6vw, 2.45rem);
+            }
+
+            .selector-lista {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 560px) {
+            .ficha-inicial-panel {
+                min-height: 240px;
+                padding: 26px 20px;
+            }
+
+            .ficha-inicial-texto h2 {
+                font-size: clamp(1.25rem, 6vw, 1.7rem);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .servicios-hero {
+                padding: 28px 0 20px;
+            }
+
+            .servicios-panel {
+                padding: 16px 0 24px;
+            }
+
+            .selector-lista {
+                grid-template-columns: 1fr;
+                gap: 3px;
+            }
+
+            .selector-item {
+                text-align: left;
+            }
+
+            .selector-item.active {
+                box-shadow: inset 3px 0 0 var(--dorado-firma);
+            }
+
+            .servicio-ficha {
+                padding: 22px 18px;
+                min-height: 400px;
+            }
+
+            .ficha-media::after {
+                background: 
+                    linear-gradient(to top, rgba(10,25,47,0.98) 0%, rgba(10,25,47,0.8) 50%, rgba(10,25,47,0.4) 100%);
+            }
+
+            .ficha-titulo {
+                font-size: clamp(1.2rem, 6vw, 1.85rem);
+                letter-spacing: -0.9px;
+            }
+
+            .ficha-subtitulo {
+                font-size: 0.96rem;
+                margin-bottom: 14px;
+            }
+
+            .ficha-lista {
+                font-size: 0.9rem;
+                line-height: 1.52;
+                padding-left: 19px;
+            }
+
+            .ficha-lista li {
+                margin-bottom: 6px;
+            }
+
+            .ficha-btn {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .ficha-titulo {
+                font-size: 1.35rem;
+            }
+
+            .ficha-lista {
+                font-size: 0.86rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .servicio-ficha::before,
+            .ficha-grid.animando .ficha-titulo,
+            .ficha-grid.animando .ficha-subtitulo,
+            .ficha-grid.animando .ficha-lista li,
+            .ficha-grid.animando .ficha-media,
+            .ficha-grid.animando .ficha-imagen,
+            .ficha-btn.boton-animando {
+                animation: none;
+            }
+
+            .ficha-grid.animando .ficha-titulo,
+            .ficha-grid.animando .ficha-subtitulo,
+            .ficha-grid.animando .ficha-lista li,
+            .ficha-grid.animando .ficha-media,
+            .ficha-grid.animando .ficha-imagen,
+            .ficha-btn.boton-animando {
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+        }
+
+        @media (min-width: 981px) {
+            body.servicios-page-layout {
+                height: 100vh;
+                height: 100dvh;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            body.servicios-page-layout .servicios-page {
+                flex: 1 1 0;
+                min-height: 0;
+                padding-top: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            body.servicios-page-layout .servicios-hero {
+                flex: 0 0 auto;
+                padding: clamp(18px, 3vh, 30px) 0 clamp(10px, 1.6vh, 16px);
+                background: transparent !important;
+                border-bottom: none !important;
+                text-align: center;
+            }
+
+            body.servicios-page-layout .servicios-hero .container {
+                width: min(92%, 860px);
+                margin: 0 auto;
+            }
+
+            body.servicios-page-layout .servicios-hero h1 {
+                font-size: clamp(2rem, 5vw, 3.2rem);
+                margin: 0 0 12px;
+                line-height: 1.08;
+            }
+
+            body.servicios-page-layout .servicios-hero p {
+                max-width: 860px;
+                margin: 0 auto;
+                font-size: clamp(1rem, 1.5vw, 1.15rem);
+                line-height: 1.42;
+                letter-spacing: -0.01em;
+                opacity: 0.9;
+            }
+
+            body.servicios-page-layout .servicios-panel {
+                flex: 0 1 auto;
+                min-height: 0;
+                display: flex;
+                align-items: stretch;
+                padding: clamp(10px, 1.6vh, 16px) 0 clamp(14px, 2vh, 20px);
+            }
+
+            body.servicios-page-layout .servicios-panel .container {
+                height: clamp(420px, 50vh, 520px);
+                width: min(78vw, 1280px);
+            }
+
+            body.servicios-page-layout .servicios-layout {
+                height: 100%;
+                min-height: 0;
+                grid-template-rows: minmax(0, 1fr);
+                grid-template-columns: minmax(210px, 300px) minmax(0, 1fr);
+                gap: clamp(14px, 2vw, 28px);
+            }
+
+            body.servicios-page-layout .servicios-selector {
+                height: 100%;
+                min-height: 0;
+                display: flex;
+                flex-direction: column;
+                border-radius: 14px;
+            }
+
+            body.servicios-page-layout .selector-header {
+                padding: clamp(10px, 1.6vh, 14px) 14px clamp(6px, 1vh, 9px);
+            }
+
+            body.servicios-page-layout .selector-header span {
+                font-size: clamp(0.64rem, 1.2vh, 0.72rem);
+                letter-spacing: 0.9px;
+            }
+
+            body.servicios-page-layout .selector-lista {
+                flex: 1;
+                height: auto;
+                min-height: 0;
+                max-height: none;
+                overflow: hidden;
+                gap: clamp(2px, 0.45vh, 4px);
+                padding: clamp(6px, 1vh, 9px);
+            }
+
+            body.servicios-page-layout .selector-item {
+                display: flex;
+                align-items: center;
+                min-height: 0;
+                padding: clamp(5px, 1.05vh, 8px) 28px clamp(5px, 1.05vh, 8px) 10px;
+                font-size: clamp(0.68rem, 1.35vh, 0.8rem);
+                line-height: 1.08;
+                border-radius: 8px;
+            }
+
+            body.servicios-page-layout .servicio-ficha {
+                height: 100%;
+                min-height: 0;
+                max-height: none;
+                padding: clamp(18px, 3vh, 30px);
+                border-radius: 18px;
+            }
+
+            body.servicios-page-layout .servicio-ficha::after {
+                border-radius: 17px;
+            }
+
+            body.servicios-page-layout .ficha-inicial-panel {
+                min-height: 0;
+                padding: clamp(18px, 3vh, 32px);
+            }
+
+            body.servicios-page-layout .ficha-inicial-texto h2 {
+                font-size: clamp(1.35rem, 3.2vh, 2rem);
+            }
+
+            body.servicios-page-layout .ficha-linea-espera {
+                margin-top: clamp(14px, 2.4vh, 22px);
+            }
+
+            body.servicios-page-layout .ficha-grid {
+                height: 100%;
+                min-height: 0;
+                gap: clamp(10px, 2vh, 18px);
+            }
+
+            body.servicios-page-layout .ficha-titulo {
+                font-size: clamp(1.45rem, 4.2vh, 2.65rem);
+                line-height: 1.02;
+                letter-spacing: -1px;
+            }
+
+            body.servicios-page-layout .ficha-cuerpo {
+                flex: 1;
+                min-height: 0;
+                align-items: center;
+                grid-template-columns: minmax(0, 0.92fr) minmax(230px, 0.74fr);
+                gap: clamp(10px, 1.6vw, 24px);
+            }
+
+            body.servicios-page-layout .ficha-contenido {
+                max-width: clamp(430px, 35vw, 560px);
+            }
+
+            body.servicios-page-layout .ficha-subtitulo {
+                margin-bottom: clamp(8px, 1.5vh, 14px);
+                font-size: clamp(0.88rem, 1.7vh, 1rem);
+            }
+
+            body.servicios-page-layout .ficha-lista {
+                font-size: clamp(0.78rem, 1.5vh, 0.9rem);
+                line-height: 1.36;
+            }
+
+            body.servicios-page-layout .ficha-lista li {
+                margin-bottom: clamp(2px, 0.45vh, 5px);
+            }
+
+            body.servicios-page-layout .ficha-acciones {
+                margin-top: clamp(10px, 1.8vh, 18px);
+            }
+
+            body.servicios-page-layout .ficha-btn {
+                min-width: 190px;
+                padding: clamp(11px, 1.8vh, 14px) 20px;
+                font-size: clamp(0.76rem, 1.35vh, 0.84rem);
+            }
+
+            body.servicios-page-layout .ficha-media {
+                max-height: 100%;
+                border-radius: 16px;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            body.servicios-page-layout .ficha-header {
+                display: flex;
+                justify-content: center;
+            }
+
+            body.servicios-page-layout .ficha-titulo {
+                max-width: min(900px, 100%);
+                margin: 0 auto;
+                text-align: center;
+                line-height: 1.14;
+                letter-spacing: -0.35px;
+                padding-bottom: 0.06em;
+                overflow: visible;
+            }
+
+            body.servicios-page-layout .ficha-cuerpo {
+                width: min(94%, 980px);
+                margin: 0 auto;
+                grid-template-columns: minmax(360px, 0.92fr) minmax(300px, 0.78fr);
+                gap: clamp(18px, 2.2vw, 34px);
+                justify-content: center;
+            }
+
+            body.servicios-page-layout .ficha-contenido {
+                width: 100%;
+                max-width: clamp(420px, 32vw, 520px);
+                justify-self: center;
+                align-self: center;
+            }
+
+            body.servicios-page-layout .ficha-media {
+                width: 100%;
+                max-width: clamp(320px, 25vw, 430px);
+                justify-self: center;
+                align-self: center;
+            }
+
+            body.servicios-page-layout .ficha-acciones {
+                justify-content: flex-start;
+                align-self: stretch;
+            }
+        }
+
+        @media (min-width: 981px) and (max-width: 1536px), (min-width: 981px) and (max-height: 900px) {
+            body.servicios-page-layout .servicios-hero {
+                padding: clamp(12px, 2vh, 20px) 0 clamp(7px, 1.2vh, 12px);
+            }
+
+            body.servicios-page-layout .servicios-hero .container {
+                width: min(88%, 760px);
+            }
+
+            body.servicios-page-layout .servicios-hero h1 {
+                font-size: clamp(1.78rem, 4.2vh, 2.65rem);
+                margin-bottom: 8px;
+            }
+
+            body.servicios-page-layout .servicios-hero p {
+                font-size: clamp(0.82rem, 1.8vh, 0.98rem);
+                line-height: 1.34;
+            }
+
+            body.servicios-page-layout .servicios-panel {
+                padding: clamp(7px, 1.1vh, 12px) 0 clamp(10px, 1.5vh, 16px);
+            }
+
+            body.servicios-page-layout .servicios-panel .container {
+                height: clamp(390px, 49vh, 470px);
+                width: min(82vw, 1160px);
+            }
+
+            body.servicios-page-layout .servicios-layout {
+                grid-template-columns: minmax(195px, 260px) minmax(0, 1fr);
+                gap: clamp(12px, 1.6vw, 22px);
+            }
+
+            body.servicios-page-layout .selector-header {
+                padding: 10px 12px 7px;
+            }
+
+            body.servicios-page-layout .selector-lista {
+                gap: 2px;
+                padding: 7px;
+            }
+
+            body.servicios-page-layout .selector-item {
+                padding: clamp(4px, 0.85vh, 7px) 25px clamp(4px, 0.85vh, 7px) 9px;
+                font-size: clamp(0.62rem, 1.18vh, 0.74rem);
+                line-height: 1.04;
+            }
+
+            body.servicios-page-layout .servicio-ficha {
+                padding: clamp(15px, 2.4vh, 24px);
+            }
+
+            body.servicios-page-layout .ficha-grid {
+                gap: clamp(8px, 1.4vh, 14px);
+            }
+
+            body.servicios-page-layout .ficha-titulo {
+                font-size: clamp(1.35rem, 3.7vh, 2.32rem);
+                line-height: 1.08;
+            }
+
+            body.servicios-page-layout .ficha-cuerpo {
+                width: min(95%, 900px);
+                grid-template-columns: minmax(320px, 0.94fr) minmax(265px, 0.74fr);
+                gap: clamp(14px, 1.7vw, 26px);
+            }
+
+            body.servicios-page-layout .ficha-contenido {
+                max-width: clamp(380px, 31vw, 480px);
+            }
+
+            body.servicios-page-layout .ficha-subtitulo {
+                font-size: clamp(0.82rem, 1.42vh, 0.94rem);
+                margin-bottom: 8px;
+                line-height: 1.35;
+            }
+
+            body.servicios-page-layout .ficha-lista {
+                font-size: clamp(0.72rem, 1.24vh, 0.84rem);
+                line-height: 1.28;
+                padding-left: 18px;
+            }
+
+            body.servicios-page-layout .ficha-lista li {
+                margin-bottom: clamp(1px, 0.34vh, 4px);
+            }
+
+            body.servicios-page-layout .ficha-acciones {
+                margin-top: clamp(7px, 1.2vh, 13px);
+            }
+
+            body.servicios-page-layout .ficha-btn {
+                min-width: 172px;
+                padding: clamp(9px, 1.5vh, 12px) 18px;
+                font-size: clamp(0.7rem, 1.18vh, 0.78rem);
+            }
+
+            body.servicios-page-layout .ficha-media {
+                max-width: clamp(280px, 23vw, 370px);
+                border-radius: 14px;
+            }
+        }
+
+        @media (min-width: 981px) and (max-width: 1400px) and (max-height: 800px) {
+            body.servicios-page-layout .servicios-hero {
+                padding: 10px 0 6px;
+            }
+
+            body.servicios-page-layout .servicios-hero h1 {
+                font-size: 2rem;
+            }
+
+            body.servicios-page-layout .servicios-hero p {
+                font-size: 0.82rem;
+                line-height: 1.28;
+            }
+
+            body.servicios-page-layout .servicios-panel .container {
+                height: clamp(370px, 50vh, 430px);
+                width: min(84vw, 1080px);
+            }
+
+            body.servicios-page-layout .servicios-layout {
+                grid-template-columns: minmax(185px, 235px) minmax(0, 1fr);
+                gap: 14px;
+            }
+
+            body.servicios-page-layout .selector-item {
+                padding: 4px 23px 4px 8px;
+                font-size: 0.62rem;
+            }
+
+            body.servicios-page-layout .servicio-ficha {
+                padding: 14px;
+            }
+
+            body.servicios-page-layout .ficha-titulo {
+                font-size: clamp(1.24rem, 3.3vh, 1.95rem);
+            }
+
+            body.servicios-page-layout .ficha-cuerpo {
+                width: min(96%, 840px);
+                grid-template-columns: minmax(300px, 0.96fr) minmax(235px, 0.68fr);
+                gap: 16px;
+            }
+
+            body.servicios-page-layout .ficha-lista {
+                font-size: 0.7rem;
+                line-height: 1.24;
+            }
+
+            body.servicios-page-layout .ficha-media {
+                max-width: 300px;
+            }
+
+            body.servicios-page-layout .ficha-btn {
+                min-width: 160px;
+                padding: 9px 16px;
+            }
+        }
+</style>
+
+    <main class="servicios-page">
+        <section class="servicios-hero">
+            <div class="container">
+                <h1>Servicios</h1>
+                <p>
+                    Selecciona el área jurídica que mejor se ajusta a tu necesidad.
+                    Cada servicio muestra sus principales materias de apoyo y permite avanzar directamente a una consulta.
+                </p>
+            </div>
+        </section>
+
+        <section class="servicios-panel">
+            <div class="container">
+                <div class="servicios-layout">
+                    <aside class="servicios-selector" aria-label="Selector de servicios jurídicos">
+                        <div class="selector-header">
+                            <span>Áreas de servicio</span>
+                        </div>
+
+                        <div class="selector-lista" role="tablist" aria-label="Listado de servicios BCTA">
+                            <button class="selector-item" type="button" data-servicio="familia">Derecho de Familia</button>
+                            <button class="selector-item" type="button" data-servicio="civil">Derecho Civil</button>
+                            <button class="selector-item" type="button" data-servicio="laboral">Derecho Laboral</button>
+                            <button class="selector-item" type="button" data-servicio="inmobiliario">Derecho Inmobiliario</button>
+                            <button class="selector-item" type="button" data-servicio="comercial">Derecho Comercial y Societario</button>
+                            <button class="selector-item" type="button" data-servicio="tributario">Derecho Tributario</button>
+                            <button class="selector-item" type="button" data-servicio="penal">Derecho Penal</button>
+                            <button class="selector-item" type="button" data-servicio="marcas">Marcas e INAPI</button>
+                            <button class="selector-item" type="button" data-servicio="seguros">Seguros</button>
+                            <button class="selector-item" type="button" data-servicio="contratos">Contratos y Asesoría Legal</button>
+                            <button class="selector-item" type="button" data-servicio="policia">Juicios de Policía Local</button>
+                            <button class="selector-item" type="button" data-servicio="herencias">Herencias y Sucesiones</button>
+                            <button class="selector-item" type="button" data-servicio="compliance">Compliance y Delitos Económicos</button>
+                        </div>
+                    </aside>
+
+                    <article class="servicio-ficha modo-inicial" id="servicio-ficha" aria-live="polite">
+                        <div class="ficha-inicial" id="ficha-inicial">
+                            <div class="ficha-inicial-panel">
+                                <div class="ficha-inicial-texto">
+                                    <h2>Esperando tu elección</h2>
+                                    <div class="ficha-linea-espera"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ficha-grid animando" id="ficha-grid">
+                            <div class="ficha-header">
+                                <h2 class="ficha-titulo" id="ficha-titulo">Derecho de Familia</h2>
+                            </div>
+
+                            <div class="ficha-cuerpo">
+                                <div class="ficha-contenido">
+                                    <p class="ficha-subtitulo" id="ficha-subtitulo">Asesoría y representación en:</p>
+                                <ul class="ficha-lista" id="ficha-lista">
+                                    <li>Divorcios, tanto de mutuo acuerdo como unilateral.</li>
+                                    <li>Pensión de alimentos.</li>
+                                    <li>Cuidado personal de niños, niñas y adolescentes.</li>
+                                    <li>Régimen de relación directa y regular.</li>
+                                    <li>Mediaciones familiares.</li>
+                                    <li>Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso.</li>
+                                </ul>
+                                <div class="ficha-acciones">
+                                    <a href="/contacto" class="ficha-btn">Agenda tu consulta</a>
+                                </div>
+                            </div>
+
+                            <figure class="ficha-media">
+                                <img
+                                    src="{{ url_for('static', filename='img/Fotos webp/foto familia.webp') }}"
+                                    alt="Imagen referencial del servicio Derecho de Familia"
+                                    class="ficha-imagen"
+                                    id="ficha-imagen"
+                                    width="640"
+                                    height="480"
+                                    decoding="async"
+                                >
+                            </figure>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<script>
+        const serviciosBCTA = {
+            familia: {
+                titulo: "Derecho de Familia",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto familia.webp') }}",
+                alt: "Imagen referencial del servicio Derecho de Familia",
+                puntos: [
+                    "Divorcios, tanto de mutuo acuerdo como unilateral.",
+                    "Pensión de alimentos.",
+                    "Cuidado personal de niños, niñas y adolescentes.",
+                    "Régimen de relación directa y regular.",
+                    "Mediaciones familiares.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            civil: {
+                titulo: "Derecho Civil",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto civil.webp') }}",
+                alt: "Imagen referencial del servicio Derecho Civil",
+                puntos: [
+                    "Juicios civiles y demandas.",
+                    "Indemnización de perjuicios.",
+                    "Incumplimiento de contratos.",
+                    "Responsabilidad civil.",
+                    "Cobranza judicial.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            laboral: {
+                titulo: "Derecho Laboral",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto laboral.webp') }}",
+                alt: "Imagen referencial del servicio Derecho Laboral",
+                puntos: [
+                    "Despidos injustificados y autodespido.",
+                    "Accidentes laborales y enfermedades profesionales.",
+                    "Cobro de prestaciones e indemnizaciones.",
+                    "Asesoría en contratos y relaciones laborales.",
+                    "Representación ante la Inspección del Trabajo y tribunales laborales.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            inmobiliario: {
+                titulo: "Derecho Inmobiliario",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto inmobiliario.webp') }}",
+                alt: "Imagen referencial del servicio Derecho Inmobiliario",
+                puntos: [
+                    "Compraventa de propiedades.",
+                    "Estudios de títulos y revisión legal de inmuebles.",
+                    "Redacción y revisión de contratos de arriendo.",
+                    "Regularización de propiedades.",
+                    "Conflictos entre arrendadores y arrendatarios.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            comercial: {
+                titulo: "Derecho Comercial y Societario",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto comercial.webp') }}",
+                alt: "Imagen referencial del servicio Derecho Comercial y Societario",
+                puntos: [
+                    "Constitución de sociedades y modificaciones societarias.",
+                    "Asesoría legal en funcionamiento y administración de empresas.",
+                    "Redacción y revisión de pactos de socios.",
+                    "Compraventa de acciones y participaciones.",
+                    "Reestructuración societaria y planificación legal.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            tributario: {
+                titulo: "Derecho Tributario",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto tributario.webp') }}",
+                alt: "Imagen referencial del servicio Derecho Tributario",
+                puntos: [
+                    "Asesoría tributaria para personas y empresas.",
+                    "Revisión de obligaciones fiscales y cumplimiento tributario.",
+                    "Defensa ante fiscalizaciones del Servicio de Impuestos Internos.",
+                    "Rectificaciones, declaraciones y regularización de situaciones tributarias.",
+                    "Planificación tributaria dentro del marco legal vigente.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            penal: {
+                titulo: "Derecho Penal",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto penal.webp') }}",
+                alt: "Imagen referencial del servicio Derecho Penal",
+                puntos: [
+                    "Defensa penal en investigaciones y procedimientos judiciales.",
+                    "Representación de víctimas y querellas criminales.",
+                    "Delitos económicos, patrimoniales y contra la propiedad.",
+                    "Audiencias de control de detención, formalización y medidas cautelares.",
+                    "Asesoría penal preventiva y revisión de antecedentes.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            marcas: {
+                titulo: "Marcas e INAPI",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto marcas.webp') }}",
+                alt: "Imagen referencial del servicio Marcas e INAPI",
+                puntos: [
+                    "Registro de marcas comerciales.",
+                    "Búsqueda y análisis de viabilidad de marcas.",
+                    "Oposición y defensa de registros marcarios.",
+                    "Renovación y protección de marcas.",
+                    "Asesoría en propiedad industrial e INAPI.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            seguros: {
+                titulo: "Seguros",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto seguros.webp') }}",
+                alt: "Imagen referencial del servicio Seguros",
+                puntos: [
+                    "Revisión de pólizas y coberturas.",
+                    "Reclamos contra compañías aseguradoras.",
+                    "Negativa de pago de seguros.",
+                    "Indemnizaciones y liquidaciones.",
+                    "Asesoría en conflictos derivados de contratos de seguros.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            contratos: {
+                titulo: "Contratos y Asesoría Legal",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto contratos.webp') }}",
+                alt: "Imagen referencial del servicio Contratos y Asesoría Legal",
+                puntos: [
+                    "Redacción y revisión de contratos.",
+                    "Asesoría legal para empresas y emprendedores.",
+                    "Contratos civiles y comerciales.",
+                    "Formalización de acuerdos y obligaciones.",
+                    "Prevención y análisis de riesgos legales.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            policia: {
+                titulo: "Juicios de Policía Local",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto policia.webp') }}",
+                alt: "Imagen referencial del servicio Juicios de Policía Local",
+                puntos: [
+                    "Infracciones de tránsito.",
+                    "Accidentes vehiculares y responsabilidad civil.",
+                    "Denuncias por Ley del Consumidor.",
+                    "Reclamaciones municipales y ordenanzas.",
+                    "Representación ante Juzgados de Policía Local.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            herencias: {
+                titulo: "Herencias y Sucesiones",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto herencias.webp') }}",
+                alt: "Imagen referencial del servicio Herencias y Sucesiones",
+                puntos: [
+                    "Posesiones efectivas testadas e intestadas.",
+                    "Tramitación de herencias.",
+                    "Partición de bienes hereditarios.",
+                    "Redacción y revisión de testamentos.",
+                    "Conflictos y representación en materias sucesorias.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            },
+            compliance: {
+                titulo: "Compliance y Delitos Económicos",
+                imagen: "{{ url_for('static', filename='img/Fotos webp/foto compliance.webp') }}",
+                alt: "Imagen referencial del servicio Compliance y Delitos Económicos",
+                puntos: [
+                    "Modelos de prevención de delitos económicos.",
+                    "Programas de cumplimiento corporativo.",
+                    "Evaluación y gestión de riesgos legales.",
+                    "Protocolos internos y políticas empresariales.",
+                    "Asesoría preventiva en cumplimiento normativo.",
+                    "Otros casos: si tu situación no está listada, agenda una consulta para evaluar tu caso."
+                ]
+            }
+        };
+
+        // Precargar imágenes al cargar el template
+        const preloadedImages = {};
+        Object.keys(serviciosBCTA).forEach(function(key) {
+            const img = new Image();
+            img.src = serviciosBCTA[key].imagen;
+            preloadedImages[key] = img;
+        });
+
+        const selectorItems = document.querySelectorAll(".selector-item");
+        const servicioFicha = document.getElementById("servicio-ficha");
+        const fichaGrid = document.getElementById("ficha-grid");
+        const fichaTitulo = document.getElementById("ficha-titulo");
+        const fichaLista = document.getElementById("ficha-lista");
+        const fichaImagen = document.getElementById("ficha-imagen");
+        const fichaBoton = document.querySelector(".ficha-btn");
+        const animacionesBoton = [
+            "boton-entrada-fondo",
+            "boton-entrada-derecha",
+            "boton-entrada-izquierda",
+            "boton-entrada-abajo",
+            "boton-entrada-arriba",
+            "boton-entrada-blur",
+            "boton-entrada-dorado",
+            "boton-entrada-diagonal"
+        ];
+        let ultimaAnimacionBoton = "";
+
+        function activarAnimacionBoton() {
+            if (!fichaBoton) return;
+
+            fichaBoton.classList.remove("boton-animando", ...animacionesBoton);
+            void fichaBoton.offsetWidth;
+
+            let animacionesDisponibles = animacionesBoton.filter(function(animacion) {
+                return animacion !== ultimaAnimacionBoton;
+            });
+
+            if (animacionesDisponibles.length === 0) {
+                animacionesDisponibles = animacionesBoton;
+            }
+
+            const animacionAleatoria = animacionesDisponibles[Math.floor(Math.random() * animacionesDisponibles.length)];
+            ultimaAnimacionBoton = animacionAleatoria;
+
+            fichaBoton.classList.add("boton-animando", animacionAleatoria);
+            fichaBoton.addEventListener("animationend", function limpiarAnimacionBoton() {
+                fichaBoton.classList.remove("boton-animando", ...animacionesBoton);
+                fichaBoton.removeEventListener("animationend", limpiarAnimacionBoton);
+            });
+        }
+
+        function activarAnimacion() {
+            fichaGrid.classList.remove("animando");
+            void fichaGrid.offsetWidth;
+            fichaGrid.classList.add("animando");
+        }
+
+        let primeraSeleccionServicio = true;
+
+        function actualizarContenidoServicio(servicioId, servicio) {
+            fichaTitulo.textContent = servicio.titulo;
+            fichaTitulo.classList.toggle("tracking-ajustado", servicioId === "compliance");
+            fichaLista.innerHTML = servicio.puntos.map(function(punto) {
+                return "<li>" + punto + "</li>";
+            }).join("");
+            fichaImagen.src = servicio.imagen;
+            fichaImagen.alt = servicio.alt;
+            fichaImagen.style.opacity = "1";
+        }
+
+        function cambiarServicio(servicioId) {
+            const servicio = serviciosBCTA[servicioId];
+            if (!servicio) return;
+
+            if (primeraSeleccionServicio) {
+                servicioFicha.classList.remove("modo-inicial");
+                actualizarContenidoServicio(servicioId, servicio);
+                activarAnimacion();
+                activarAnimacionBoton();
+                primeraSeleccionServicio = false;
+                return;
+            }
+
+            const imagenActual = fichaImagen.getAttribute("src");
+            const mismaImagen = imagenActual === servicio.imagen || imagenActual.endsWith(servicio.imagen);
+
+            if (mismaImagen) {
+                actualizarContenidoServicio(servicioId, servicio);
+                activarAnimacion();
+                activarAnimacionBoton();
+                return;
+            }
+
+            fichaImagen.style.opacity = "0";
+
+            setTimeout(function() {
+                actualizarContenidoServicio(servicioId, servicio);
+                activarAnimacion();
+                activarAnimacionBoton();
+            }, 80);
+        }
+
+        selectorItems.forEach(function(item) {
+            item.addEventListener("click", function() {
+                selectorItems.forEach(function(btn) {
+                    btn.classList.remove("active");
+                });
+
+                item.classList.add("active");
+                cambiarServicio(item.dataset.servicio);
+            });
+        });
+</script>
+{% endblock %}

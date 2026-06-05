@@ -1,147 +1,466 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Intranet | BCTA</title>
-    <style>
-        :root {
-            --azul: #0a192f;
-            --dorado: #c5a059;
-            --gris: #f5f7fa;
-            --blanco: #ffffff;
-            --texto: #334155;
+{% extends "base.html" %}
+
+{% block title %}Acceso Intranet | BCTA Abogados{% endblock %}
+
+{% block body_class %}intranet-page-layout{% endblock %}
+
+{% block content %}
+<style>
+    body.intranet-page-layout {
+        background: var(--azul-premium);
+        overflow: hidden;
+    }
+
+    body.intranet-page-layout > .intranet-page {
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 0;
+        padding: clamp(28px, 5vh, 54px) 20px;
+        color: var(--texto-claro);
+        background:
+            radial-gradient(circle at 18% 14%, rgba(197, 160, 89, 0.11), transparent 28%),
+            radial-gradient(circle at 86% 22%, rgba(122, 31, 43, 0.13), transparent 31%),
+            linear-gradient(135deg, var(--azul-premium) 0%, var(--azul-secundario) 54%, var(--azul-premium) 100%);
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+    }
+
+    body.intranet-page-layout > .intranet-page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(90deg, rgba(10, 25, 47, 0.18), transparent 34%, rgba(10, 25, 47, 0.24)),
+            radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.035), transparent 45%);
+        pointer-events: none;
+    }
+
+    .intranet-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 760px;
+        background: rgba(10, 25, 47, 0.34);
+        padding: clamp(30px, 4.4vh, 46px) clamp(42px, 5vw, 64px);
+        text-align: center;
+        border: 1px solid rgba(197, 160, 89, 0.30);
+        box-shadow: 0 22px 48px rgba(0, 0, 0, 0.22);
+        backdrop-filter: blur(8px);
+    }
+
+    .intranet-card h1 {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        color: var(--dorado-firma);
+        font-size: clamp(2rem, 3.6vh, 2.5rem);
+        line-height: 1.05;
+        margin: 0 0 clamp(14px, 1.8vh, 20px);
+        letter-spacing: -0.8px;
+        white-space: nowrap;
+    }
+
+    .intranet-card p {
+        font-size: clamp(0.98rem, 1.7vh, 1.06rem);
+        color: rgba(245, 247, 250, 0.82);
+        line-height: 1.6;
+        margin: 0 0 clamp(18px, 2.5vh, 24px);
+    }
+
+
+    .intranet-form {
+        display: grid;
+        gap: 14px;
+        text-align: left;
+    }
+
+    .intranet-form label {
+        display: block;
+        color: rgba(245, 247, 250, 0.84);
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 7px;
+    }
+
+    .intranet-input-wrap {
+        position: relative;
+    }
+
+    .intranet-form input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid rgba(197, 160, 89, 0.34);
+        background: rgba(245, 247, 250, 0.95);
+        color: var(--azul-premium);
+        padding: 10px 44px 10px 15px;
+        font-size: 0.92rem;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        outline: none;
+    }
+
+    .intranet-toggle {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        border: 0;
+        background: transparent;
+        color: rgba(10, 25, 47, 0.72);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+        padding: 4px;
+    }
+
+    .intranet-toggle:hover {
+        color: var(--azul-premium);
+    }
+
+    .intranet-form input:focus {
+        border-color: var(--dorado-firma);
+        box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.16);
+    }
+
+    .intranet-ayuda {
+        display: block;
+        margin-top: 6px;
+        color: rgba(245, 247, 250, 0.62);
+        font-size: 0.78rem;
+        line-height: 1.35;
+    }
+
+    .intranet-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 8px;
+        padding: 14px 22px;
+        border-radius: 8px;
+        background: var(--dorado-firma);
+        color: var(--azul-premium);
+        font-size: 0.82rem;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.15px;
+        border: 1px solid rgba(197, 160, 89, 0.76);
+        box-shadow: 0 14px 26px rgba(0, 0, 0, 0.18);
+        cursor: pointer;
+        transition: transform 0.24s ease, box-shadow 0.24s ease, background-color 0.24s ease;
+    }
+
+    .intranet-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 34px rgba(0, 0, 0, 0.26);
+        background: #d4af5d;
+    }
+
+    .intranet-btn:active,
+    .intranet-btn.is-pressing {
+        transform: translateY(1px) scale(0.985);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.22);
+        background: #c49a44;
+    }
+
+    .intranet-btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .intranet-alerta {
+        display: none;
+        margin-top: 18px;
+        padding: 15px;
+        border: 1px solid rgba(197, 160, 89, 0.28);
+        background: rgba(10, 25, 47, 0.38);
+        color: rgba(245, 247, 250, 0.86);
+        text-align: center;
+        font-size: 0.92rem;
+        line-height: 1.5;
+    }
+
+    .intranet-alerta.is-visible {
+        display: block;
+    }
+
+    @media (min-width: 981px) and (max-width: 1536px), (min-width: 981px) and (max-height: 900px) {
+        body.intranet-page-layout > .intranet-page {
+            padding: clamp(22px, 4vh, 42px) 20px;
         }
 
-        * {
-            box-sizing: border-box;
+        .intranet-card {
+            max-width: 680px;
+            padding: clamp(24px, 3.4vh, 36px) clamp(34px, 4vw, 52px);
         }
 
-        body {
-            margin: 0;
-            font-family: "Segoe UI", sans-serif;
-            background: var(--gris);
-            color: var(--texto);
+        .intranet-card h1 {
+            font-size: clamp(1.72rem, 3.2vh, 2.18rem);
+            margin-bottom: clamp(10px, 1.5vh, 16px);
         }
 
-        .wrap {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+        .intranet-card p {
+            font-size: clamp(0.86rem, 1.45vh, 0.98rem);
+            line-height: 1.48;
+            margin-bottom: clamp(14px, 2vh, 20px);
         }
 
-        .card {
-            width: 100%;
-            max-width: 700px;
-            background: var(--blanco);
-            border-radius: 12px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
-            border-top: 5px solid var(--dorado);
-            padding: 40px;
-            text-align: center;
+        .intranet-form {
+            gap: 11px;
         }
 
-        h1 {
-            margin-top: 0;
-            margin-bottom: 16px;
-            color: var(--azul);
-            font-size: 2rem;
+        .intranet-form label {
+            margin-bottom: 5px;
+            font-size: 0.74rem;
         }
 
-        p {
-            line-height: 1.7;
-            margin-bottom: 16px;
+        .intranet-form input {
+            padding: 9px 40px 9px 13px;
+            font-size: 0.86rem;
         }
 
-        .estado {
-            margin: 25px 0;
-            padding: 16px;
-            border-radius: 8px;
-            background: #eef2f7;
-            color: #2563eb;
-            font-weight: 700;
+        .intranet-ayuda {
+            margin-top: 5px;
+            font-size: 0.7rem;
         }
 
-        .acciones {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 10px;
+        .intranet-btn {
+            padding: 12px 18px;
+            font-size: 0.76rem;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 14px 22px;
-            border: 1px solid var(--dorado);
-            background: transparent;
-            color: var(--dorado);
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: 0.25s ease;
+        .intranet-alerta {
+            margin-top: 14px;
+            padding: 12px;
+            font-size: 0.82rem;
+            line-height: 1.38;
+        }
+    }
+
+    @media (min-width: 981px) and (max-width: 1400px) and (max-height: 800px) {
+        .intranet-card {
+            max-width: 620px;
+            padding: 22px 42px;
         }
 
-        .btn:hover {
-            background: var(--dorado);
-            color: var(--azul);
+        .intranet-card h1 {
+            font-size: 1.82rem;
         }
 
-        .logout-form {
-            margin: 0;
+        .intranet-card p {
+            font-size: 0.84rem;
+            line-height: 1.4;
         }
-    </style>
-</head>
-<body>
-    <div class="wrap">
-        <div class="card">
-            <h1>Intranet</h1>
 
-            <p>
-                Esta sección corresponde al acceso administrativo interno del estudio.
-            </p>
+        .intranet-form {
+            gap: 9px;
+        }
 
-            <p>
-                Aquí podrán mostrarse herramientas, accesos y módulos de gestión interna.
-            </p>
+        .intranet-alerta {
+            margin-top: 12px;
+            padding: 10px;
+            font-size: 0.78rem;
+        }
+    }
 
-            <div class="estado">
-                ESTADO: módulo en preparación
+    @media (max-width: 560px) {
+        body.intranet-page-layout > .intranet-page {
+            padding: 86px 18px 34px;
+            overflow: auto;
+        }
+
+        .intranet-card {
+            padding: 30px 22px;
+        }
+
+        .intranet-card h1 {
+            white-space: normal;
+        }
+    }
+</style>
+
+<div class="intranet-page">
+    <div class="intranet-card">
+        <h1>Acceso Intranet</h1>
+        <p>
+            Bienvenido a las herramientas de gestión administrativa de BCTA Abogados.
+            Ingresa los datos de ingreso proporcionados.
+        </p>
+
+        <form class="intranet-form" id="intranet-form" autocomplete="off">
+            <div>
+                <label for="usuario">Usuario</label>
+                <div class="intranet-input-wrap">
+                    <input type="text" id="usuario" name="usuario" placeholder="Ingrese su Código de Colaborador" minlength="7" maxlength="7" pattern="[A-Za-z]{3}-[0-9]{3}">
+                    <button type="button" class="intranet-toggle" data-target="usuario" aria-label="Ocultar usuario" aria-pressed="false"></button>
+                </div>
+                <span class="intranet-ayuda">Usuario: Código de Colaborador/a proporcionado por TI.</span>
             </div>
 
-            <div class="acciones">
-                <a class="btn" href="/home">← Volver al inicio</a>
-
-                <form class="logout-form" id="logout-form" method="post" action="/salir">
-                    <button class="btn" type="submit">Cerrar acceso</button>
-                </form>
+            <div>
+                <label for="password">Contraseña</label>
+                <div class="intranet-input-wrap">
+                    <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" minlength="8" maxlength="10">
+                    <button type="button" class="intranet-toggle" data-target="password" aria-label="Mostrar contraseña" aria-pressed="false"></button>
+                </div>
+                <span class="intranet-ayuda">Contraseña: mínimo 8 y máximo 10 caracteres.</span>
             </div>
+
+            <button type="submit" class="intranet-btn" disabled>Ingresar</button>
+        </form>
+
+        <div class="intranet-alerta" id="intranet-alerta" aria-live="polite">
+            <span id="intranet-alerta-texto">Tu Código de Colaborador/a o password no está registrado.</span>
         </div>
     </div>
+</div>
 
-    <script>
-        const logoutForm = document.getElementById("logout-form");
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const intranetForm = document.getElementById('intranet-form');
+        const intranetAlerta = document.getElementById('intranet-alerta');
+        const intranetAlertaTexto = document.getElementById('intranet-alerta-texto');
+        const usuarioInput = document.getElementById('usuario');
+        const passwordInput = document.getElementById('password');
+        const intranetBtn = intranetForm ? intranetForm.querySelector('.intranet-btn') : null;
+        const intranetToggles = document.querySelectorAll('.intranet-toggle');
+        let intentos = 0;
 
-        if (logoutForm) {
-            logoutForm.addEventListener("submit", async function (event) {
-                event.preventDefault();
+        const iconoOjoAbierto = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="2.8" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+        `;
 
-                try {
-                    await fetch("/salir", {
-                        method: "POST",
-                        credentials: "same-origin"
-                    });
-                } catch (error) {
+        const iconoOjoCerrado = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M2.5 12s3.5-6 9.5-6c1.65 0 3.06.45 4.25 1.08M21.5 12s-3.5 6-9.5 6c-1.6 0-2.98-.4-4.15-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.8 9.8a2.8 2.8 0 0 0 4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        `;
+
+        function limpiarFormulario(enfocarUsuario) {
+            usuarioInput.value = '';
+            passwordInput.value = '';
+            usuarioInput.type = 'text';
+            passwordInput.type = 'password';
+            actualizarIconosVisibilidad();
+            actualizarEstadoBoton();
+
+            if (enfocarUsuario && !usuarioInput.disabled) {
+                setTimeout(function () {
+                    usuarioInput.focus();
+                }, 0);
+            }
+        }
+
+        function actualizarEstadoBoton() {
+            const usuario = usuarioInput.value.trim();
+            const password = passwordInput.value.trim();
+            const usuarioValido = /^[A-Za-z]{3}-[0-9]{3}$/.test(usuario);
+            const passwordValido = password.length >= 8 && password.length <= 10;
+            intranetBtn.disabled = !(usuarioValido && passwordValido);
+        }
+
+        function actualizarIconosVisibilidad() {
+            intranetToggles.forEach(function (toggle) {
+                const target = document.getElementById(toggle.dataset.target);
+                if (!target) {
+                    return;
                 }
 
-                window.location.href = "/";
+                const visible = target.type === 'text';
+                toggle.innerHTML = visible ? iconoOjoAbierto : iconoOjoCerrado;
+                toggle.setAttribute('aria-pressed', visible ? 'true' : 'false');
+                toggle.setAttribute('aria-label', visible ? 'Ocultar ' + target.name : 'Mostrar ' + target.name);
             });
         }
-    </script>
-</body>
-</html>
+
+        function mostrarMensaje(mensaje) {
+            intranetAlertaTexto.textContent = mensaje;
+            intranetAlerta.classList.add('is-visible');
+        }
+
+        if (intranetForm && intranetAlerta && intranetAlertaTexto && usuarioInput && passwordInput && intranetBtn) {
+            actualizarIconosVisibilidad();
+            actualizarEstadoBoton();
+
+            usuarioInput.addEventListener('input', actualizarEstadoBoton);
+            passwordInput.addEventListener('input', actualizarEstadoBoton);
+
+            intranetToggles.forEach(function (toggle) {
+                toggle.addEventListener('click', function () {
+                    const target = document.getElementById(toggle.dataset.target);
+                    if (!target) {
+                        return;
+                    }
+
+                    target.type = target.type === 'password' ? 'text' : 'password';
+                    actualizarIconosVisibilidad();
+                });
+            });
+
+            intranetForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                intranetBtn.classList.add('is-pressing');
+                setTimeout(function () {
+                    intranetBtn.classList.remove('is-pressing');
+                }, 180);
+
+                const usuario = usuarioInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                if (!usuario && !password) {
+                    mostrarMensaje('No se ingresaron datos, por favor intente nuevamente.');
+                    limpiarFormulario(true);
+                    return;
+                }
+
+                if (!usuario) {
+                    mostrarMensaje('Tu usuario no ha sido ingresado, reintenta.');
+                    limpiarFormulario(true);
+                    return;
+                }
+
+                if (!password) {
+                    mostrarMensaje('Tu contraseña no ha sido ingresada, reintenta.');
+                    limpiarFormulario(true);
+                    return;
+                }
+
+                if (!/^[A-Za-z]{3}-[0-9]{3}$/.test(usuario)) {
+                    mostrarMensaje('El Código de Colaborador/a debe tener el formato ABC-123: tres letras, guion y tres números.');
+                    limpiarFormulario(true);
+                    return;
+                }
+
+                if (password.length < 8 || password.length > 10) {
+                    mostrarMensaje('La contraseña debe tener mínimo 8 y máximo 10 caracteres.');
+                    limpiarFormulario(true);
+                    return;
+                }
+
+                intentos += 1;
+                limpiarFormulario(true);
+
+                if (intentos >= 3) {
+                    usuarioInput.disabled = true;
+                    passwordInput.disabled = true;
+                    intranetBtn.disabled = true;
+                    mostrarMensaje('Tu Código de Colaborador/a o password no está registrado. Acceso bloqueado temporalmente. Solicite asistencia al departamento de TI.');
+                    return;
+                }
+
+                const intentosRestantes = 3 - intentos;
+                mostrarMensaje('Tu Código de Colaborador/a o password no está registrado. Quedan ' + intentosRestantes + ' intentos. Reintenta o solicita asistencia al departamento de TI.');
+            });
+        }
+    });
+</script>
+{% endblock %}

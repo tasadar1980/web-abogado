@@ -1,0 +1,555 @@
+<!-- MÓDULO 3: CSS, HTML y rotación de imágenes pertenecientes al módulo Empresas. -->
+    <style>
+    .ls-module3-decor-section {
+        position: relative;
+        min-height: auto;
+        box-sizing: border-box;
+        padding: clamp(56px, 7vh, 72px) 60px clamp(28px, 4vh, 44px);
+        background: var(--gris-suave);
+        color: #fff;
+        overflow: hidden;
+        isolation: isolate;
+    }
+
+    .ls-module3-layout {
+        width: min(90vw, 1420px);
+        margin: 0 auto;
+        background: transparent;
+        display: flex;
+        overflow: visible;
+        flex-wrap: wrap;
+        gap: clamp(44px, 5vw, 82px);
+        align-items: center;
+    }
+
+    .ls-module3-content {
+        flex: 1.28 1 500px;
+        min-width: 300px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .ls-module3-decor-section h2 {
+        font-size: clamp(3rem, 5vw, 4.5rem);
+        color: #fff;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.1;
+        margin-bottom: 30px;
+        letter-spacing: -1.5px;
+    }
+
+    .ls-module3-decor-section p.lead {
+        font-size: 1.4rem;
+        font-weight: 400;
+        color: rgba(255,255,255,0.8);
+        line-height: 1.6;
+        max-width: 90%;
+        margin-bottom: 40px;
+    }
+
+    .ls-module3-contact-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        min-width: 122px;
+        padding: 10px 22px;
+        border: 1px solid rgba(197, 160, 89, 0.82);
+        border-radius: 999px;
+        color: #ffffff;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        background: #7A1F2B;
+        backdrop-filter: blur(4px);
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        z-index: 4;
+        transition: opacity 0.3s ease, background 0.3s ease;
+    }
+
+    .ls-module3-contact-button:hover {
+        opacity: 0.92;
+        background: #651925;
+    }
+
+.ls-module3-submodule {
+        position: relative;
+    }
+
+    .ls-module3-submodule-scale {
+        transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+        will-change: transform;
+    }
+
+    .ls-module3-submodule-scale:hover {
+        transform: scale(1.035);
+    }
+
+    .ls-module3-copy-main {
+        transform-origin: left center;
+    }
+
+    .ls-module3-image {
+        transform-origin: center center;
+    }
+
+    .ls-module3-photo-loop {
+        position: relative;
+        flex: 1 1 410px;
+        min-width: 300px;
+        min-height: 400px;
+        overflow: visible;
+        border-radius: 18px;
+        background: var(--azul-premium);
+        box-shadow:
+            0 24px 55px rgba(10, 25, 47, 0.24),
+            0 8px 22px rgba(10, 25, 47, 0.16);
+    }
+
+    .ls-module3-photo-loop::before {
+        content: "";
+        position: absolute;
+        left: 6%;
+        right: 6%;
+        bottom: -24px;
+        height: 44px;
+        border-radius: 999px;
+        background: radial-gradient(ellipse at center, rgba(10, 25, 47, 0.30) 0%, rgba(10, 25, 47, 0.16) 42%, rgba(10, 25, 47, 0) 76%);
+        filter: blur(16px);
+        opacity: 0.78;
+        transform: translateY(0) scale(1);
+        pointer-events: none;
+        z-index: -1;
+        transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .ls-module3-photo-loop::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -22px 38px rgba(10, 25, 47, 0.10);
+        pointer-events: none;
+        z-index: 3;
+    }
+
+    .ls-module3-photo-loop img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0;
+        border-radius: 18px;
+        transition: opacity 0.9s ease-in-out;
+        z-index: 1;
+    }
+
+    .ls-module3-photo-loop img.is-active {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .ls-module3-photo-loop:hover::before {
+        opacity: 0.88;
+        transform: translateY(3px) scale(1.04);
+    }
+
+    .ls-module3-decor-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+            linear-gradient(to right, rgba(10, 25, 47, 0.95) 0%, rgba(10, 25, 47, 0.7) 100%),
+            url("{{ url_for('static', filename='img/Fotos Empresa/fotos webp/minería.webp') }}");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 1;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .ls-module3-decor-section > * {
+        position: relative;
+        z-index: 2;
+    }
+
+    .ls-differentiators-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        align-items: stretch;
+        border-top: none !important;
+        padding-top: 60px;
+    }
+
+    .ls-differentiator-card {
+        position: relative;
+        min-height: 190px;
+        display: flex;
+        align-items: center;
+        isolation: isolate;
+        overflow: hidden;
+        border-radius: 34px;
+        cursor: pointer;
+        transition:
+            color .45s cubic-bezier(.22,.61,.36,1),
+            transform .45s cubic-bezier(.22,.61,.36,1);
+    }
+
+    .ls-differentiator-card::before {
+        content: "";
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        border-radius: 999px;
+        background: var(--gris-suave);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition:
+            transform .58s cubic-bezier(.22,.61,.36,1),
+            border-radius .58s cubic-bezier(.22,.61,.36,1),
+            width .58s cubic-bezier(.22,.61,.36,1),
+            height .58s cubic-bezier(.22,.61,.36,1);
+        z-index: -1;
+    }
+
+    .ls-differentiator-card:hover::before {
+        width: 135%;
+        height: 135%;
+        border-radius: 120px;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .ls-differentiator-card:hover {
+        color: #fff;
+    }
+
+    .ls-differentiator-card-inner {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 28px 22px;
+        border-radius: 34px;
+    }
+
+    .ls-differentiator-card h4 {
+        color: var(--dorado-firma);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 18px;
+        transition: color .45s ease;
+    }
+
+    .ls-differentiator-card p {
+        font-size: 1.1rem;
+        font-weight: 300;
+        line-height: 1.6;
+        opacity: 0.8;
+        margin: 0;
+        transition: color .45s ease;
+    }
+
+    .ls-differentiator-card:hover h4,
+    .ls-differentiator-card:hover p {
+        color: var(--azul-premium) !important;
+    }
+
+    
+
+    
+
+    
+        .ls-module3-decor-section {
+            --module3-section-padding-y: clamp(32px, 5.2svh, 70px);
+            --module3-section-padding-x: clamp(44px, 4vw, 60px);
+            --module3-layout-width: min(88vw, 1380px);
+            --module3-gap: clamp(34px, 4.6vw, 72px);
+            --module3-grid-top: clamp(28px, 4.4svh, 54px);
+            --module3-grid-gap: clamp(22px, 2.4vw, 38px);
+            --module3-title-size: clamp(2.8rem, 4.2vw, 4.5rem);
+            --module3-lead-size: clamp(1.12rem, 1.3vw, 1.36rem);
+            --module3-photo-height: clamp(280px, 35svh, 420px);
+            --module3-card-min: clamp(140px, 17svh, 190px);
+            --module3-card-padding-y: clamp(18px, 2.2svh, 28px);
+            --module3-card-padding-x: clamp(16px, 1.6vw, 22px);
+            --module3-grid-align-offset: var(--module3-card-padding-x);
+            --module3-grid-width: calc(var(--module3-layout-width) + (var(--module3-grid-align-offset) * 2));
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--module3-section-padding-y) var(--module3-section-padding-x);
+        }
+
+        .ls-module3-layout {
+            width: var(--module3-layout-width);
+            flex: 0 0 auto;
+            gap: var(--module3-gap);
+        }
+
+        .ls-module3-decor-section h2 {
+            font-size: var(--module3-title-size);
+            line-height: 1.06;
+            margin-bottom: clamp(14px, 2.2svh, 28px);
+        }
+
+        .ls-module3-decor-section p.lead {
+            font-size: var(--module3-lead-size);
+            line-height: 1.5;
+            max-width: 94%;
+            margin-bottom: clamp(18px, 2.8svh, 36px);
+        }
+
+        .ls-module3-photo-loop {
+            min-height: var(--module3-photo-height);
+        }
+
+        .ls-differentiators-grid {
+            width: var(--module3-grid-width);
+            margin: 0 auto;
+            flex: 0 0 auto;
+            gap: var(--module3-grid-gap);
+            padding-top: var(--module3-grid-top);
+        }
+
+        .ls-differentiator-card {
+            min-height: var(--module3-card-min);
+        }
+
+        .ls-differentiator-card-inner {
+            min-height: calc(var(--module3-card-min) - 28px);
+            padding: var(--module3-card-padding-y) var(--module3-card-padding-x);
+        }
+
+        .ls-differentiator-card h4 {
+            font-size: clamp(1.14rem, 1.45vw, 1.5rem);
+            margin-bottom: clamp(9px, 1.5svh, 18px);
+        }
+
+        .ls-differentiator-card p {
+            font-size: clamp(.92rem, 1.05vw, 1.08rem);
+            line-height: 1.45;
+        }
+    
+
+    
+
+    
+
+    @media (min-width: 981px) and (max-width: 1536px), (min-width: 981px) and (max-height: 900px) {
+        .ls-module3-decor-section {
+            --module3-section-padding-y: clamp(24px, 4.2svh, 48px);
+            --module3-section-padding-x: clamp(34px, 3vw, 48px);
+            --module3-layout-width: min(88vw, 1240px);
+            --module3-gap: clamp(24px, 3.4vw, 48px);
+            --module3-grid-top: clamp(18px, 3.2svh, 36px);
+            --module3-grid-gap: clamp(16px, 1.8vw, 28px);
+            --module3-title-size: clamp(2.35rem, 3.65vw, 3.75rem);
+            --module3-lead-size: clamp(1rem, 1.12vw, 1.18rem);
+            --module3-photo-height: clamp(230px, 30svh, 340px);
+            --module3-card-min: clamp(122px, 14.5svh, 160px);
+            --module3-card-padding-y: clamp(14px, 1.8svh, 20px);
+            --module3-card-padding-x: clamp(14px, 1.4vw, 18px);
+        }
+
+        .ls-module3-layout {
+            flex-wrap: nowrap;
+        }
+
+        .ls-module3-content,
+        .ls-module3-photo-loop {
+            min-width: 0;
+        }
+
+        .ls-module3-photo-loop {
+            flex-basis: clamp(340px, 32vw, 410px);
+        }
+
+        .ls-differentiator-card h4 {
+            font-size: clamp(1rem, 1.25vw, 1.25rem);
+        }
+
+        .ls-differentiator-card p {
+            font-size: clamp(.78rem, .9vw, .94rem);
+            line-height: 1.38;
+        }
+    }
+
+    @media (min-width: 981px) and (max-width: 1400px) and (max-height: 800px) {
+        .ls-module3-decor-section {
+            --module3-section-padding-y: 22px;
+            --module3-section-padding-x: 36px;
+            --module3-layout-width: min(90vw, 1180px);
+            --module3-gap: 28px;
+            --module3-grid-top: 18px;
+            --module3-grid-gap: 16px;
+            --module3-title-size: clamp(2.12rem, 3.35vw, 3.1rem);
+            --module3-lead-size: .95rem;
+            --module3-photo-height: clamp(215px, 28svh, 290px);
+            --module3-card-min: 112px;
+            --module3-card-padding-y: 12px;
+            --module3-card-padding-x: 14px;
+        }
+
+        .ls-module3-decor-section p.lead {
+            line-height: 1.38;
+            margin-bottom: 18px;
+        }
+
+        .ls-module3-contact-button {
+            padding: 8px 18px;
+            font-size: 0.8rem;
+        }
+
+        .ls-differentiator-card h4 {
+            margin-bottom: 7px;
+        }
+
+        .ls-differentiator-card p {
+            font-size: .76rem;
+            line-height: 1.32;
+        }
+    }
+
+    </style>
+
+<section id="snap-section-3" class="index-module index-module-3 ls-module3-decor-section">
+        <div class="ls-module3-layout">
+
+            <div class="ls-module3-content">
+                <div class="ls-module3-submodule ls-module3-copy-main ls-module3-submodule-scale">
+                    <h2>Asesoría jurídica para decisiones más seguras</h2>
+                    <p class="lead">Acompañamos a empresas que necesitan asesoría legal, detectar riesgos que impactan la toma de decisiones con mayor claridad. Analizamos cada situación con criterio y visión práctica, proponiendo recomendaciones y estrategias ajustadas a la realidad de cada negocio.</p>
+                </div>
+
+                <div class="ls-module3-submodule ls-module3-copy-cta">
+                    <a href="/contacto" class="ls-module3-contact-button">Contacto <span>→</span></a>
+                </div>
+            </div>
+
+            <div class="ls-module3-submodule ls-module3-image ls-module3-submodule-scale ls-module3-photo-loop"
+                id="ls-module3-photo-loop" aria-label="Imágenes de empresas BCTA">
+                <img src="{{ url_for('static', filename='img/Fotos Empresa/fotos webp/agricultura.webp') }}" alt="Asesoría jurídica para empresas BCTA" class="is-active" id="ls-module3-photo-a">
+                <img src="{{ url_for('static', filename='img/Fotos Empresa/fotos webp/altura.webp') }}" alt="Asesoría jurídica para empresas BCTA" id="ls-module3-photo-b">
+            </div>
+        </div>
+
+        <div class="ls-differentiators-grid">
+            <div class="ls-differentiator-card">
+                <div class="ls-differentiator-card-inner">
+                    <h4>Relaciones laborales</h4>
+                    <p>Contrataciones, desvinculaciones, responsabilidades y decisiones internas pueden generar efectos relevantes cuando no existe claridad en los procesos o criterios aplicados.</p>
+                </div>
+            </div>
+            <div class="ls-differentiator-card">
+                <div class="ls-differentiator-card-inner">
+                    <h4>Riesgos y continuidad operacional</h4>
+                    <p>Aspectos contractuales, tributarios, comerciales o normativos pueden impactar el funcionamiento y la estabilidad de una empresa cuando no son evaluados oportunamente.</p>
+                </div>
+            </div>
+            <div class="ls-differentiator-card">
+                <div class="ls-differentiator-card-inner">
+                    <h4>Prevención y respaldo jurídico</h4>
+                    <p>Contar con orientación jurídica permite analizar escenarios con mayor anticipación, reducir contingencias y enfrentar decisiones empresariales con mayor seguridad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const module3Photos = [
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/agricultura.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/altura.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/bolsa 2.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/bolsa.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/callcenter.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/condominios.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/eolicos.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/ganadería.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/industrias 2.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/industrias.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/minería 2.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/minería.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/paneles.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/personas trabajando.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/represa.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/salmoneria.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/tecnología 2.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/tecnología.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/transmision.webp') }}"
+                    ];
+
+                    const module3PhotoA = document.getElementById("ls-module3-photo-a");
+                    const module3PhotoB = document.getElementById("ls-module3-photo-b");
+                    let module3ActivePhoto = module3PhotoA;
+                    let module3NextPhoto = module3PhotoB;
+                    let module3PhotoIndex = 0;
+
+
+                    function shuffleModule3Photos() {
+                        for (let i = module3Photos.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [module3Photos[i], module3Photos[j]] = [module3Photos[j], module3Photos[i]];
+                        }
+                    }
+
+
+                    function rotateModule3PhotoLoop() {
+                        if (!module3ActivePhoto || !module3NextPhoto || module3Photos.length < 2) {
+                            return;
+                        }
+
+                        module3PhotoIndex += 1;
+
+                        if (module3PhotoIndex >= module3Photos.length) {
+                            const lastPhoto = module3Photos[module3Photos.length - 1];
+                            shuffleModule3Photos();
+                            if (module3Photos[0] === lastPhoto && module3Photos.length > 1) {
+                                [module3Photos[0], module3Photos[1]] = [module3Photos[1], module3Photos[0]];
+                            }
+                            module3PhotoIndex = 0;
+                        }
+
+                        module3NextPhoto.src = module3Photos[module3PhotoIndex];
+                        const module3Loop = document.getElementById("ls-module3-photo-loop");
+                        if (module3Loop) {
+                            module3Loop.style.setProperty("--module3-loop-bg", `url("${module3Photos[module3PhotoIndex]}")`);
+                        }
+                        module3NextPhoto.classList.add("is-active");
+                        module3ActivePhoto.classList.remove("is-active");
+
+                        [module3ActivePhoto, module3NextPhoto] = [module3NextPhoto, module3ActivePhoto];
+                    }
+
+                    shuffleModule3Photos();
+                    if (module3PhotoA) {
+                        module3PhotoA.src = module3Photos[0];
+                    }
+                    const module3Loop = document.getElementById("ls-module3-photo-loop");
+                    if (module3Loop) {
+                        module3Loop.style.setProperty("--module3-loop-bg", `url("${module3Photos[0]}")`);
+                    }
+                    window.setInterval(rotateModule3PhotoLoop, 3500);
+        });
+    </script>

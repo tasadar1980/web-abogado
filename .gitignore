@@ -2,3 +2,5 @@ env/
 __pycache__/
 *.pyc
 .env
+contact_limits.json
+brandbook_text.txt

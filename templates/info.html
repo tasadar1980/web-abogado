@@ -1,0 +1,1093 @@
+{% extends "base.html" %}
+{% block title %}Solicitud de Información | BCTA Abogados{% endblock %}
+{% block body_class %}contacto-page-layout{% endblock %}
+
+{% block content %}
+<style>
+    .contacto-page {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.08), transparent 60%),
+                    linear-gradient(135deg, var(--azul-premium) 0%, var(--azul-secundario) 100%);
+        padding: 120px 0 40px;
+        min-height: calc(100vh - 105px);
+        box-sizing: border-box;
+    }
+
+    .contacto-header {
+        text-align: center;
+        margin-bottom: clamp(20px, 3vw, 35px);
+    }
+
+    .contacto-header h1 {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        color: var(--dorado-firma);
+        margin: 0 0 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .contacto-header p {
+        color: var(--texto-claro);
+        font-size: clamp(1rem, 1.5vw, 1.15rem);
+        max-width: 600px;
+        margin: 0 auto;
+        opacity: 0.9;
+    }
+
+    .contacto-header .contacto-instruction {
+        color: var(--blanco);
+        font-size: 1.5rem;
+        margin: -2px auto 10px;
+        text-align: center;
+        line-height: 1.2;
+        font-weight: 700;
+        opacity: 1;
+        max-width: 760px;
+    }
+
+    .contacto-header .contacto-instruction strong {
+        color: inherit;
+        font-weight: inherit;
+        letter-spacing: inherit;
+    }
+
+    .wizard-container {
+        max-width: 760px;
+        margin: 0 auto;
+        background: rgba(10, 25, 47, 0.4);
+        border: 1px solid rgba(197, 160, 89, 0.25);
+        border-radius: 24px;
+        padding: clamp(24px, 4vw, 48px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        position: relative;
+        overflow: hidden;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Progress Bar */
+    .wizard-progress {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        position: relative;
+    }
+
+    .wizard-progress::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: 1;
+        transform: translateY(-50%);
+    }
+
+    .progress-step {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--azul-secundario);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: var(--texto-claro);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.9rem;
+        position: relative;
+        z-index: 2;
+        transition: all 0.4s ease;
+    }
+
+    .progress-step.active {
+        background: var(--dorado-firma);
+        border-color: var(--dorado-firma);
+        color: var(--azul-premium);
+        box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+    }
+
+    .progress-step.completed {
+        background: var(--dorado-firma);
+        border-color: var(--dorado-firma);
+        color: var(--azul-premium);
+    }
+
+    /* Step Panels */
+    .wizard-step {
+        display: none;
+        flex: 1;
+        animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .wizard-step.active {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @keyframes fadeSlideUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-title {
+        color: var(--blanco);
+        font-size: 1.5rem;
+        margin: -2px 0 10px;
+        text-align: center;
+    }
+    
+    .step-summary {
+        text-align: center;
+        color: var(--dorado-firma);
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+        letter-spacing: 0.5px;
+        opacity: 0.9;
+    }
+
+    /* Step 1: Lista de Servicios (Estilo servicios.html) */
+    .area-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 12px;
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 10px;
+        /* Custom scrollbar */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(197, 160, 89, 0.5) transparent;
+    }
+
+    .area-btn {
+        background: transparent;
+        border: 1px solid rgba(197, 160, 89, 0.25);
+        color: var(--texto-claro);
+        padding: 16px 20px;
+        text-align: left;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .area-btn:hover {
+        background: rgba(197, 160, 89, 0.1);
+        border-color: var(--dorado-firma);
+        transform: translateX(5px);
+        color: var(--blanco);
+    }
+
+    .area-btn::after {
+        content: "→";
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%) translateX(-10px);
+        opacity: 0;
+        color: var(--dorado-firma);
+        transition: all 0.4s ease;
+    }
+
+    .area-btn:hover::after {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+
+    /* Formularios */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .contact-fields-row {
+        display: grid;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .contact-fields-row.name-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .contact-fields-row.contact-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contact-fields-row .form-group {
+        margin-bottom: 0;
+    }
+
+    .form-label {
+        display: block;
+        color: var(--texto-claro);
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+    }
+
+    .form-control {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--blanco);
+        padding: 14px 18px;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--dorado-firma);
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+    }
+
+    textarea.form-control {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .wizard-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 18px;
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: var(--texto-claro);
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--blanco);
+    }
+
+    .btn-primary {
+        background: var(--dorado-firma);
+        border: none;
+        color: var(--azul-premium);
+        padding: 12px 32px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-left: auto;
+    }
+
+    .btn-primary:hover {
+        background: #d4b271;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+    }
+
+    .honeypot-field {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+    }
+
+    .turnstile-holder {
+        width: 0;
+        height: 0;
+        min-height: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .turnstile-security-note {
+        max-width: 620px;
+        margin: 14px auto 0;
+        color: var(--texto-claro);
+        font-size: clamp(0.66rem, 0.78vw, 0.74rem);
+        line-height: 1.24;
+        opacity: 0.78;
+        text-align: center;
+        font-weight: 400;
+    }
+
+    .contacto-limit-notice {
+        max-width: 620px;
+        margin: 6px auto 0;
+        color: var(--blanco);
+        font-size: clamp(0.66rem, 0.78vw, 0.74rem);
+        line-height: 1.24;
+        opacity: 0.92;
+        text-align: center;
+        font-weight: 400;
+    }
+
+    .step-summary {
+        color: var(--dorado-firma);
+        font-weight: 700;
+        opacity: 0.96;
+    }
+
+    .step-summary span {
+        color: var(--dorado-firma);
+        font-weight: 700;
+    }
+
+    .wizard-step .step-summary {
+        color: var(--blanco);
+        font-size: 1.5rem;
+        margin: -2px 0 24px;
+        text-align: center;
+        line-height: 1.2;
+        font-weight: 700;
+        letter-spacing: 0;
+        opacity: 1;
+    }
+
+    .wizard-step .step-summary span {
+        color: var(--blanco);
+        font-weight: 700;
+    }
+
+    .character-counter {
+        color: var(--texto-claro);
+        font-size: 0.78rem;
+        text-align: right;
+        opacity: 0.75;
+        margin-top: 6px;
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.48;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .btn-primary:disabled:hover {
+        background: var(--dorado-firma);
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Success State */
+    .success-state {
+        text-align: center;
+        padding: 40px 20px;
+        display: none;
+    }
+
+    .success-icon {
+        font-size: 4rem;
+        color: var(--dorado-firma);
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+        .area-grid,
+        .contact-fields-row.name-row,
+        .contact-fields-row.contact-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (min-width: 981px) {
+        body.contacto-page-layout {
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.contacto-page-layout .contacto-page {
+            flex: 1;
+            min-height: 0;
+            padding-top: 80px; /* Navbar superpuesto de forma transparente */
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        body.contacto-page-layout .contacto-page > .container {
+            transform: translateY(clamp(-34px, -4vh, -22px));
+        }
+
+        body.contacto-page-layout .contacto-header {
+            margin-bottom: clamp(10px, 2vh, 24px);
+        }
+
+        body.contacto-page-layout .wizard-container {
+            flex: 1;
+            min-height: 0;
+            max-height: 500px; /* Limitar altura para evitar que se desborde al footer */
+            padding: clamp(18px, 2.6vh, 32px) clamp(20px, 3vh, 36px) clamp(20px, 3vh, 36px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.contacto-page-layout .wizard-progress {
+            margin-bottom: clamp(10px, 1.4vh, 18px);
+        }
+
+        body.contacto-page-layout .wizard-step.active {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.contacto-page-layout .area-grid {
+            flex: 1;
+            min-height: 0;
+            max-height: none;
+            overflow-y: auto;
+        }
+
+        body.contacto-page-layout textarea.form-control {
+            min-height: 80px;
+            height: clamp(80px, 12vh, 120px);
+        }
+
+        body.contacto-page-layout .form-group {
+            margin-bottom: clamp(10px, 1.5vh, 16px);
+        }
+
+        body.contacto-page-layout .wizard-actions {
+            margin-top: auto;
+            padding-top: clamp(6px, 1.1vh, 14px);
+        }
+    }
+
+    @media (min-width: 981px) and (max-width: 1536px), (min-width: 981px) and (max-height: 900px) {
+        body.contacto-page-layout .contacto-page {
+            padding-top: 72px;
+            padding-bottom: 16px;
+        }
+
+        body.contacto-page-layout .contacto-page > .container {
+            transform: translateY(clamp(-28px, -3.4vh, -18px));
+        }
+
+        body.contacto-page-layout .contacto-header h1 {
+            font-size: clamp(1.8rem, 4.1vh, 2.7rem);
+            margin-bottom: 8px;
+        }
+
+        body.contacto-page-layout .contacto-header .contacto-instruction,
+        body.contacto-page-layout .wizard-step .step-summary {
+            font-size: clamp(1.12rem, 2.4vh, 1.32rem);
+            margin-bottom: clamp(10px, 1.6vh, 18px);
+        }
+
+        body.contacto-page-layout .contacto-limit-notice,
+        body.contacto-page-layout .turnstile-security-note {
+            font-size: clamp(0.62rem, 0.72vw, 0.7rem);
+            margin-top: 5px;
+        }
+
+        body.contacto-page-layout .wizard-container {
+            max-width: 700px;
+            max-height: 460px;
+            padding: clamp(16px, 2.1vh, 26px) clamp(18px, 2.4vw, 30px);
+            border-radius: 20px;
+        }
+
+        body.contacto-page-layout .wizard-progress {
+            margin-bottom: clamp(8px, 1.2vh, 14px);
+        }
+
+        body.contacto-page-layout .progress-step {
+            width: 28px;
+            height: 28px;
+            font-size: 0.82rem;
+        }
+
+        body.contacto-page-layout .step-title {
+            font-size: clamp(1.14rem, 2.3vh, 1.34rem);
+            margin-bottom: 10px;
+        }
+
+        body.contacto-page-layout .area-grid {
+            grid-template-columns: repeat(auto-fill, minmax(198px, 1fr));
+            gap: 9px;
+        }
+
+        body.contacto-page-layout .area-btn {
+            padding: 12px 18px;
+            font-size: 0.84rem;
+        }
+
+        body.contacto-page-layout .contact-fields-row {
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        body.contacto-page-layout .form-label {
+            margin-bottom: 6px;
+            font-size: 0.78rem;
+        }
+
+        body.contacto-page-layout .form-control {
+            padding: 11px 14px;
+            font-size: 0.9rem;
+            border-radius: 10px;
+        }
+
+        body.contacto-page-layout textarea.form-control {
+            min-height: 72px;
+            height: clamp(72px, 10vh, 104px);
+        }
+
+        body.contacto-page-layout .btn-outline,
+        body.contacto-page-layout .btn-primary {
+            padding: 10px 22px;
+            font-size: 0.88rem;
+        }
+    }
+
+    @media (min-width: 981px) and (max-width: 1400px) and (max-height: 800px) {
+        body.contacto-page-layout .contacto-page {
+            padding-top: 66px;
+            padding-bottom: 12px;
+        }
+
+        body.contacto-page-layout .contacto-page > .container {
+            transform: translateY(-18px);
+        }
+
+        body.contacto-page-layout .contacto-header {
+            margin-bottom: 8px;
+        }
+
+        body.contacto-page-layout .contacto-header h1 {
+            font-size: 2rem;
+        }
+
+        body.contacto-page-layout .contacto-header .contacto-instruction,
+        body.contacto-page-layout .wizard-step .step-summary {
+            font-size: 1.08rem;
+            margin-bottom: 10px;
+        }
+
+        body.contacto-page-layout .wizard-container {
+            max-width: 660px;
+            max-height: 420px;
+            padding: 14px 22px 18px;
+        }
+
+        body.contacto-page-layout .area-grid {
+            grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+            gap: 8px;
+        }
+
+        body.contacto-page-layout .area-btn {
+            padding: 10px 16px;
+            font-size: 0.8rem;
+        }
+
+        body.contacto-page-layout .form-group {
+            margin-bottom: 10px;
+        }
+
+        body.contacto-page-layout textarea.form-control {
+            min-height: 66px;
+            height: 82px;
+        }
+    }
+</style>
+
+<main class="contacto-page">
+    <div class="container">
+        <div class="contacto-header">
+            <h1>Solicitud de Información</h1>
+            <p id="contacto-header-text" class="contacto-instruction">Seleccione el ítem relacionado a su consulta de Política de Privacidad.</p>
+            <p id="contacto-limit-notice" class="contacto-limit-notice">Por seguridad y para evitar uso automatizado, este formulario permite una solicitud mensual por usuario o conexión.</p>
+        </div>
+
+        <div class="wizard-container">
+            <div class="wizard-progress" id="progress-bar">
+                <div class="progress-step active" data-step="1">1</div>
+                <div class="progress-step" data-step="2">2</div>
+                <div class="progress-step" data-step="3">3</div>
+            </div>
+
+            <!-- Paso 1: Área -->
+            <div class="wizard-step active" id="step-1">
+                <h2 class="step-title">¿Sobre qué tema necesitas información?</h2>
+                <div class="area-grid">
+                    <button class="area-btn" data-area="Identificación del Titular">Identificación del Titular</button>
+                    <button class="area-btn" data-area="Objeto del Sitio">Objeto del Sitio</button>
+                    <button class="area-btn" data-area="Ausencia de Asesoría Jurídica">Ausencia de Asesoría Jurídica</button>
+                    <button class="area-btn" data-area="Relación Abogado-Cliente">Relación Abogado-Cliente</button>
+                    <button class="area-btn" data-area="Confidencialidad">Confidencialidad</button>
+                    <button class="area-btn" data-area="Protección de Datos Personales">Protección de Datos Personales</button>
+                    <button class="area-btn" data-area="Propiedad Intelectual">Propiedad Intelectual</button>
+                    <button class="area-btn" data-area="Uso del Sitio">Uso del Sitio</button>
+                    <button class="area-btn" data-area="Disponibilidad del Sitio">Disponibilidad del Sitio</button>
+                    <button class="area-btn" data-area="Enlaces externos">Enlaces externos</button>
+                    <button class="area-btn" data-area="Cookies">Cookies</button>
+                    <button class="area-btn" data-area="Legislación aplicable y jurisdicción">Legislación aplicable y jurisdicción</button>
+                    <button class="area-btn" data-area="Contacto">Contacto</button>
+                    <button class="area-btn" data-area="Información Sensible">Información Sensible</button>
+                    <button class="area-btn" data-area="Otro asunto sobre Política de Privacidad">Otro asunto sobre Política de Privacidad</button>
+                </div>
+            </div>
+
+            <!-- Paso 2: Mensaje -->
+            <div class="wizard-step" id="step-2">
+                <div class="step-summary" id="summary-step-2">Área: <span></span></div>
+                <div class="form-group">
+                    <textarea id="mensaje" class="form-control" maxlength="1200" placeholder="Describe brevemente tu solicitud, contexto y qué información necesitas aclarar. No incluyas antecedentes sensibles, documentos reservados ni información confidencial del caso."></textarea>
+                    <div class="character-counter" id="mensaje-counter">0 / 1200 caracteres</div>
+                </div>
+                <div class="wizard-actions">
+                    <button class="btn-outline" onclick="prevStep(1)">Atrás</button>
+                    <button class="btn-primary" id="btn-continuar-mensaje" onclick="nextStep(3)" disabled>Continuar</button>
+                </div>
+            </div>
+
+            <!-- Paso 3: Contacto -->
+            <div class="wizard-step" id="step-3">
+                <div class="step-summary" id="summary-step-3">Área: <span></span></div>
+                <div class="contact-fields-row name-row">
+                    <div class="form-group">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Ej. Juan">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Apellido Paterno</label>
+                        <input type="text" id="apellido_paterno" class="form-control" placeholder="Ej. Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Apellido Materno</label>
+                        <input type="text" id="apellido_materno" class="form-control" placeholder="Ej. González">
+                    </div>
+                </div>
+                <div class="contact-fields-row contact-row">
+                    <div class="form-group">
+                        <label class="form-label">Teléfono o WhatsApp</label>
+                        <input type="tel" id="telefono" class="form-control" placeholder="+56 9 1234 5678">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" id="correo" class="form-control" placeholder="tu@correo.com">
+                    </div>
+                </div>
+                <div class="honeypot-field" aria-hidden="true">
+                    <label>Website</label>
+                    <input type="text" id="website" tabindex="-1" autocomplete="off">
+                </div>
+                {% if turnstile_site_key %}
+                <div class="turnstile-holder" aria-hidden="true">
+                    <div id="turnstile-container"></div>
+                </div>
+                {% endif %}
+                <div class="wizard-actions">
+                    <button class="btn-outline" onclick="prevStep(2)">Atrás</button>
+                    <button class="btn-primary" id="btn-enviar" onclick="enviarFormulario()" disabled>Enviar Solicitud</button>
+                </div>
+                {% if turnstile_site_key %}
+                <p class="turnstile-security-note">Protección anti-spam activa. Este formulario cuenta con verificación automática de seguridad.</p>
+                {% endif %}
+            </div>
+
+            <!-- Paso 4: Éxito -->
+            <div class="success-state" id="step-success">
+                <div class="success-icon">✓</div>
+                <h2 class="step-title">¡Solicitud Enviada!</h2>
+                <p style="color: var(--texto-claro); margin-bottom: 30px;">Hemos recibido tu solicitud sobre <strong id="resumen-area" style="color: var(--blanco);"></strong>. La revisaremos de acuerdo con su naturaleza y antecedentes disponibles.</p>
+                <button class="btn-outline" onclick="window.location.href='/home'">Volver al Inicio</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% if turnstile_site_key %}
+<script>
+    window.onloadTurnstileCallback = function() {
+        if (typeof inicializarTurnstileInvisible === 'function') {
+            inicializarTurnstileInvisible();
+        }
+    };
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback" async defer></script>
+{% endif %}
+
+<script>
+    let formData = {
+        area: '',
+        mensaje: '',
+        nombre: '',
+        telefono: '',
+        correo: '',
+        website: '',
+        turnstileToken: ''
+    };
+
+    let turnstileWidgetId = null;
+    let envioPendiente = false;
+
+    const LIMITE_MENSAJE = 1200;
+    const MIN_MENSAJE_UTIL = 30;
+    const MIN_NOMBRE_CARACTERES = 6;
+    const MIN_TELEFONO_DIGITOS = 8;
+    const textoHeaderPorPaso = {
+        1: 'Seleccione el ítem relacionado a su consulta de Política de Privacidad.',
+        2: 'Cuéntanos brevemente tu solicitud.',
+        3: 'Indícanos cómo podemos contactarte.'
+    };
+
+    // Manejo del Paso 1 (Botones de Área)
+    document.querySelectorAll('.area-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            formData.area = this.getAttribute('data-area');
+            document.getElementById('resumen-area').textContent = formData.area;
+            nextStep(2);
+        });
+    });
+
+    function nextStep(step) {
+        // Actualizar resumen
+        if (step === 2) {
+            document.querySelector('#summary-step-2 span').textContent = formData.area;
+        } else if (step === 3) {
+            document.querySelector('#summary-step-3 span').textContent = formData.area;
+        }
+        
+        // Ocultar activo
+        document.querySelector('.wizard-step.active').classList.remove('active');
+        // Mostrar nuevo
+        document.getElementById('step-' + step).classList.add('active');
+        updateProgress(step);
+        updateHeader(step);
+    }
+
+    function prevStep(step) {
+        document.querySelector('.wizard-step.active').classList.remove('active');
+        document.getElementById('step-' + step).classList.add('active');
+        updateProgress(step);
+        updateHeader(step);
+    }
+
+    function updateProgress(step) {
+        document.querySelectorAll('.progress-step').forEach(el => {
+            let s = parseInt(el.getAttribute('data-step'));
+            if (s < step) {
+                el.classList.add('completed');
+                el.classList.remove('active');
+            } else if (s === step) {
+                el.classList.add('active');
+                el.classList.remove('completed');
+            } else {
+                el.classList.remove('active', 'completed');
+            }
+        });
+    }
+
+    function updateHeader(step) {
+        const headerText = document.getElementById('contacto-header-text');
+        if (headerText && textoHeaderPorPaso[step]) {
+            headerText.innerHTML = textoHeaderPorPaso[step];
+        }
+    }
+
+    function limpiarEspacios(texto) {
+        return texto.trim().replace(/\s+/g, ' ');
+    }
+
+    function contarCaracteresUtiles(texto) {
+        return limpiarEspacios(texto).length;
+    }
+
+    function esTextoRepetitivo(texto) {
+        const normalizado = limpiarEspacios(texto).toLowerCase().replace(/[^a-záéíóúñ0-9]/gi, '');
+        if (normalizado.length < MIN_MENSAJE_UTIL) {
+            return false;
+        }
+
+        const caracteresUnicos = new Set(normalizado.split(''));
+        return caracteresUnicos.size <= 3;
+    }
+
+    function mensajeEsValido() {
+        const mensaje = document.getElementById('mensaje');
+        if (!mensaje) {
+            return false;
+        }
+
+        const texto = mensaje.value;
+        return contarCaracteresUtiles(texto) >= MIN_MENSAJE_UTIL && !esTextoRepetitivo(texto);
+    }
+
+    function actualizarContadorMensaje() {
+        const mensaje = document.getElementById('mensaje');
+        const contador = document.getElementById('mensaje-counter');
+        if (!mensaje || !contador) {
+            return;
+        }
+
+        const caracteresUtiles = contarCaracteresUtiles(mensaje.value);
+        contador.textContent = `${mensaje.value.length} / ${LIMITE_MENSAJE} caracteres · mínimo ${MIN_MENSAJE_UTIL} caracteres útiles`;
+        contador.style.opacity = caracteresUtiles === 0 || mensajeEsValido() ? '0.75' : '1';
+    }
+
+    function validarMensajePaso2() {
+        const btnContinuar = document.getElementById('btn-continuar-mensaje');
+
+        if (!btnContinuar) {
+            return;
+        }
+
+        btnContinuar.disabled = !mensajeEsValido();
+        validarContactoPaso3();
+    }
+
+    function inicializarTurnstileInvisible() {
+        const contenedor = document.getElementById('turnstile-container');
+
+        if (typeof turnstile === 'undefined' || !contenedor || turnstileWidgetId !== null) {
+            return;
+        }
+
+        turnstileWidgetId = turnstile.render('#turnstile-container', {
+            sitekey: '{{ turnstile_site_key }}',
+            size: 'invisible',
+            callback: function(token) {
+                habilitarEnvio(token);
+
+                if (envioPendiente) {
+                    envioPendiente = false;
+                    enviarFormularioConToken();
+                }
+            },
+            'expired-callback': function() {
+                deshabilitarEnvio();
+            },
+            'error-callback': function() {
+                envioPendiente = false;
+                deshabilitarEnvio();
+                restaurarBotonEnviar();
+                alert("No pudimos iniciar la verificación de seguridad. Por favor recarga la página e intenta nuevamente.");
+            }
+        });
+    }
+
+    function habilitarEnvio(token) {
+        formData.turnstileToken = token || obtenerTokenTurnstile();
+        validarContactoPaso3();
+    }
+
+    function deshabilitarEnvio() {
+        formData.turnstileToken = '';
+        validarContactoPaso3();
+    }
+
+    function mostrarExito() {
+        document.getElementById('progress-bar').style.display = 'none';
+        document.querySelector('.wizard-step.active').classList.remove('active');
+        document.getElementById('step-success').style.display = 'block';
+    }
+
+    function restaurarBotonEnviar() {
+        const btn = document.getElementById('btn-enviar');
+        btn.textContent = 'Enviar Solicitud';
+        validarContactoPaso3();
+    }
+
+    function obtenerTokenTurnstile() {
+        if (typeof turnstile === 'undefined' || turnstileWidgetId === null) {
+            return formData.turnstileToken || '';
+        }
+
+        const token = turnstile.getResponse(turnstileWidgetId);
+        return token || formData.turnstileToken || '';
+    }
+
+    function turnstileRequerido() {
+        return Boolean(document.getElementById('turnstile-container'));
+    }
+
+    function nombreCompletoFormulario() {
+        const nombre = document.getElementById('nombre');
+        const apellidoPaterno = document.getElementById('apellido_paterno');
+        const apellidoMaterno = document.getElementById('apellido_materno');
+
+        return limpiarEspacios([
+            nombre ? nombre.value : '',
+            apellidoPaterno ? apellidoPaterno.value : '',
+            apellidoMaterno ? apellidoMaterno.value : ''
+        ].join(' '));
+    }
+
+    function nombreEsValido() {
+        const nombre = document.getElementById('nombre');
+        const apellidoPaterno = document.getElementById('apellido_paterno');
+
+        if (!nombre || !apellidoPaterno) {
+            return false;
+        }
+
+        return limpiarEspacios(nombre.value).length >= 2 && limpiarEspacios(apellidoPaterno.value).length >= 2;
+    }
+
+    function telefonoEsValido() {
+        const telefono = document.getElementById('telefono');
+        if (!telefono) {
+            return false;
+        }
+
+        const digitos = telefono.value.replace(/\D/g, '');
+        return digitos.length >= MIN_TELEFONO_DIGITOS;
+    }
+
+    function correoEsValido() {
+        const correo = document.getElementById('correo');
+        if (!correo) {
+            return false;
+        }
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim());
+    }
+
+    function validarContactoPaso3() {
+        const btn = document.getElementById('btn-enviar');
+        if (!btn) {
+            return;
+        }
+
+        btn.disabled = !(mensajeEsValido() && nombreEsValido() && telefonoEsValido() && correoEsValido());
+    }
+
+    const mensajeInput = document.getElementById('mensaje');
+    if (mensajeInput) {
+        mensajeInput.addEventListener('input', actualizarContadorMensaje);
+        mensajeInput.addEventListener('input', validarMensajePaso2);
+        actualizarContadorMensaje();
+        validarMensajePaso2();
+    }
+
+    ['nombre', 'apellido_paterno', 'apellido_materno', 'telefono', 'correo'].forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) {
+            campo.addEventListener('input', validarContactoPaso3);
+        }
+    });
+
+    validarContactoPaso3();
+    inicializarTurnstileInvisible();
+
+    function enviarFormulario() {
+        // Recolectar datos
+        formData.mensaje = document.getElementById('mensaje').value.trim();
+        formData.nombre = nombreCompletoFormulario();
+        formData.telefono = document.getElementById('telefono').value.trim();
+        formData.correo = document.getElementById('correo').value.trim();
+        formData.website = document.getElementById('website').value.trim();
+        formData.turnstileToken = obtenerTokenTurnstile();
+
+        // Validación básica
+        if(!mensajeEsValido()) {
+            alert("Por favor describe tu solicitud con al menos 30 caracteres útiles.");
+            return;
+        }
+
+        if(!nombreEsValido()) {
+            alert("Por favor ingresa tu nombre y apellido paterno.");
+            return;
+        }
+
+        if(!telefonoEsValido()) {
+            alert("Por favor ingresa un teléfono o WhatsApp válido.");
+            return;
+        }
+
+        if(!correoEsValido()) {
+            alert("Por favor ingresa un correo válido.");
+            return;
+        }
+
+        const btn = document.getElementById('btn-enviar');
+        btn.disabled = true;
+
+        if(turnstileRequerido() && !formData.turnstileToken) {
+            envioPendiente = true;
+            inicializarTurnstileInvisible();
+
+            if(typeof turnstile !== 'undefined' && turnstileWidgetId !== null) {
+                turnstile.execute(turnstileWidgetId);
+                return;
+            }
+
+            envioPendiente = false;
+            restaurarBotonEnviar();
+            alert("No pudimos iniciar la verificación de seguridad. Por favor recarga la página e intenta nuevamente.");
+            return;
+        }
+
+        enviarFormularioConToken();
+    }
+
+    function enviarFormularioConToken() {
+        const btn = document.getElementById('btn-enviar');
+        btn.textContent = 'Enviando...';
+        btn.disabled = true;
+
+        // Enviar a la API Flask
+        fetch('/api/info', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json().then(data => ({ ok: response.ok, status: response.status, data })))
+        .then(resultado => {
+            if(resultado.ok && resultado.data.status === 'success') {
+                mostrarExito();
+                return;
+            }
+
+            if(typeof turnstile !== 'undefined') {
+                turnstile.reset(turnstileWidgetId);
+                deshabilitarEnvio();
+            }
+
+            restaurarBotonEnviar();
+
+            if(resultado.data.status === 'limit') {
+                alert(resultado.data.message || "Ya registramos una solicitud desde esta conexión durante este mes.");
+            } else {
+                alert("No pudimos enviar tu solicitud en este momento. Por favor intenta nuevamente en unos minutos.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+
+            if(typeof turnstile !== 'undefined') {
+                turnstile.reset(turnstileWidgetId);
+                deshabilitarEnvio();
+            }
+
+            restaurarBotonEnviar();
+            alert("No pudimos enviar tu solicitud en este momento. Por favor intenta nuevamente en unos minutos.");
+        });
+    }
+</script>
+{% endblock %}

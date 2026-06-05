@@ -1,0 +1,329 @@
+<!-- MÓDULO 4: CSS y HTML del mosaico diferenciador. -->
+    <style>
+.ls-module4-section {
+        display: flex;
+        --module4-footer-height: var(--bcta-footer-height, 210px);
+        --module4-section-padding-y: clamp(14px, 2svh, 28px);
+        min-height: calc(100svh - var(--module4-footer-height));
+        width: 100%;
+        padding: var(--module4-section-padding-y) 0;
+        background: var(--azul-premium);
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .ls-module4-mosaic {
+        --module4-mosaic-gap: 24px;
+        --module4-mosaic-lift: clamp(22px, 3.8svh, 42px);
+        --module4-mosaic-size: min(
+            84vw,
+            calc((100svh - var(--module4-footer-height) - (var(--module4-section-padding-y) * 2) - 8px) * 1.92),
+            1180px
+        );
+        width: var(--module4-mosaic-size);
+        transform: translateY(calc(var(--module4-mosaic-lift) * -1));
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, calc((var(--module4-mosaic-size) - (var(--module4-mosaic-gap) * 3)) / 4));
+        column-gap: var(--module4-mosaic-gap);
+        row-gap: var(--module4-mosaic-gap);
+    }
+
+    .ls-module4-tile {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        cursor: pointer;
+    }
+
+    .ls-module4-tile::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: var(--ls-module4-bg);
+        border-radius: var(--ls-module4-radius, 0);
+        transform: scale(1);
+        transition:
+            border-radius .58s cubic-bezier(.22,.61,.36,1),
+            transform .58s cubic-bezier(.22,.61,.36,1),
+            background .45s ease;
+    }
+
+    .ls-module4-title,
+    .ls-module4-copy {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition:
+            opacity .42s ease,
+            transform .42s cubic-bezier(.22,.61,.36,1);
+    }
+
+    .ls-module4-title {
+        padding: 24px;
+        color: var(--ls-module4-title-color);
+        font-size: var(--ls-module4-title-size, clamp(2rem, 2.8vw, 3.6rem));
+        font-weight: 400;
+        line-height: 1.05;
+        letter-spacing: -1.4px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .ls-module4-copy {
+        padding: 28px;
+        color: var(--ls-module4-copy-color);
+        font-size: var(--ls-module4-copy-size, 1rem);
+        font-weight: 400;
+        line-height: 1.45;
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    .ls-module4-tile:hover::before {
+        border-radius: var(--ls-module4-hover-radius, 32px);
+        background: var(--ls-module4-hover-bg);
+        transform: scale(var(--ls-module4-hover-scale, 1));
+    }
+
+    .ls-module4-tile:hover .ls-module4-title {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    .ls-module4-tile:hover .ls-module4-copy {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .ls-module4-dominant {
+        grid-column: span 2;
+        --ls-module4-bg: var(--gris-suave);
+        --ls-module4-hover-bg: var(--gris-medio, #C9CED6);
+        --ls-module4-radius: 0;
+        --ls-module4-hover-radius: 120px;
+        --ls-module4-title-color: var(--azul-premium);
+        --ls-module4-copy-color: var(--azul-premium);
+        --ls-module4-title-size: clamp(2.7rem, 4.2vw, 5.1rem);
+        --ls-module4-copy-size: 1.18rem;
+    }
+
+    .ls-module4-indicadores {
+        --ls-module4-bg: #FFFFFF;
+        --ls-module4-hover-bg: var(--gris-medio, #C9CED6);
+        --ls-module4-radius: 0;
+        --ls-module4-hover-radius: 999px;
+        --ls-module4-title-color: var(--azul-premium);
+        --ls-module4-copy-color: var(--azul-premium);
+        --ls-module4-title-size: clamp(1.8rem, 2.3vw, 2.7rem);
+        --ls-module4-copy-size: .98rem;
+    }
+
+    .ls-module4-trazabilidad {
+        --ls-module4-bg: var(--azul-secundario);
+        --ls-module4-hover-bg: var(--dorado-firma);
+        --ls-module4-radius: 0;
+        --ls-module4-hover-radius: 999px;
+        --ls-module4-title-color: #FFFFFF;
+        --ls-module4-copy-color: var(--azul-premium);
+        --ls-module4-title-size: clamp(1.8rem, 2.3vw, 2.7rem);
+        --ls-module4-copy-size: .98rem;
+    }
+
+    .ls-module4-gestion {
+        --ls-module4-bg: var(--gris-medio, #C9CED6);
+        --ls-module4-hover-bg: #55635A;
+        --ls-module4-radius: 0;
+        --ls-module4-hover-radius: 999px;
+        --ls-module4-title-color: var(--azul-premium);
+        --ls-module4-copy-color: #FFFFFF;
+        --ls-module4-title-size: clamp(2.2rem, 3.2vw, 4rem);
+        --ls-module4-copy-size: .98rem;
+    }
+
+    .ls-module4-equipo {
+        --ls-module4-bg: var(--azul-secundario);
+        --ls-module4-hover-bg: var(--gris-suave);
+        --ls-module4-radius: 0;
+        --ls-module4-hover-radius: 999px;
+        --ls-module4-title-color: #FFFFFF;
+        --ls-module4-copy-color: var(--azul-premium);
+        --ls-module4-title-size: clamp(2.2rem, 3.2vw, 4rem);
+        --ls-module4-copy-size: .98rem;
+    }
+
+    .ls-module4-tecnologia {
+        --ls-module4-bg: var(--dorado-firma);
+        --ls-module4-hover-bg: var(--azul-premium);
+        --ls-module4-radius: 0;
+        --ls-module4-hover-radius: 999px;
+        --ls-module4-title-color: var(--azul-premium);
+        --ls-module4-copy-color: #FFFFFF;
+        --ls-module4-title-size: clamp(1.7rem, 2.45vw, 3.05rem);
+        --ls-module4-copy-size: .98rem;
+    }
+
+    .ls-module4-comunicacion {
+        --ls-module4-bg: var(--gris-medio, #C9CED6);
+        --ls-module4-hover-bg: #7A1F2B;
+        --ls-module4-radius: 999px;
+        --ls-module4-hover-radius: 0;
+        --ls-module4-title-color: var(--azul-premium);
+        --ls-module4-copy-color: #FFFFFF;
+        --ls-module4-title-size: clamp(1.35rem, 2vw, 2.35rem);
+        --ls-module4-copy-size: .98rem;
+    }
+
+    .ls-module4-comunicacion::before {
+        transition:
+            border-radius .34s cubic-bezier(.22,.61,.36,1),
+            transform .34s cubic-bezier(.22,.61,.36,1),
+            background .30s ease;
+    }
+
+    
+
+    
+
+    @media (min-width: 981px) and (max-width: 1536px), (min-width: 981px) and (max-height: 900px) {
+        .ls-module4-section {
+            --module4-footer-height: var(--bcta-footer-height, 168px);
+            --module4-section-padding-y: clamp(10px, 1.6svh, 18px);
+        }
+
+        .ls-module4-mosaic {
+            --module4-mosaic-gap: clamp(16px, 1.7vw, 21px);
+            --module4-mosaic-lift: clamp(16px, 2.5svh, 30px);
+            --module4-mosaic-size: min(
+                82vw,
+                calc((100svh - var(--module4-footer-height) - (var(--module4-section-padding-y) * 2) - 8px) * 1.9),
+                1040px
+            );
+        }
+
+        .ls-module4-title {
+            padding: 18px;
+            letter-spacing: -1px;
+        }
+
+        .ls-module4-copy {
+            padding: 20px;
+            line-height: 1.34;
+        }
+
+        .ls-module4-dominant {
+            --ls-module4-title-size: clamp(2.35rem, 3.65vw, 4.15rem);
+            --ls-module4-copy-size: 1.02rem;
+        }
+
+        .ls-module4-indicadores,
+        .ls-module4-trazabilidad,
+        .ls-module4-tecnologia {
+            --ls-module4-title-size: clamp(1.45rem, 2.05vw, 2.22rem);
+            --ls-module4-copy-size: .84rem;
+        }
+
+        .ls-module4-gestion,
+        .ls-module4-equipo {
+            --ls-module4-title-size: clamp(1.85rem, 2.72vw, 3.2rem);
+            --ls-module4-copy-size: .84rem;
+        }
+
+        .ls-module4-comunicacion {
+            --ls-module4-title-size: clamp(1.2rem, 1.72vw, 1.95rem);
+            --ls-module4-copy-size: .84rem;
+        }
+    }
+
+    @media (min-width: 981px) and (max-width: 1400px) and (max-height: 800px) {
+        .ls-module4-section {
+            --module4-footer-height: var(--bcta-footer-height, 142px);
+            --module4-section-padding-y: 8px;
+        }
+
+        .ls-module4-mosaic {
+            --module4-mosaic-gap: 14px;
+            --module4-mosaic-lift: 18px;
+            --module4-mosaic-size: min(
+                80vw,
+                calc((100svh - var(--module4-footer-height) - (var(--module4-section-padding-y) * 2) - 8px) * 1.88),
+                930px
+            );
+        }
+
+        .ls-module4-title {
+            padding: 14px;
+        }
+
+        .ls-module4-copy {
+            padding: 16px;
+            font-size: var(--ls-module4-copy-size, .78rem);
+            line-height: 1.28;
+        }
+
+        .ls-module4-dominant {
+            --ls-module4-title-size: clamp(2rem, 3.35vw, 3.45rem);
+            --ls-module4-copy-size: .9rem;
+        }
+
+        .ls-module4-indicadores,
+        .ls-module4-trazabilidad,
+        .ls-module4-gestion,
+        .ls-module4-equipo,
+        .ls-module4-tecnologia,
+        .ls-module4-comunicacion {
+            --ls-module4-copy-size: .76rem;
+        }
+    }
+
+    </style>
+
+<section id="snap-section-4" class="index-module index-module-4 ls-module4-section">
+        <div class="ls-module4-mosaic" aria-label="Diferenciadores BCTA">
+            <article class="ls-module4-tile ls-module4-dominant">
+                <div class="ls-module4-title">¿Qué nos diferencia?</div>
+                <div class="ls-module4-copy">Integramos derecho, gestión y tecnología para entregar una atención jurídica más ordenada, trazable y cercana.</div>
+            </article>
+
+            <article class="ls-module4-tile ls-module4-indicadores">
+                <div class="ls-module4-title">Indicadores</div>
+                <div class="ls-module4-copy">Aplicamos criterios de seguimiento y control para revisar avances, prioridades y puntos críticos de cada asunto.</div>
+            </article>
+
+            <article class="ls-module4-tile ls-module4-trazabilidad">
+                <div class="ls-module4-title">Trazabilidad</div>
+                <div class="ls-module4-copy">Ordenamos antecedentes, etapas y comunicaciones relevantes para mantener una visión clara del proceso.</div>
+            </article>
+
+            <article class="ls-module4-tile ls-module4-gestion">
+                <div class="ls-module4-title">Gestión</div>
+                <div class="ls-module4-copy">Trabajamos cada caso con estructura, planificación y responsabilidad, evitando que la asesoría dependa solo de la reacción.</div>
+            </article>
+
+            <article class="ls-module4-tile ls-module4-equipo">
+                <div class="ls-module4-title">Equipo</div>
+                <div class="ls-module4-copy">Combinamos experiencia jurídica, criterio profesional y apoyo de gestión para abordar cada situación con mayor perspectiva.</div>
+            </article>
+
+            <article class="ls-module4-tile ls-module4-tecnologia">
+                <div class="ls-module4-title">Tecnología</div>
+                <div class="ls-module4-copy">Utilizamos herramientas digitales para organizar información, facilitar el seguimiento y mejorar la experiencia del cliente.</div>
+            </article>
+
+            <article class="ls-module4-tile ls-module4-comunicacion">
+                <div class="ls-module4-title">Comunicación</div>
+                <div class="ls-module4-copy">Mantenemos una relación cercana y clara, combinando canales digitales con contacto directo cuando el caso lo requiere.</div>
+            </article>
+        </div>
+    </section>
