@@ -1,0 +1,403 @@
+<!-- Mobile_m4 generado desde M3_home_movil_v1(5).txt -->
+<!-- Copia quirúrgica: CSS móvil @media (max-width: 760px) + primera escena móvil de M3 Empresas. -->
+<style>
+@media (max-width: 760px) {
+        .home-slide-deck .index-module-3.ls-module3-decor-section,
+        .ls-module3-decor-section {
+            min-height: auto;
+            display: block;
+            align-items: initial;
+            justify-content: initial;
+            color-scheme: dark;
+            padding: 0 22px 64px;
+            overflow: hidden;
+        }
+
+        .ls-module3-decor-section::before {
+            background-image:
+                linear-gradient(180deg, rgba(10, 25, 47, 0.97) 0%, rgba(10, 25, 47, 0.9) 58%, rgba(10, 25, 47, 0.82) 100%),
+                url("{{ url_for('static', filename='img/Fotos Empresa/fotos webp/minería.webp') }}");
+        }
+
+        .ls-module3-layout {
+            display: none;
+        }
+
+        .ls-module3-mobile-stage {
+            min-height: 100vh;
+            min-height: 100dvh;
+            width: min(100%, 520px);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: clamp(54px, 6.4svh, 66px) 0 clamp(58px, 7.2svh, 76px);
+            box-sizing: border-box;
+            text-align: center;
+            transform: translateY(clamp(16px, 2.4svh, 24px));
+        }
+
+        .ls-module3-mobile-stage h2 {
+            max-width: 94%;
+            font-size: clamp(1.78rem, 7.55vw, 2.38rem);
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            margin: 0 auto;
+            color: #ffffff;
+            transform: translateY(-23px);
+        }
+
+        .ls-module3-mobile-photo {
+            width: min(92%, 390px);
+            flex: none;
+            min-width: 0;
+            min-height: 0;
+            aspect-ratio: 16 / 10;
+            border-radius: 16px;
+            margin: clamp(22px, 3.1svh, 30px) auto 0;
+        }
+
+        .ls-module3-mobile-photo img,
+        .ls-module3-mobile-photo::after {
+            border-radius: 16px;
+        }
+
+        .ls-module3-mobile-stage p.lead {
+            max-width: min(92%, 390px);
+            font-size: clamp(0.9rem, 3.72vw, 1rem);
+            line-height: 1.5;
+            margin: clamp(22px, 3.1svh, 30px) auto 0;
+            color: rgba(255, 255, 255, 0.84);
+        }
+
+        .ls-module3-mobile-stage .ls-module3-copy-cta {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: clamp(20px, 3svh, 28px);
+            transform: translateY(15px);
+        }
+
+        .ls-module3-mobile-stage .ls-module3-contact-button {
+            width: 100%;
+            max-width: 312px;
+            min-height: 44px;
+            padding: 11px 20px;
+            font-size: 0.84rem;
+        }
+
+        .ls-module3-submodule-scale,
+        .ls-module3-submodule-scale:hover {
+            transform: none;
+            transition: none;
+        }
+
+        .ls-differentiators-grid {
+            width: min(100%, 520px);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(16px, 2.8svh, 24px);
+            padding: clamp(70px, 8.8svh, 92px) 0 clamp(76px, 9.6svh, 102px) !important;
+            margin: 0 auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .ls-module3-mobile-carousel-title {
+            display: block;
+            max-width: 92%;
+            margin: 0 auto;
+            color: #ffffff;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.95rem, 8.25vw, 2.65rem);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -0.025em;
+        }
+
+        .ls-differentiators-grid > .ls-differentiator-card {
+            display: none;
+        }
+
+        .ls-module3-mobile-card-viewport {
+            position: relative;
+            display: block;
+            width: min(100%, 392px);
+            height: clamp(338px, 48svh, 430px);
+            margin: 0 auto;
+            touch-action: pan-y;
+        }
+
+        .ls-module3-mobile-card {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow:
+                0 22px 46px rgba(0, 0, 0, 0.22),
+                0 8px 20px rgba(0, 0, 0, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(0);
+            transition:
+                opacity 0.84s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.84s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 0.84s;
+            will-change: transform, opacity;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: pan-y;
+        }
+
+        .ls-module3-mobile-card.is-active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+            transition:
+                opacity 0.84s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.84s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 0ms;
+        }
+
+        .ls-module3-mobile-card.is-preparing-next {
+            opacity: 0;
+            visibility: visible;
+            transform: translateX(34px);
+            transition: none;
+        }
+
+        .ls-module3-mobile-card.is-preparing-prev {
+            opacity: 0;
+            visibility: visible;
+            transform: translateX(-34px);
+            transition: none;
+        }
+
+        .ls-module3-mobile-card.is-entering-next,
+        .ls-module3-mobile-card.is-entering-prev {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .ls-module3-mobile-card.is-leaving-next {
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateX(-34px);
+        }
+
+        .ls-module3-mobile-card.is-leaving-prev {
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateX(34px);
+        }
+
+        .ls-module3-mobile-card,
+        .ls-module3-mobile-card:hover,
+        .ls-module3-mobile-card:active,
+        .ls-module3-mobile-card:focus,
+        .ls-module3-mobile-card:focus-visible {
+            color: rgba(255, 255, 255, 0.88);
+            outline: none;
+        }
+
+        .ls-module3-mobile-card-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(32px, 5.8svh, 46px) clamp(24px, 6vw, 32px);
+            border-radius: 24px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .ls-module3-mobile-card h4,
+        .ls-module3-mobile-card:hover h4,
+        .ls-module3-mobile-card:active h4,
+        .ls-module3-mobile-card:focus h4 {
+            color: #C5A059;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.48rem, 6.45vw, 1.96rem);
+            font-weight: 800;
+            line-height: 1.14;
+            letter-spacing: -0.018em;
+            margin: 0 0 clamp(18px, 3svh, 24px);
+            transition: none;
+        }
+
+        .ls-module3-mobile-card p,
+        .ls-module3-mobile-card:hover p,
+        .ls-module3-mobile-card:active p,
+        .ls-module3-mobile-card:focus p {
+            color: rgba(255, 255, 255, 0.88);
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.02rem, 4.15vw, 1.14rem);
+            font-weight: 400;
+            line-height: 1.62;
+            letter-spacing: -0.006em;
+            opacity: 0.92;
+            margin: 0;
+            transition: none;
+        }
+
+        .ls-module3-mobile-card h4,
+        .ls-module3-mobile-card p {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+
+        .ls-module3-mobile-carousel-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .ls-module3-mobile-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.34);
+            padding: 0;
+            cursor: pointer;
+            transition: width 0.28s ease, background 0.28s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .ls-module3-mobile-carousel-dot.is-active {
+            width: 24px;
+            background: #C5A059;
+        }
+
+        .ls-module3-mobile-carousel-cta {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: clamp(2px, 0.8svh, 8px);
+        }
+
+        .ls-module3-mobile-carousel-cta .ls-module3-contact-button {
+            width: 100%;
+            max-width: 312px;
+            min-height: 44px;
+            padding: 11px 20px;
+            font-size: 0.84rem;
+        }
+    }
+</style>
+
+<section id="mobile-home-m4" class="mobile-home-section mobile-m4 index-module index-module-3 ls-module3-decor-section">
+        <div class="ls-module3-mobile-stage" aria-label="Asesoría jurídica para empresas BCTA móvil">
+            <h2>Tu Empresa más segura</h2>
+
+            <div class="ls-module3-submodule ls-module3-mobile-photo ls-module3-photo-loop"
+                id="mobile-m4-photo-loop" aria-label="Imágenes de empresas BCTA">
+                <img src="{{ url_for('static', filename='img/Fotos Empresa/fotos webp/agricultura.webp') }}" alt="Asesoría jurídica para empresas BCTA" class="is-active" id="mobile-m4-photo-a">
+                <img src="{{ url_for('static', filename='img/Fotos Empresa/fotos webp/altura.webp') }}" alt="Asesoría jurídica para empresas BCTA" id="mobile-m4-photo-b">
+            </div>
+
+            <p class="lead">Nuestro compromiso no es solo detectar riesgos que impactan en sus decisiones, sino también analizar cada situación con criterio y visión práctica, proponiendo recomendaciones y estrategias legales ajustadas a su negocio.</p>
+
+            <div class="ls-module3-submodule ls-module3-copy-cta">
+                <a href="/contacto" class="ls-module3-contact-button">Contáctanos</a>
+            </div>
+        </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const root = document.querySelector(".mobile-m4");
+if (!root) return;
+
+const module3Photos = [
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/agricultura.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/altura.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/bolsa 2.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/bolsa.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/callcenter.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/condominios.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/eolicos.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/ganadería.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/industrias 2.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/industrias.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/minería 2.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/minería.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/paneles.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/personas trabajando.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/represa.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/salmoneria.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/tecnología 2.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/tecnología.webp') }}",
+                        "{{ url_for('static', filename='img/Fotos Empresa/fotos webp/transmision.webp') }}"
+                    ];
+
+                    function shuffleModule3Photos(photos) {
+                        for (let i = photos.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [photos[i], photos[j]] = [photos[j], photos[i]];
+                        }
+                    }
+
+                    function initModule3PhotoLoop(loopId, photoAId, photoBId) {
+                        const photos = [...module3Photos];
+                        const photoA = root.querySelector(`#${photoAId}`);
+                        const photoB = root.querySelector(`#${photoBId}`);
+                        const loop = root.querySelector(`#${loopId}`);
+                        let activePhoto = photoA;
+                        let nextPhoto = photoB;
+                        let photoIndex = 0;
+
+                        if (!photoA || !photoB || !loop) return;
+
+                        shuffleModule3Photos(photos);
+                        photoA.src = photos[0];
+                        loop.style.setProperty("--module3-loop-bg", `url("${photos[0]}")`);
+
+                        window.setInterval(() => {
+                            if (!activePhoto || !nextPhoto || photos.length < 2) return;
+
+                            photoIndex += 1;
+
+                            if (photoIndex >= photos.length) {
+                                const lastPhoto = photos[photos.length - 1];
+                                shuffleModule3Photos(photos);
+                                if (photos[0] === lastPhoto && photos.length > 1) {
+                                    [photos[0], photos[1]] = [photos[1], photos[0]];
+                                }
+                                photoIndex = 0;
+                            }
+
+                            nextPhoto.src = photos[photoIndex];
+                            loop.style.setProperty("--module3-loop-bg", `url("${photos[photoIndex]}")`);
+                            nextPhoto.classList.add("is-active");
+                            activePhoto.classList.remove("is-active");
+
+                            [activePhoto, nextPhoto] = [nextPhoto, activePhoto];
+                        }, 3500);
+                    }
+                    initModule3PhotoLoop("mobile-m4-photo-loop", "mobile-m4-photo-a", "mobile-m4-photo-b");
+});
+</script>

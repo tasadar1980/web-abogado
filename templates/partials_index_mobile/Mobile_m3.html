@@ -1,0 +1,477 @@
+<!-- Mobile_m3 generado desde M2_home_movil_v1(7).txt -->
+<!-- Copia quirúrgica: CSS móvil @media (max-width: 760px) + bloque móvil de criterios/carrusel. -->
+<style>
+@media (max-width: 760px) {
+        .home-slide-deck .index-module-2.ls-module2-decor-section,
+        .ls-module2-decor-section {
+            min-height: auto;
+            display: block;
+            align-items: initial;
+            justify-content: initial;
+            color-scheme: light;
+            background: var(--gris-suave);
+            padding: 0 22px 64px;
+            overflow: hidden;
+        }
+
+        .ls-module2-decor-section::before {
+            opacity: 0.54;
+            background-image:
+                linear-gradient(180deg, rgba(245, 247, 250, 0.80) 0%, rgba(245, 247, 250, 0.66) 58%, rgba(245, 247, 250, 0.48) 100%),
+                url("{{ url_for('static', filename='img/Fotos webp mod2/abogado oficina.webp') }}");
+            background-position: 24% top;
+            background-size: auto 100%;
+        }
+
+        .ls-module2-layout {
+            display: none;
+        }
+
+        .ls-module2-mobile-stage {
+            min-height: 100vh;
+            min-height: 100dvh;
+            width: min(100%, 520px);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: clamp(68px, 8.2svh, 84px) 0 clamp(92px, 11.4svh, 124px);
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .ls-module2-mobile-stage h2 {
+            max-width: 92%;
+            font-size: clamp(1.95rem, 8.25vw, 2.65rem);
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            margin: 0 auto;
+            color: var(--azul-premium);
+        }
+
+        .ls-module2-mobile-photo {
+            width: min(100%, 420px);
+            flex: none;
+            min-width: 0;
+            min-height: 0;
+            aspect-ratio: 4 / 3;
+            border-radius: 16px;
+            margin: clamp(24px, 3.2svh, 34px) auto 0;
+        }
+
+        .ls-module2-mobile-photo img,
+        .ls-module2-mobile-photo::after {
+            border-radius: 16px;
+        }
+
+        .ls-module2-mobile-stage p.lead {
+            max-width: 96%;
+            font-size: clamp(1rem, 4.05vw, 1.08rem);
+            line-height: 1.52;
+            margin: clamp(38px, 5.4svh, 50px) auto 0;
+            color: var(--texto-oscuro);
+        }
+
+        .ls-module2-mobile-stage .ls-module2-copy-cta {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: clamp(14px, 2.2svh, 20px);
+        }
+
+        .ls-module2-mobile-stage .ls-link-arrow {
+            width: 100%;
+            max-width: 312px;
+            min-height: 44px;
+            padding: 11px 20px;
+            font-size: 0.84rem;
+        }
+
+        .ls-module2-submodule-scale,
+        .ls-module2-submodule-scale:hover {
+            transform: none;
+            transition: none;
+        }
+
+        .ls-practice-grid {
+            width: min(100%, 520px);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(16px, 2.8svh, 24px);
+            padding: clamp(70px, 8.8svh, 92px) 0 clamp(76px, 9.6svh, 102px) !important;
+            margin: 0 auto;
+            box-sizing: border-box;
+            text-align: center;
+            transform: translateY(clamp(14px, 2.2svh, 22px));
+        }
+
+        .ls-module2-mobile-carousel-title {
+            display: block;
+            max-width: 92%;
+            margin: 0 auto;
+            color: #0A192F;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.95rem, 8.25vw, 2.65rem);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -0.025em;
+        }
+
+        .ls-practice-grid > .ls-practice-card {
+            display: none;
+        }
+
+        .ls-module2-mobile-card-viewport {
+            position: relative;
+            display: block;
+            width: min(100%, 392px);
+            height: clamp(338px, 48svh, 430px);
+            margin: 0 auto;
+            touch-action: pan-y;
+        }
+
+        .ls-module2-mobile-card {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.59);
+            border: 1px solid rgba(10, 25, 47, 0.10);
+            box-shadow:
+                0 22px 46px rgba(10, 25, 47, 0.13),
+                0 8px 20px rgba(10, 25, 47, 0.08);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(0);
+            transition:
+                opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 0.52s;
+            will-change: transform, opacity;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: pan-y;
+        }
+
+        .ls-module2-mobile-card.is-active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+            transition:
+                opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 0ms;
+        }
+
+        .ls-module2-mobile-card.is-preparing-next {
+            opacity: 0;
+            visibility: visible;
+            transform: translateX(42px);
+            transition: none;
+        }
+
+        .ls-module2-mobile-card.is-preparing-prev {
+            opacity: 0;
+            visibility: visible;
+            transform: translateX(-42px);
+            transition: none;
+        }
+
+        .ls-module2-mobile-card.is-entering-next,
+        .ls-module2-mobile-card.is-entering-prev {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .ls-module2-mobile-card.is-leaving-next {
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateX(-42px);
+        }
+
+        .ls-module2-mobile-card.is-leaving-prev {
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateX(42px);
+        }
+
+        .ls-module2-mobile-card,
+        .ls-module2-mobile-card:hover,
+        .ls-module2-mobile-card:active,
+        .ls-module2-mobile-card:focus,
+        .ls-module2-mobile-card:focus-visible {
+            color: #1F2937;
+            outline: none;
+        }
+
+        .ls-module2-mobile-card-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(32px, 5.8svh, 46px) clamp(24px, 6vw, 32px);
+            border-radius: 24px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .ls-module2-mobile-card h4,
+        .ls-module2-mobile-card:hover h4,
+        .ls-module2-mobile-card:active h4,
+        .ls-module2-mobile-card:focus h4 {
+            color: #0A192F;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.48rem, 6.45vw, 1.96rem);
+            font-weight: 800;
+            line-height: 1.14;
+            letter-spacing: -0.018em;
+            margin: 0 0 clamp(18px, 3svh, 24px);
+            transition: none;
+        }
+
+        .ls-module2-mobile-card p,
+        .ls-module2-mobile-card:hover p,
+        .ls-module2-mobile-card:active p,
+        .ls-module2-mobile-card:focus p {
+            color: #1F2937;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.02rem, 4.15vw, 1.14rem);
+            font-weight: 400;
+            line-height: 1.62;
+            letter-spacing: -0.006em;
+            opacity: 0.9;
+            margin: 0;
+            transition: none;
+        }
+
+        .ls-module2-mobile-card h4,
+        .ls-module2-mobile-card p {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+
+        .ls-module2-mobile-carousel-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .ls-module2-mobile-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(10, 25, 47, 0.28);
+            padding: 0;
+            cursor: pointer;
+            transition: width 0.28s ease, background 0.28s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .ls-module2-mobile-carousel-dot.is-active {
+            width: 24px;
+            background: #C5A059;
+        }
+
+        .ls-module2-mobile-carousel-cta {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: clamp(2px, 0.8svh, 8px);
+        }
+
+        .ls-module2-mobile-carousel-cta .ls-link-arrow {
+            width: 100%;
+            max-width: 312px;
+            min-height: 44px;
+            padding: 11px 20px;
+            font-size: 0.84rem;
+        }
+    }
+</style>
+
+<section id="mobile-home-m3" class="mobile-home-section mobile-m3 index-module index-module-2 ls-module2-decor-section">
+        <div class="ls-practice-grid" aria-label="Criterios de acompañamiento BCTA">
+            <h3 class="ls-module2-mobile-carousel-title">Tres aspectos que pueden orientar su caso</h3>
+
+            <div class="ls-practice-card">
+                <div class="ls-practice-card-inner">
+                    <h4>Elementos clave</h4>
+                    <p>Fechas, conversaciones, documentos y hechos pueden ser determinantes en una evaluación jurídica. Recordar los escenarios con claridad y reunir antecedentes puede marcar diferencias al momento de analizar su caso.</p>
+                </div>
+            </div>
+            <div class="ls-practice-card">
+                <div class="ls-practice-card-inner">
+                    <h4>Decisiones versus tiempo</h4>
+                    <p>Esperar más de lo necesario puede afectar el desarrollo de un caso. Evaluar el escenario con anticipación y comprender el contexto permite tomar decisiones con mayor claridad y preparación.</p>
+                </div>
+            </div>
+            <div class="ls-practice-card" id="mobile-m3-seguimiento">
+                <div class="ls-practice-card-inner">
+                    <h4>Construimos confianza</h4>
+                    <p>Comprender correctamente una situación requiere comunicación y criterio. En nuestra experiencia, una conversación clara y bien guiada suele ser el primer paso para abordar un escenario con mayor claridad y avanzar hacia mejores resultados.</p>
+                </div>
+            </div>
+
+            <div class="ls-module2-mobile-card-viewport" aria-live="polite">
+                <article class="ls-module2-mobile-card is-active" data-module2-mobile-card="0">
+                    <div class="ls-module2-mobile-card-inner">
+                        <h4>Elementos clave</h4>
+                        <p>Fechas, conversaciones, documentos y hechos pueden ser determinantes en una evaluación jurídica. Recordar los escenarios con claridad y reunir antecedentes puede marcar diferencias al momento de analizar su caso.</p>
+                    </div>
+                </article>
+                <article class="ls-module2-mobile-card" data-module2-mobile-card="1">
+                    <div class="ls-module2-mobile-card-inner">
+                        <h4>Decisiones versus tiempo</h4>
+                        <p>Esperar más de lo necesario puede afectar el desarrollo de un caso. Evaluar el escenario con anticipación y comprender el contexto permite tomar decisiones con mayor claridad y preparación.</p>
+                    </div>
+                </article>
+                <article class="ls-module2-mobile-card" data-module2-mobile-card="2">
+                    <div class="ls-module2-mobile-card-inner">
+                        <h4>Construimos confianza</h4>
+                        <p>Comprender correctamente una situación requiere comunicación y criterio. En nuestra experiencia, una conversación clara y bien guiada suele ser el primer paso para abordar un escenario con mayor claridad y avanzar hacia mejores resultados.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="ls-module2-mobile-carousel-dots" aria-label="Navegación de criterios">
+                <button class="ls-module2-mobile-carousel-dot is-active" type="button" data-module2-dot="0" aria-label="Ver elementos clave"></button>
+                <button class="ls-module2-mobile-carousel-dot" type="button" data-module2-dot="1" aria-label="Ver decisiones versus tiempo"></button>
+                <button class="ls-module2-mobile-carousel-dot" type="button" data-module2-dot="2" aria-label="Ver construimos confianza"></button>
+            </div>
+
+            <div class="ls-module2-mobile-carousel-cta">
+                <a href="/servicios" class="ls-link-arrow">IR A SERVICIOS</a>
+            </div>
+        </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    function initModule2MobileCarousel() {
+        const isMobile = window.matchMedia("(max-width: 760px)").matches;
+        if (!isMobile) return;
+
+        const root = document.querySelector(".mobile-m3");
+        if (!root) return;
+
+        const viewport = root.querySelector(".ls-module2-mobile-card-viewport");
+        const cards = Array.from(root.querySelectorAll("[data-module2-mobile-card]"));
+        const dots = Array.from(root.querySelectorAll("[data-module2-dot]"));
+        let activeIndex = cards.findIndex((card) => card.classList.contains("is-active"));
+        let isAnimating = false;
+        let touchStartX = null;
+        let touchStartY = null;
+
+        if (!viewport || !cards.length || !dots.length) return;
+        if (activeIndex < 0) activeIndex = 0;
+
+        function clearCardTransitionClasses() {
+            cards.forEach((card) => {
+                card.classList.remove(
+                    "is-preparing-next",
+                    "is-preparing-prev",
+                    "is-entering-next",
+                    "is-entering-prev",
+                    "is-leaving-next",
+                    "is-leaving-prev"
+                );
+            });
+        }
+
+        function syncDots() {
+            dots.forEach((dot, dotIndex) => {
+                dot.classList.toggle("is-active", dotIndex === activeIndex);
+            });
+        }
+
+        function getDotDirection(nextIndex) {
+            const forwardDistance = (nextIndex - activeIndex + cards.length) % cards.length;
+            const backwardDistance = (activeIndex - nextIndex + cards.length) % cards.length;
+            return forwardDistance <= backwardDistance ? "next" : "prev";
+        }
+
+        function setActiveCard(index, direction = "next") {
+            const nextIndex = (index + cards.length) % cards.length;
+            if (nextIndex === activeIndex) return;
+
+            const currentCard = cards[activeIndex];
+            const nextCard = cards[nextIndex];
+            const movement = direction === "prev" ? "prev" : "next";
+
+            clearCardTransitionClasses();
+
+            cards.forEach((card, cardIndex) => {
+                if (cardIndex !== activeIndex && cardIndex !== nextIndex) {
+                    card.classList.remove("is-active");
+                }
+            });
+
+            currentCard.classList.add(`is-leaving-${movement}`);
+            nextCard.classList.add("is-active", `is-entering-${movement}`);
+
+            activeIndex = nextIndex;
+            syncDots();
+
+            window.setTimeout(() => {
+                currentCard.classList.remove("is-active", `is-leaving-${movement}`);
+                nextCard.classList.remove(`is-entering-${movement}`);
+            }, 540);
+        }
+
+        dots.forEach((dot) => {
+            dot.addEventListener("click", () => {
+                const nextIndex = Number(dot.dataset.module2Dot);
+                if (Number.isNaN(nextIndex)) return;
+                setActiveCard(nextIndex, getDotDirection(nextIndex));
+            });
+        });
+
+        viewport.addEventListener("touchstart", (event) => {
+            if (event.touches.length !== 1 || isAnimating) return;
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        }, { passive: true });
+
+        viewport.addEventListener("touchend", (event) => {
+            if (touchStartX === null || touchStartY === null || isAnimating) return;
+
+            const touchEndX = event.changedTouches[0].clientX;
+            const touchEndY = event.changedTouches[0].clientY;
+            const deltaX = touchStartX - touchEndX;
+            const deltaY = touchStartY - touchEndY;
+            touchStartX = null;
+            touchStartY = null;
+
+            if (Math.abs(deltaX) < 42 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+            setActiveCard(deltaX > 0 ? activeIndex + 1 : activeIndex - 1, deltaX > 0 ? "next" : "prev");
+        }, { passive: true });
+
+        syncDots();
+    }
+
+    initModule2MobileCarousel();
+});
+</script>

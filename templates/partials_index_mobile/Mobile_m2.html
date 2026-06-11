@@ -1,0 +1,398 @@
+<!-- Mobile_m2 generado desde M2_home_movil_v1(7).txt -->
+<!-- Copia quirúrgica: CSS móvil @media (max-width: 760px) + primera escena móvil de M2. -->
+<style>
+@media (max-width: 760px) {
+        .home-slide-deck .index-module-2.ls-module2-decor-section,
+        .ls-module2-decor-section {
+            min-height: auto;
+            display: block;
+            align-items: initial;
+            justify-content: initial;
+            color-scheme: light;
+            background: var(--gris-suave);
+            padding: 0 22px 64px;
+            overflow: hidden;
+        }
+
+        .ls-module2-decor-section::before {
+            opacity: 0.54;
+            background-image:
+                linear-gradient(180deg, rgba(245, 247, 250, 0.80) 0%, rgba(245, 247, 250, 0.66) 58%, rgba(245, 247, 250, 0.48) 100%),
+                url("{{ url_for('static', filename='img/Fotos webp mod2/abogado oficina.webp') }}");
+            background-position: 24% top;
+            background-size: auto 100%;
+        }
+
+        .ls-module2-layout {
+            display: none;
+        }
+
+        .ls-module2-mobile-stage {
+            min-height: 100vh;
+            min-height: 100dvh;
+            width: min(100%, 520px);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: clamp(68px, 8.2svh, 84px) 0 clamp(92px, 11.4svh, 124px);
+            box-sizing: border-box;
+            text-align: center;
+            transform: translateY(clamp(14px, 2.2svh, 22px));
+        }
+
+        .ls-module2-mobile-stage h2 {
+            max-width: 92%;
+            font-size: clamp(1.95rem, 8.25vw, 2.65rem);
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            margin: 0 auto;
+            color: var(--azul-premium);
+        }
+
+        .ls-module2-mobile-photo {
+            width: min(100%, 420px);
+            flex: none;
+            min-width: 0;
+            min-height: 0;
+            aspect-ratio: 4 / 3;
+            border-radius: 16px;
+            margin: clamp(24px, 3.2svh, 34px) auto 0;
+        }
+
+        .ls-module2-mobile-photo img,
+        .ls-module2-mobile-photo::after {
+            border-radius: 16px;
+        }
+
+        .ls-module2-mobile-stage p.lead {
+            max-width: 96%;
+            font-size: clamp(1rem, 4.05vw, 1.08rem);
+            line-height: 1.52;
+            margin: clamp(38px, 5.4svh, 50px) auto 0;
+            color: var(--texto-oscuro);
+        }
+
+        .ls-module2-mobile-stage .ls-module2-copy-cta {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: clamp(14px, 2.2svh, 20px);
+        }
+
+        .ls-module2-mobile-stage .ls-link-arrow {
+            width: 100%;
+            max-width: 312px;
+            min-height: 44px;
+            padding: 11px 20px;
+            font-size: 0.84rem;
+        }
+
+        .ls-module2-submodule-scale,
+        .ls-module2-submodule-scale:hover {
+            transform: none;
+            transition: none;
+        }
+
+        .ls-practice-grid {
+            width: min(100%, 520px);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(16px, 2.8svh, 24px);
+            padding: clamp(70px, 8.8svh, 92px) 0 clamp(76px, 9.6svh, 102px) !important;
+            margin: 0 auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .ls-module2-mobile-carousel-title {
+            display: block;
+            max-width: 92%;
+            margin: 0 auto;
+            color: #0A192F;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.95rem, 8.25vw, 2.65rem);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -0.025em;
+        }
+
+        .ls-practice-grid > .ls-practice-card {
+            display: none;
+        }
+
+        .ls-module2-mobile-card-viewport {
+            position: relative;
+            display: block;
+            width: min(100%, 392px);
+            height: clamp(338px, 48svh, 430px);
+            margin: 0 auto;
+            touch-action: pan-y;
+        }
+
+        .ls-module2-mobile-card {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.59);
+            border: 1px solid rgba(10, 25, 47, 0.10);
+            box-shadow:
+                0 22px 46px rgba(10, 25, 47, 0.13),
+                0 8px 20px rgba(10, 25, 47, 0.08);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(0);
+            transition:
+                opacity 0.84s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.84s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 0.84s;
+            will-change: transform, opacity;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: pan-y;
+        }
+
+        .ls-module2-mobile-card.is-active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+            transition:
+                opacity 0.84s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.84s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 0ms;
+        }
+
+        .ls-module2-mobile-card.is-preparing-next {
+            opacity: 0;
+            visibility: visible;
+            transform: translateX(34px);
+            transition: none;
+        }
+
+        .ls-module2-mobile-card.is-preparing-prev {
+            opacity: 0;
+            visibility: visible;
+            transform: translateX(-34px);
+            transition: none;
+        }
+
+        .ls-module2-mobile-card.is-entering-next,
+        .ls-module2-mobile-card.is-entering-prev {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .ls-module2-mobile-card.is-leaving-next {
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateX(-34px);
+        }
+
+        .ls-module2-mobile-card.is-leaving-prev {
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateX(34px);
+        }
+
+        .ls-module2-mobile-card,
+        .ls-module2-mobile-card:hover,
+        .ls-module2-mobile-card:active,
+        .ls-module2-mobile-card:focus,
+        .ls-module2-mobile-card:focus-visible {
+            color: #1F2937;
+            outline: none;
+        }
+
+        .ls-module2-mobile-card-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(32px, 5.8svh, 46px) clamp(24px, 6vw, 32px);
+            border-radius: 24px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .ls-module2-mobile-card h4,
+        .ls-module2-mobile-card:hover h4,
+        .ls-module2-mobile-card:active h4,
+        .ls-module2-mobile-card:focus h4 {
+            color: #0A192F;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.48rem, 6.45vw, 1.96rem);
+            font-weight: 800;
+            line-height: 1.14;
+            letter-spacing: -0.018em;
+            margin: 0 0 clamp(18px, 3svh, 24px);
+            transition: none;
+        }
+
+        .ls-module2-mobile-card p,
+        .ls-module2-mobile-card:hover p,
+        .ls-module2-mobile-card:active p,
+        .ls-module2-mobile-card:focus p {
+            color: #1F2937;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.02rem, 4.15vw, 1.14rem);
+            font-weight: 400;
+            line-height: 1.62;
+            letter-spacing: -0.006em;
+            opacity: 0.9;
+            margin: 0;
+            transition: none;
+        }
+
+        .ls-module2-mobile-card h4,
+        .ls-module2-mobile-card p {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+
+        .ls-module2-mobile-carousel-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .ls-module2-mobile-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(10, 25, 47, 0.28);
+            padding: 0;
+            cursor: pointer;
+            transition: width 0.28s ease, background 0.28s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .ls-module2-mobile-carousel-dot.is-active {
+            width: 24px;
+            background: #C5A059;
+        }
+
+        .ls-module2-mobile-carousel-cta {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: clamp(2px, 0.8svh, 8px);
+        }
+
+        .ls-module2-mobile-carousel-cta .ls-link-arrow {
+            width: 100%;
+            max-width: 312px;
+            min-height: 44px;
+            padding: 11px 20px;
+            font-size: 0.84rem;
+        }
+    }
+</style>
+
+<section id="mobile-home-m2" class="mobile-home-section mobile-m2 index-module index-module-2 ls-module2-decor-section">
+        <div class="ls-module2-mobile-stage" aria-label="Acompañamiento claro BCTA móvil">
+            <h2>Acompañamiento claro en cada etapa</h2>
+
+            <div class="ls-module2-submodule ls-module2-mobile-photo ls-module2-photo-loop"
+                id="mobile-m2-photo-loop" aria-label="Imágenes de acompañamiento BCTA">
+                <img src="{{ url_for('static', filename='img/Fotos webp mod2/abuelos 1.webp') }}" alt="Acompañamiento jurídico BCTA" class="is-active" id="mobile-m2-photo-a">
+                <img src="{{ url_for('static', filename='img/Fotos webp mod2/abuelos 2.webp') }}" alt="Acompañamiento jurídico BCTA" id="mobile-m2-photo-b">
+            </div>
+
+            <p class="lead">Sabemos que detrás de cada situación hay decisiones, personas y circunstancias importantes. Por eso le acompañamos con orientación clara, seguimiento y asesoría seria en cada etapa del proceso.</p>
+
+            <div class="ls-module2-submodule ls-module2-copy-cta">
+                <a href="/servicios" class="ls-link-arrow">IR A SERVICIOS</a>
+            </div>
+        </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const root = document.querySelector(".mobile-m2");
+    if (!root) return;
+
+    const module2Photos = [
+        "{{ url_for('static', filename='img/Fotos webp mod2/abuelos 1.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/abuelos 2.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/conductor.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/familia 1.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/Madre hijo.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/muletas.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/padre e Hija.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/pareja 1.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/pareja 2.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/trabajador 1.webp') }}",
+        "{{ url_for('static', filename='img/Fotos webp mod2/trabajador 2.webp') }}"
+    ];
+
+    function shuffleModule2Photos(photos) {
+        for (let i = photos.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [photos[i], photos[j]] = [photos[j], photos[i]];
+        }
+    }
+
+    function initModule2PhotoLoop(loopId, photoAId, photoBId) {
+        const photos = [...module2Photos];
+        const photoA = root.querySelector(`#${photoAId}`);
+        const photoB = root.querySelector(`#${photoBId}`);
+        const loop = root.querySelector(`#${loopId}`);
+        let activePhoto = photoA;
+        let nextPhoto = photoB;
+        let photoIndex = 0;
+
+        if (!photoA || !photoB || !loop) return;
+
+        shuffleModule2Photos(photos);
+        photoA.src = photos[0];
+        loop.style.setProperty("--module2-loop-bg", `url("${photos[0]}")`);
+
+        window.setInterval(() => {
+            if (!activePhoto || !nextPhoto || photos.length < 2) return;
+
+            photoIndex += 1;
+
+            if (photoIndex >= photos.length) {
+                const lastPhoto = photos[photos.length - 1];
+                shuffleModule2Photos(photos);
+                if (photos[0] === lastPhoto && photos.length > 1) {
+                    [photos[0], photos[1]] = [photos[1], photos[0]];
+                }
+                photoIndex = 0;
+            }
+
+            nextPhoto.src = photos[photoIndex];
+            loop.style.setProperty("--module2-loop-bg", `url("${photos[photoIndex]}")`);
+            nextPhoto.classList.add("is-active");
+            activePhoto.classList.remove("is-active");
+
+            [activePhoto, nextPhoto] = [nextPhoto, activePhoto];
+        }, 3500);
+    }
+
+    initModule2PhotoLoop("mobile-m2-photo-loop", "mobile-m2-photo-a", "mobile-m2-photo-b");
+});
+</script>

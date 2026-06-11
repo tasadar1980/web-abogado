@@ -81,26 +81,6 @@
         transform: translateY(7vh);
     }
 
-    body.home-page .ls-footer {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 900;
-        opacity: 0;
-        transform: translateY(16px);
-        pointer-events: none;
-        transition:
-            opacity 1800ms cubic-bezier(0.22, 1, 0.36, 1),
-            transform 1800ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    body.home-page.is-home-slide-4 .ls-footer {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-    }
-
     /* ==========================================
        FONDOS ESPECÍFICOS Y CONTRASTE DE TEXTO (M1 - M4)
        ========================================== */
@@ -180,6 +160,152 @@
         line-height: 1.6;
         max-width: 650px;
     }
+
+    @media (max-width: 760px) {
+        html,
+        body.home-page {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body.home-page {
+            overflow-y: auto;
+        }
+
+        .home-slide-deck {
+            display: block;
+            width: 100%;
+            height: auto;
+            min-height: 0;
+            overflow: visible;
+            background: var(--azul-premium);
+        }
+
+        .home-slide-deck .index-module,
+        .home-slide-deck .index-module.is-active,
+        .home-slide-deck .index-module.is-leaving,
+        .home-slide-deck .index-module.is-entering,
+        .home-slide-deck .index-module.is-before,
+        .home-slide-deck .index-module.is-after,
+        .home-slide-deck .index-module.from-above,
+        .home-slide-deck .index-module.from-below,
+        .home-slide-deck .index-module.to-above,
+        .home-slide-deck .index-module.to-below {
+            position: relative;
+            inset: auto;
+            display: block;
+            width: 100%;
+            height: auto;
+            min-height: auto;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: none;
+            transition: none;
+            z-index: auto;
+            will-change: auto;
+            overflow: visible;
+        }
+
+        .home-slide-deck .index-module > * {
+            width: 100%;
+        }
+    }
+
+    .mobile-home-deck {
+        display: none;
+    }
+
+    /* === HOME MOBILE M1-M6: deck por cajas === */
+    @media (max-width: 760px) {
+        html,
+        body.home-page {
+            height: 100%;
+            overflow: hidden !important;
+            overscroll-behavior: none;
+        }
+
+        /* HOME MOBILE LEGACY M1-M4 DISABLED */
+        body.home-page .home-slide-deck {
+            display: none !important;
+        }
+
+        .mobile-home-deck {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100svh;
+            height: 100dvh;
+            overflow: hidden;
+            background: var(--azul-premium);
+            touch-action: none;
+        }
+
+        .mobile-home-section {
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100%;
+            height: 100svh;
+            height: 100dvh;
+            min-height: 100svh;
+            min-height: 100dvh;
+            max-height: 100dvh;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(5dvh);
+            transition:
+                opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 560ms cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 560ms;
+            overflow: hidden !important;
+            z-index: 1;
+        }
+
+        .mobile-home-section.mobile-is-active,
+        .mobile-home-section.mobile-is-entering,
+        .mobile-home-section.mobile-is-leaving {
+            visibility: visible;
+            transition:
+                opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 560ms cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 0ms;
+        }
+
+        .mobile-home-section.mobile-is-active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+            z-index: 3;
+        }
+
+        .mobile-home-section.mobile-is-before,
+        .mobile-home-section.mobile-to-above {
+            transform: translateY(-5dvh);
+        }
+
+        .mobile-home-section.mobile-is-after,
+        .mobile-home-section.mobile-to-below {
+            transform: translateY(5dvh);
+        }
+
+        .mobile-home-section.mobile-is-leaving {
+            opacity: 0;
+            z-index: 2;
+            transition:
+                opacity 260ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 520ms;
+        }
+
+        .mobile-home-section.mobile-is-entering {
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 3;
+        }
+
+    }
 </style>
 
 <main class="home-slide-deck" data-active-slide="0" aria-live="polite">
@@ -187,6 +313,15 @@
     {% include "partials_index/Index_m2.html" %}
     {% include "partials_index/Index_m3.html" %}
     {% include "partials_index/Index_m4.html" %}
+</main>
+
+<main class="mobile-home-deck" aria-label="Home móvil BCTA">
+    {% include "partials_index_mobile/Mobile_m1.html" %}
+    {% include "partials_index_mobile/Mobile_m2.html" %}
+    {% include "partials_index_mobile/Mobile_m3.html" %}
+    {% include "partials_index_mobile/Mobile_m4.html" %}
+    {% include "partials_index_mobile/Mobile_m5.html" %}
+    {% include "partials_index_mobile/Mobile_m6.html" %}
 </main>
 
 <script>
@@ -204,6 +339,12 @@
         let transitionTimer = null;
 
         if (!deck || slides.length === 0) return;
+
+        const mobileHomeLegacyDisabledQuery = window.matchMedia("(max-width: 760px)");
+        if (mobileHomeLegacyDisabledQuery.matches) {
+            document.body.classList.remove("is-home-transitioning");
+            return;
+        }
 
         function isMenuOpen() {
             return offcanvas && offcanvas.classList.contains("active");
@@ -230,6 +371,61 @@
             if (!header) return;
             header.classList.toggle("is-module-two", activeIndex === 1);
             header.classList.remove("is-scrolling");
+        }
+
+        const mobileHeaderQuery = window.matchMedia("(max-width: 760px)");
+        let mobileHeaderTimer = null;
+
+        function getMobileActiveIndex() {
+            const viewportCenter = window.innerHeight / 2;
+            let nearestIndex = activeIndex;
+            let nearestDistance = Infinity;
+
+            slides.forEach((slide, index) => {
+                const rect = slide.getBoundingClientRect();
+                const slideCenter = rect.top + (rect.height / 2);
+                const distance = Math.abs(slideCenter - viewportCenter);
+
+                if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+                    nearestIndex = index;
+                    nearestDistance = -1;
+                    return;
+                }
+
+                if (distance < nearestDistance) {
+                    nearestIndex = index;
+                    nearestDistance = distance;
+                }
+            });
+
+            return nearestIndex;
+        }
+
+        function finishMobileHeaderTransition() {
+            if (!mobileHeaderQuery.matches) return;
+
+            activeIndex = getMobileActiveIndex();
+            isTransitioning = false;
+            syncBodyState();
+            syncHeaderState();
+        }
+
+        function handleMobileHeaderScroll() {
+            if (!mobileHeaderQuery.matches || isMenuOpen()) return;
+
+            isTransitioning = true;
+            syncBodyState();
+
+            clearTimeout(mobileHeaderTimer);
+            mobileHeaderTimer = setTimeout(finishMobileHeaderTransition, 560);
+        }
+
+        function initMobileHeaderBehavior() {
+            if (!mobileHeaderQuery.matches) return;
+
+            finishMobileHeaderTransition();
+            window.addEventListener("scroll", handleMobileHeaderScroll, { passive: true });
+            window.addEventListener("resize", finishMobileHeaderTransition, { passive: true });
         }
 
         function syncSlides(previousIndex = activeIndex, direction = "down") {
@@ -361,10 +557,184 @@
                 goPrevious();
             }
         }, { passive: true });
-
         syncSlides();
         syncBodyState();
         syncHeaderState();
+        initMobileHeaderBehavior();
+    })();
+</script>
+
+<script>
+    (() => {
+        const mobileDeck = document.querySelector(".mobile-home-deck");
+        if (!mobileDeck) return;
+
+        const mobileSections = Array.from(mobileDeck.querySelectorAll(".mobile-home-section"));
+        const mobileDeckQuery = window.matchMedia("(max-width: 760px)");
+        const transitionDuration = 560;
+        const wheelThreshold = 24;
+        const touchThreshold = 40;
+        const pullHomeThreshold = 96;
+        const pullHomeStartLimit = 130;
+        let activeMobileIndex = 0;
+        let mobileTransitioning = false;
+        let mobileTouchStartX = null;
+        let mobileTouchStartY = null;
+        let mobileTransitionTimer = null;
+
+        if (!mobileSections.length) return;
+
+        function isMenuOpen() {
+            const offcanvas = document.getElementById("ls-offcanvas");
+            return offcanvas && offcanvas.classList.contains("active");
+        }
+
+        function syncMobileBodyState() {
+            document.body.classList.remove(
+                "is-home-mobile-slide-1",
+                "is-home-mobile-slide-2",
+                "is-home-mobile-slide-3",
+                "is-home-mobile-slide-4",
+                "is-home-mobile-slide-5",
+                "is-home-mobile-slide-6"
+            );
+            document.body.classList.add(`is-home-mobile-slide-${activeMobileIndex + 1}`);
+            document.body.classList.toggle("is-home-mobile-transitioning", mobileTransitioning);
+            mobileDeck.dataset.activeMobileSlide = String(activeMobileIndex);
+        }
+
+        function syncMobileSections(previousIndex = activeMobileIndex, direction = "down") {
+            mobileSections.forEach((section, index) => {
+                section.classList.remove(
+                    "mobile-is-active",
+                    "mobile-is-before",
+                    "mobile-is-after",
+                    "mobile-is-entering",
+                    "mobile-is-leaving",
+                    "mobile-to-above",
+                    "mobile-to-below"
+                );
+
+                if (index === activeMobileIndex) {
+                    section.classList.add("mobile-is-active");
+                    if (index !== previousIndex) {
+                        section.classList.add("mobile-is-entering");
+                    }
+                } else if (index === previousIndex) {
+                    section.classList.add("mobile-is-leaving", direction === "down" ? "mobile-to-above" : "mobile-to-below");
+                } else if (index < activeMobileIndex) {
+                    section.classList.add("mobile-is-before");
+                } else {
+                    section.classList.add("mobile-is-after");
+                }
+            });
+        }
+
+        function finishMobileTransition() {
+            mobileTransitioning = false;
+            mobileSections.forEach((section, index) => {
+                section.classList.remove("mobile-is-entering", "mobile-is-leaving", "mobile-to-above", "mobile-to-below");
+                if (index < activeMobileIndex) {
+                    section.classList.add("mobile-is-before");
+                } else if (index > activeMobileIndex) {
+                    section.classList.add("mobile-is-after");
+                }
+            });
+            syncMobileBodyState();
+        }
+
+        function goToMobileSection(nextIndex) {
+            if (!mobileDeckQuery.matches || isMenuOpen()) return;
+
+            const targetIndex = Math.max(0, Math.min(mobileSections.length - 1, nextIndex));
+            if (targetIndex === activeMobileIndex || mobileTransitioning) return;
+
+            const previousIndex = activeMobileIndex;
+            const direction = targetIndex > activeMobileIndex ? "down" : "up";
+            activeMobileIndex = targetIndex;
+            mobileTransitioning = true;
+
+            clearTimeout(mobileTransitionTimer);
+            syncMobileSections(previousIndex, direction);
+            syncMobileBodyState();
+
+            mobileTransitionTimer = window.setTimeout(finishMobileTransition, transitionDuration);
+        }
+
+        function restoreMobileDeck() {
+            if (!mobileDeckQuery.matches) return;
+            window.scrollTo(0, 0);
+            mobileTransitioning = false;
+            clearTimeout(mobileTransitionTimer);
+            syncMobileSections(activeMobileIndex);
+            syncMobileBodyState();
+        }
+
+        mobileDeck.addEventListener("click", (event) => {
+            const link = event.target.closest('a[href="#mobile-home-m2"], a[href="#mobile-home-m4"]');
+            if (!link || !mobileDeckQuery.matches) return;
+
+            event.preventDefault();
+            const targets = {
+                "#mobile-home-m2": 1,
+                "#mobile-home-m4": 3
+            };
+            goToMobileSection(targets[link.getAttribute("href")]);
+        });
+
+        window.addEventListener("wheel", (event) => {
+            if (!mobileDeckQuery.matches || isMenuOpen()) return;
+            event.preventDefault();
+            if (mobileTransitioning || Math.abs(event.deltaY) < wheelThreshold) return;
+            goToMobileSection(activeMobileIndex + (event.deltaY > 0 ? 1 : -1));
+        }, { passive: false });
+
+        window.addEventListener("touchstart", (event) => {
+            if (!mobileDeckQuery.matches || isMenuOpen() || mobileTransitioning || event.touches.length !== 1) return;
+            mobileTouchStartX = event.touches[0].clientX;
+            mobileTouchStartY = event.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener("touchmove", (event) => {
+            if (!mobileDeckQuery.matches || isMenuOpen()) return;
+            event.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener("touchend", (event) => {
+            if (!mobileDeckQuery.matches || mobileTouchStartY === null || mobileTouchStartX === null || isMenuOpen() || mobileTransitioning) return;
+
+            const touchStartY = mobileTouchStartY;
+            const touchEndX = event.changedTouches[0].clientX;
+            const touchEndY = event.changedTouches[0].clientY;
+            const deltaX = mobileTouchStartX - touchEndX;
+            const deltaY = touchStartY - touchEndY;
+            mobileTouchStartX = null;
+            mobileTouchStartY = null;
+
+            if (touchStartY < pullHomeStartLimit && deltaY < -pullHomeThreshold && Math.abs(deltaY) > Math.abs(deltaX) * 1.25) {
+                if (activeMobileIndex === 0) {
+                    window.location.reload();
+                    return;
+                }
+                goToMobileSection(0);
+                return;
+            }
+
+            if (Math.abs(deltaY) < touchThreshold || Math.abs(deltaY) <= Math.abs(deltaX)) return;
+            goToMobileSection(activeMobileIndex + (deltaY > 0 ? 1 : -1));
+        }, { passive: true });
+
+        window.addEventListener("orientationchange", () => {
+            window.setTimeout(restoreMobileDeck, 240);
+        }, { passive: true });
+
+        window.addEventListener("resize", () => {
+            window.setTimeout(restoreMobileDeck, 160);
+        }, { passive: true });
+
+        syncMobileSections();
+        syncMobileBodyState();
+        restoreMobileDeck();
     })();
 </script>
 {% endblock %}

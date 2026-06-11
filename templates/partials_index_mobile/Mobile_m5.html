@@ -1,0 +1,476 @@
+<!-- Mobile_m5 generado desde M3_home_movil_v1(5).txt -->
+<!-- Copia quirúrgica: CSS móvil @media (max-width: 760px) + bloque móvil de criterios/carrusel Empresas. -->
+<style>
+@media (max-width: 760px) {
+        .home-slide-deck .index-module-3.ls-module3-decor-section,
+        .ls-module3-decor-section {
+            min-height: auto;
+            display: block;
+            align-items: initial;
+            justify-content: initial;
+            color-scheme: dark;
+            padding: 0 22px 64px;
+            overflow: hidden;
+        }
+
+        .ls-module3-decor-section::before {
+            background-image:
+                linear-gradient(180deg, rgba(10, 25, 47, 0.97) 0%, rgba(10, 25, 47, 0.9) 58%, rgba(10, 25, 47, 0.82) 100%),
+                url("{{ url_for('static', filename='img/Fotos Empresa/fotos webp/minería.webp') }}");
+        }
+
+        .ls-module3-layout {
+            display: none;
+        }
+
+        .ls-module3-mobile-stage {
+            min-height: 100vh;
+            min-height: 100dvh;
+            width: min(100%, 520px);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: clamp(54px, 6.4svh, 66px) 0 clamp(58px, 7.2svh, 76px);
+            box-sizing: border-box;
+            text-align: center;
+            transform: translateY(clamp(10px, 1.6svh, 16px));
+        }
+
+        .ls-module3-mobile-stage h2 {
+            max-width: 94%;
+            font-size: clamp(1.78rem, 7.55vw, 2.38rem);
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            margin: 0 auto;
+            color: #ffffff;
+            transform: translateY(-23px);
+        }
+
+        .ls-module3-mobile-photo {
+            width: min(92%, 390px);
+            flex: none;
+            min-width: 0;
+            min-height: 0;
+            aspect-ratio: 16 / 10;
+            border-radius: 16px;
+            margin: clamp(22px, 3.1svh, 30px) auto 0;
+        }
+
+        .ls-module3-mobile-photo img,
+        .ls-module3-mobile-photo::after {
+            border-radius: 16px;
+        }
+
+        .ls-module3-mobile-stage p.lead {
+            max-width: min(92%, 390px);
+            font-size: clamp(0.9rem, 3.72vw, 1rem);
+            line-height: 1.5;
+            margin: clamp(22px, 3.1svh, 30px) auto 0;
+            color: rgba(255, 255, 255, 0.84);
+        }
+
+        .ls-module3-mobile-stage .ls-module3-copy-cta {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: clamp(20px, 3svh, 28px);
+            transform: translateY(15px);
+        }
+
+        .ls-module3-mobile-stage .ls-module3-contact-button {
+            width: 100%;
+            max-width: 312px;
+            min-height: 44px;
+            padding: 11px 20px;
+            font-size: 0.84rem;
+        }
+
+        .ls-module3-submodule-scale,
+        .ls-module3-submodule-scale:hover {
+            transform: none;
+            transition: none;
+        }
+
+        .ls-differentiators-grid {
+            width: min(100%, 520px);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(16px, 2.8svh, 24px);
+            padding: clamp(70px, 8.8svh, 92px) 0 clamp(76px, 9.6svh, 102px) !important;
+            margin: 0 auto;
+            box-sizing: border-box;
+            text-align: center;
+            transform: translateY(clamp(14px, 2.2svh, 22px));
+        }
+
+        .ls-module3-mobile-carousel-title {
+            display: block;
+            max-width: 92%;
+            margin: 0 auto;
+            color: #ffffff;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.95rem, 8.25vw, 2.65rem);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -0.025em;
+        }
+
+        .ls-differentiators-grid > .ls-differentiator-card {
+            display: none;
+        }
+
+        .ls-module3-mobile-card-viewport {
+            position: relative;
+            display: block;
+            width: min(100%, 392px);
+            height: clamp(338px, 48svh, 430px);
+            margin: 0 auto;
+            touch-action: pan-y;
+        }
+
+        .ls-module3-mobile-card {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow:
+                0 22px 46px rgba(0, 0, 0, 0.22),
+                0 8px 20px rgba(0, 0, 0, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(0);
+            transition:
+                opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 0.52s;
+            will-change: transform, opacity;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: pan-y;
+        }
+
+        .ls-module3-mobile-card.is-active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+            transition:
+                opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0ms linear 0ms;
+        }
+
+        .ls-module3-mobile-card.is-preparing-next {
+            opacity: 0;
+            visibility: visible;
+            transform: translateX(42px);
+            transition: none;
+        }
+
+        .ls-module3-mobile-card.is-preparing-prev {
+            opacity: 0;
+            visibility: visible;
+            transform: translateX(-42px);
+            transition: none;
+        }
+
+        .ls-module3-mobile-card.is-entering-next,
+        .ls-module3-mobile-card.is-entering-prev {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .ls-module3-mobile-card.is-leaving-next {
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateX(-42px);
+        }
+
+        .ls-module3-mobile-card.is-leaving-prev {
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateX(42px);
+        }
+
+        .ls-module3-mobile-card,
+        .ls-module3-mobile-card:hover,
+        .ls-module3-mobile-card:active,
+        .ls-module3-mobile-card:focus,
+        .ls-module3-mobile-card:focus-visible {
+            color: rgba(255, 255, 255, 0.88);
+            outline: none;
+        }
+
+        .ls-module3-mobile-card-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(32px, 5.8svh, 46px) clamp(24px, 6vw, 32px);
+            border-radius: 24px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .ls-module3-mobile-card h4,
+        .ls-module3-mobile-card:hover h4,
+        .ls-module3-mobile-card:active h4,
+        .ls-module3-mobile-card:focus h4 {
+            color: #C5A059;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.48rem, 6.45vw, 1.96rem);
+            font-weight: 800;
+            line-height: 1.14;
+            letter-spacing: -0.018em;
+            margin: 0 0 clamp(18px, 3svh, 24px);
+            transition: none;
+        }
+
+        .ls-module3-mobile-card p,
+        .ls-module3-mobile-card:hover p,
+        .ls-module3-mobile-card:active p,
+        .ls-module3-mobile-card:focus p {
+            color: rgba(255, 255, 255, 0.88);
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(1.02rem, 4.15vw, 1.14rem);
+            font-weight: 400;
+            line-height: 1.62;
+            letter-spacing: -0.006em;
+            opacity: 0.92;
+            margin: 0;
+            transition: none;
+        }
+
+        .ls-module3-mobile-card h4,
+        .ls-module3-mobile-card p {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+
+        .ls-module3-mobile-carousel-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .ls-module3-mobile-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.34);
+            padding: 0;
+            cursor: pointer;
+            transition: width 0.28s ease, background 0.28s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .ls-module3-mobile-carousel-dot.is-active {
+            width: 24px;
+            background: #C5A059;
+        }
+
+        .ls-module3-mobile-carousel-cta {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: clamp(2px, 0.8svh, 8px);
+        }
+
+        .ls-module3-mobile-carousel-cta .ls-module3-contact-button {
+            width: 100%;
+            max-width: 312px;
+            min-height: 44px;
+            padding: 11px 20px;
+            font-size: 0.84rem;
+        }
+    }
+</style>
+
+<section id="mobile-home-m5" class="mobile-home-section mobile-m5 index-module index-module-3 ls-module3-decor-section">
+        <div class="ls-differentiators-grid" aria-label="Criterios de asesoría empresarial BCTA">
+            <h3 class="ls-module3-mobile-carousel-title">Tres aspectos que pueden orientar su empresa</h3>
+
+            <div class="ls-differentiator-card">
+                <div class="ls-differentiator-card-inner">
+                    <h4>Relaciones laborales</h4>
+                    <p>Contrataciones, desvinculaciones, responsabilidades y decisiones internas pueden generar efectos relevantes cuando no existe claridad en los procesos o criterios aplicados.</p>
+                </div>
+            </div>
+            <div class="ls-differentiator-card">
+                <div class="ls-differentiator-card-inner">
+                    <h4>Riesgos y continuidad operacional</h4>
+                    <p>Aspectos contractuales, tributarios, comerciales o normativos pueden impactar el funcionamiento y la estabilidad de una empresa cuando no son evaluados oportunamente.</p>
+                </div>
+            </div>
+            <div class="ls-differentiator-card">
+                <div class="ls-differentiator-card-inner">
+                    <h4>Prevención y respaldo jurídico</h4>
+                    <p>Contar con orientación jurídica permite analizar escenarios con mayor anticipación, reducir contingencias y enfrentar decisiones empresariales con mayor seguridad.</p>
+                </div>
+            </div>
+
+            <div class="ls-module3-mobile-card-viewport" aria-live="polite">
+                <article class="ls-module3-mobile-card is-active" data-module3-mobile-card="0">
+                    <div class="ls-module3-mobile-card-inner">
+                        <h4>Relaciones laborales</h4>
+                        <p>Contrataciones, desvinculaciones, responsabilidades y decisiones internas pueden generar efectos relevantes cuando no existe claridad en los procesos o criterios aplicados.</p>
+                    </div>
+                </article>
+                <article class="ls-module3-mobile-card" data-module3-mobile-card="1">
+                    <div class="ls-module3-mobile-card-inner">
+                        <h4>Riesgos y continuidad operacional</h4>
+                        <p>Aspectos contractuales, tributarios, comerciales o normativos pueden impactar el funcionamiento y la estabilidad de una empresa cuando no son evaluados oportunamente.</p>
+                    </div>
+                </article>
+                <article class="ls-module3-mobile-card" data-module3-mobile-card="2">
+                    <div class="ls-module3-mobile-card-inner">
+                        <h4>Prevención y respaldo jurídico</h4>
+                        <p>Contar con orientación jurídica permite analizar escenarios con mayor anticipación, reducir contingencias y enfrentar decisiones empresariales con mayor seguridad.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="ls-module3-mobile-carousel-dots" aria-label="Navegación de criterios empresariales">
+                <button class="ls-module3-mobile-carousel-dot is-active" type="button" data-module3-dot="0" aria-label="Ver relaciones laborales"></button>
+                <button class="ls-module3-mobile-carousel-dot" type="button" data-module3-dot="1" aria-label="Ver riesgos y continuidad operacional"></button>
+                <button class="ls-module3-mobile-carousel-dot" type="button" data-module3-dot="2" aria-label="Ver prevención y respaldo jurídico"></button>
+            </div>
+
+            <div class="ls-module3-mobile-carousel-cta">
+                <a href="/contacto" class="ls-module3-contact-button">Contáctanos</a>
+            </div>
+        </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+function initModule3MobileCarousel() {
+                        const isMobile = window.matchMedia("(max-width: 760px)").matches;
+                        if (!isMobile) return;
+
+                        const root = document.querySelector(".mobile-m5");
+                        if (!root) return;
+
+                        const viewport = root.querySelector(".ls-module3-mobile-card-viewport");
+                        const cards = Array.from(root.querySelectorAll("[data-module3-mobile-card]"));
+                        const dots = Array.from(root.querySelectorAll("[data-module3-dot]"));
+                        let activeIndex = cards.findIndex((card) => card.classList.contains("is-active"));
+                        let isAnimating = false;
+                        let touchStartX = null;
+                        let touchStartY = null;
+
+                        if (!viewport || !cards.length || !dots.length) return;
+                        if (activeIndex < 0) activeIndex = 0;
+
+                        function clearCardTransitionClasses() {
+                            cards.forEach((card) => {
+                                card.classList.remove(
+                                    "is-preparing-next",
+                                    "is-preparing-prev",
+                                    "is-entering-next",
+                                    "is-entering-prev",
+                                    "is-leaving-next",
+                                    "is-leaving-prev"
+                                );
+                            });
+                        }
+
+                        function syncDots() {
+                            dots.forEach((dot, dotIndex) => {
+                                dot.classList.toggle("is-active", dotIndex === activeIndex);
+                            });
+                        }
+
+                        function getDotDirection(nextIndex) {
+                            const forwardDistance = (nextIndex - activeIndex + cards.length) % cards.length;
+                            const backwardDistance = (activeIndex - nextIndex + cards.length) % cards.length;
+                            return forwardDistance <= backwardDistance ? "next" : "prev";
+                        }
+
+                        function setActiveCard(index, direction = "next") {
+                            const nextIndex = (index + cards.length) % cards.length;
+                            if (nextIndex === activeIndex) return;
+
+                            const currentCard = cards[activeIndex];
+                            const nextCard = cards[nextIndex];
+                            const movement = direction === "prev" ? "prev" : "next";
+
+                            clearCardTransitionClasses();
+
+                            cards.forEach((card, cardIndex) => {
+                                if (cardIndex !== activeIndex && cardIndex !== nextIndex) {
+                                    card.classList.remove("is-active");
+                                }
+                            });
+
+                            currentCard.classList.add(`is-leaving-${movement}`);
+                            nextCard.classList.add("is-active", `is-entering-${movement}`);
+
+                            activeIndex = nextIndex;
+                            syncDots();
+
+                            window.setTimeout(() => {
+                                currentCard.classList.remove("is-active", `is-leaving-${movement}`);
+                                nextCard.classList.remove(`is-entering-${movement}`);
+                            }, 540);
+                        }
+
+                        dots.forEach((dot) => {
+                            dot.addEventListener("click", () => {
+                                const nextIndex = Number(dot.dataset.module3Dot);
+                                if (Number.isNaN(nextIndex)) return;
+                                setActiveCard(nextIndex, getDotDirection(nextIndex));
+                            });
+                        });
+
+                        viewport.addEventListener("touchstart", (event) => {
+                            if (event.touches.length !== 1 || isAnimating) return;
+                            touchStartX = event.touches[0].clientX;
+                            touchStartY = event.touches[0].clientY;
+                        }, { passive: true });
+
+                        viewport.addEventListener("touchend", (event) => {
+                            if (touchStartX === null || touchStartY === null || isAnimating) return;
+
+                            const touchEndX = event.changedTouches[0].clientX;
+                            const touchEndY = event.changedTouches[0].clientY;
+                            const deltaX = touchStartX - touchEndX;
+                            const deltaY = touchStartY - touchEndY;
+                            touchStartX = null;
+                            touchStartY = null;
+
+                            if (Math.abs(deltaX) < 42 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+                            setActiveCard(deltaX > 0 ? activeIndex + 1 : activeIndex - 1, deltaX > 0 ? "next" : "prev");
+                        }, { passive: true });
+
+                        syncDots();
+                    }
+
+    initModule3MobileCarousel();
+});
+</script>

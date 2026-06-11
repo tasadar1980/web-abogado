@@ -300,17 +300,79 @@
     }
 
     @media (max-width: 560px) {
+        body.usuarios-page-layout {
+            overflow: auto;
+        }
+
         body.usuarios-page-layout > .usuarios-page {
-            padding: 86px 18px 34px;
+            align-items: center;
+            justify-content: center;
+            min-height: 100svh;
+            padding: 86px 14px 46px;
             overflow: auto;
         }
 
         .usuarios-card {
-            padding: 30px 22px;
+            max-width: 100%;
+            padding: 20px 16px 18px;
+            border-radius: 18px;
+            box-sizing: border-box;
         }
 
         .usuarios-card h1 {
+            font-size: clamp(1.34rem, 6.4vw, 1.62rem);
+            line-height: 1.12;
+            margin-bottom: 10px;
+            letter-spacing: -0.45px;
             white-space: normal;
+        }
+
+        .usuarios-card p {
+            font-size: 0.82rem;
+            line-height: 1.36;
+            margin-bottom: 14px;
+        }
+
+        .usuarios-form {
+            gap: 9px;
+        }
+
+        .usuarios-form label {
+            margin-bottom: 4px;
+            font-size: 0.68rem;
+            letter-spacing: 0.55px;
+        }
+
+        .usuarios-form input,
+        .usuarios-form select {
+            min-height: 40px;
+            padding: 9px 40px 9px 12px;
+            font-size: 0.84rem;
+        }
+
+        .usuarios-ayuda {
+            margin-top: 4px;
+            font-size: 0.66rem;
+            line-height: 1.28;
+        }
+
+        .usuarios-btn {
+            margin-top: 4px;
+            padding: 11px 16px;
+            font-size: 0.74rem;
+        }
+
+        .usuarios-alerta {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 0.76rem;
+            line-height: 1.34;
+        }
+
+        .usuarios-contacto {
+            margin-top: 9px;
+            padding: 10px 14px;
+            font-size: 0.7rem;
         }
     }
 </style>
@@ -398,7 +460,7 @@
             actualizarIconosVisibilidad();
             actualizarEstadoBoton();
 
-            if (enfocarUsuario && !usuarioInput.disabled) {
+            if (enfocarUsuario && !usuarioInput.disabled && !window.matchMedia('(max-width: 760px)').matches) {
                 setTimeout(function () {
                     usuarioInput.focus();
                 }, 0);
@@ -407,6 +469,30 @@
 
         function normalizarRut(rut) {
             return rut.replace(/\./g, '').replace(/-/g, '').trim().toUpperCase();
+        }
+
+        function limpiarRutChileno(rut) {
+            return rut.replace(/[^0-9kK]/g, '').toUpperCase().slice(0, 9);
+        }
+
+        function formatearRutChileno(rut) {
+            const rutLimpio = limpiarRutChileno(rut);
+            if (rutLimpio.length <= 1) {
+                return rutLimpio;
+            }
+
+            const cuerpo = rutLimpio.slice(0, -1);
+            const dv = rutLimpio.slice(-1);
+            const cuerpoFormateado = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            return cuerpoFormateado + '-' + dv;
+        }
+
+        function formatearUsuarioSiCorresponde() {
+            if (tipoDocumentoInput.value !== 'chile') {
+                return;
+            }
+
+            usuarioInput.value = formatearRutChileno(usuarioInput.value);
         }
 
         function validarRutChileno(rut) {
@@ -440,7 +526,7 @@
 
         function validarUsuario() {
             const tipoDocumento = tipoDocumentoInput.value;
-            const usuario = usuarioInput.value.trim();
+            const usuario = tipoDocumento === 'chile' ? limpiarRutChileno(usuarioInput.value) : usuarioInput.value.trim();
 
             if (tipoDocumento === 'chile') {
                 return validarRutChileno(usuario);
@@ -459,6 +545,8 @@
             }
 
             usuarioInput.value = '';
+            usuariosAlerta.classList.remove('is-visible');
+            usuariosContacto.style.display = 'none';
             actualizarEstadoBoton();
         }
 
@@ -489,6 +577,15 @@
             usuariosAlerta.classList.add('is-visible');
         }
 
+        function cerrarTecladoMovilActivo() {
+            const activo = document.activeElement;
+            if (!activo || !['INPUT', 'TEXTAREA', 'SELECT'].includes(activo.tagName)) {
+                return;
+            }
+
+            activo.blur();
+        }
+
         if (usuariosForm && usuariosAlerta && usuariosAlertaTexto && usuariosContacto && tipoDocumentoInput && usuarioInput && ayudaDocumento && passwordInput && usuariosBtn) {
             usuariosContacto.style.display = 'none';
             actualizarAyudaDocumento();
@@ -496,7 +593,10 @@
             actualizarEstadoBoton();
 
             tipoDocumentoInput.addEventListener('change', actualizarAyudaDocumento);
-            usuarioInput.addEventListener('input', actualizarEstadoBoton);
+            usuarioInput.addEventListener('input', function () {
+                formatearUsuarioSiCorresponde();
+                actualizarEstadoBoton();
+            });
             passwordInput.addEventListener('input', actualizarEstadoBoton);
 
             usuariosToggles.forEach(function (toggle) {
@@ -513,15 +613,16 @@
 
             usuariosForm.addEventListener('submit', function (event) {
                 event.preventDefault();
+                cerrarTecladoMovilActivo();
 
                 usuariosBtn.classList.add('is-pressing');
                 setTimeout(function () {
                     usuariosBtn.classList.remove('is-pressing');
                 }, 180);
 
-                const usuario = usuarioInput.value.trim();
-                const password = passwordInput.value.trim();
                 const tipoDocumento = tipoDocumentoInput.value;
+                const usuario = tipoDocumento === 'chile' ? limpiarRutChileno(usuarioInput.value) : usuarioInput.value.trim();
+                const password = passwordInput.value.trim();
 
                 if (!usuario && !password) {
                     mostrarMensaje('No se ingresaron datos, por favor intente nuevamente.', false);

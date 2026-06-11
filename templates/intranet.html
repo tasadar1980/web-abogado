@@ -267,17 +267,72 @@
     }
 
     @media (max-width: 560px) {
+        body.intranet-page-layout {
+            overflow: auto;
+        }
+
         body.intranet-page-layout > .intranet-page {
-            padding: 86px 18px 34px;
+            align-items: center;
+            justify-content: center;
+            min-height: 100svh;
+            padding: 86px 14px 46px;
             overflow: auto;
         }
 
         .intranet-card {
-            padding: 30px 22px;
+            max-width: 100%;
+            padding: 20px 16px 18px;
+            border-radius: 18px;
+            box-sizing: border-box;
         }
 
         .intranet-card h1 {
+            font-size: clamp(1.34rem, 6.4vw, 1.62rem);
+            line-height: 1.12;
+            margin-bottom: 10px;
+            letter-spacing: -0.45px;
             white-space: normal;
+        }
+
+        .intranet-card p {
+            font-size: 0.82rem;
+            line-height: 1.36;
+            margin-bottom: 14px;
+        }
+
+        .intranet-form {
+            gap: 9px;
+        }
+
+        .intranet-form label {
+            margin-bottom: 4px;
+            font-size: 0.68rem;
+            letter-spacing: 0.55px;
+        }
+
+        .intranet-form input {
+            min-height: 40px;
+            padding: 9px 40px 9px 12px;
+            font-size: 0.84rem;
+        }
+
+        .intranet-ayuda {
+            margin-top: 4px;
+            font-size: 0.66rem;
+            line-height: 1.28;
+        }
+
+        .intranet-btn {
+            margin-top: 4px;
+            padding: 11px 16px;
+            font-size: 0.74rem;
+        }
+
+        .intranet-alerta {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 0.76rem;
+            line-height: 1.34;
         }
     }
 </style>
@@ -287,17 +342,17 @@
         <h1>Acceso Intranet</h1>
         <p>
             Bienvenido a las herramientas de gestión administrativa de BCTA Abogados.
-            Ingresa los datos de ingreso proporcionados.
+            Ingresa tus datos de acceso proporcionados.
         </p>
 
         <form class="intranet-form" id="intranet-form" autocomplete="off">
             <div>
                 <label for="usuario">Usuario</label>
                 <div class="intranet-input-wrap">
-                    <input type="text" id="usuario" name="usuario" placeholder="Ingrese su Código de Colaborador" minlength="7" maxlength="7" pattern="[A-Za-z]{3}-[0-9]{3}">
+                    <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu c&oacute;digo de acceso" minlength="7" maxlength="7" pattern="[A-Za-z]{3}-[0-9]{3}">
                     <button type="button" class="intranet-toggle" data-target="usuario" aria-label="Ocultar usuario" aria-pressed="false"></button>
                 </div>
-                <span class="intranet-ayuda">Usuario: Código de Colaborador/a proporcionado por TI.</span>
+                <span class="intranet-ayuda">Dato proporcionado internamente por BCTA Abogados</span>
             </div>
 
             <div>
@@ -313,7 +368,7 @@
         </form>
 
         <div class="intranet-alerta" id="intranet-alerta" aria-live="polite">
-            <span id="intranet-alerta-texto">Tu Código de Colaborador/a o password no está registrado.</span>
+            <span id="intranet-alerta-texto">Tus datos de acceso no est&aacute;n registrados.</span>
         </div>
     </div>
 </div>
@@ -352,7 +407,7 @@
             actualizarIconosVisibilidad();
             actualizarEstadoBoton();
 
-            if (enfocarUsuario && !usuarioInput.disabled) {
+            if (enfocarUsuario && !usuarioInput.disabled && !window.matchMedia('(max-width: 760px)').matches) {
                 setTimeout(function () {
                     usuarioInput.focus();
                 }, 0);
@@ -386,6 +441,15 @@
             intranetAlerta.classList.add('is-visible');
         }
 
+        function cerrarTecladoMovilActivo() {
+            const activo = document.activeElement;
+            if (!activo || !['INPUT', 'TEXTAREA', 'SELECT'].includes(activo.tagName)) {
+                return;
+            }
+
+            activo.blur();
+        }
+
         if (intranetForm && intranetAlerta && intranetAlertaTexto && usuarioInput && passwordInput && intranetBtn) {
             actualizarIconosVisibilidad();
             actualizarEstadoBoton();
@@ -407,6 +471,7 @@
 
             intranetForm.addEventListener('submit', function (event) {
                 event.preventDefault();
+                cerrarTecladoMovilActivo();
 
                 intranetBtn.classList.add('is-pressing');
                 setTimeout(function () {
@@ -435,7 +500,7 @@
                 }
 
                 if (!/^[A-Za-z]{3}-[0-9]{3}$/.test(usuario)) {
-                    mostrarMensaje('El Código de Colaborador/a debe tener el formato ABC-123: tres letras, guion y tres números.');
+                    mostrarMensaje('El codigo de acceso ingresado no es valido.');
                     limpiarFormulario(true);
                     return;
                 }
@@ -453,12 +518,12 @@
                     usuarioInput.disabled = true;
                     passwordInput.disabled = true;
                     intranetBtn.disabled = true;
-                    mostrarMensaje('Tu Código de Colaborador/a o password no está registrado. Acceso bloqueado temporalmente. Solicite asistencia al departamento de TI.');
+                    mostrarMensaje('Tus datos de acceso no estan registrados. Acceso bloqueado temporalmente. Solicita asistencia interna.');
                     return;
                 }
 
                 const intentosRestantes = 3 - intentos;
-                mostrarMensaje('Tu Código de Colaborador/a o password no está registrado. Quedan ' + intentosRestantes + ' intentos. Reintenta o solicita asistencia al departamento de TI.');
+                mostrarMensaje('Tus datos de acceso no estan registrados. Quedan ' + intentosRestantes + ' intentos. Reintenta o solicita asistencia interna.');
             });
         }
     });

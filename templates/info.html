@@ -385,6 +385,324 @@
         box-shadow: none;
     }
 
+    .contacto-form-feedback {
+        display: none;
+    }
+
+    .contacto-mobile-security-modal {
+        display: none;
+    }
+
+    @media (max-width: 900px) {
+        body.contacto-page-layout {
+            height: auto;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: var(--azul-premium);
+        }
+
+        body.contacto-page-layout .contacto-page {
+            justify-content: flex-start;
+            min-height: 100svh;
+            padding: 98px 0 28px;
+            overflow-x: hidden;
+        }
+
+        body.contacto-page-layout .contacto-page > .container {
+            width: min(92vw, 720px);
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        body.contacto-page-layout .contacto-header {
+            margin-bottom: 12px;
+        }
+
+        body.contacto-page-layout .contacto-header h1 {
+            display: none;
+        }
+
+        body.contacto-page-layout .contacto-header .contacto-instruction {
+            max-width: 92%;
+            color: var(--dorado-firma);
+            font-size: clamp(1.42rem, 6.6vw, 1.82rem);
+            line-height: 1.08;
+            margin-bottom: 0;
+            text-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
+        }
+
+        body.contacto-page-layout .contacto-limit-notice {
+            display: none;
+        }
+
+        body.contacto-page-layout .wizard-container {
+            width: 100%;
+            min-height: 0;
+            padding: 16px 14px 18px;
+            border-radius: 18px;
+            background: rgba(10, 25, 47, 0.52);
+            border-color: rgba(197, 160, 89, 0.22);
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+        }
+
+        body.contacto-page-layout .wizard-progress {
+            width: 78%;
+            margin: 0 auto 16px;
+        }
+
+        body.contacto-page-layout .progress-step {
+            width: 28px;
+            height: 28px;
+            font-size: 0.78rem;
+        }
+
+        body.contacto-page-layout .step-title {
+            font-size: 1.06rem;
+            line-height: 1.18;
+            margin: 0 0 12px;
+        }
+
+        body.contacto-page-layout .wizard-step .step-summary {
+            font-size: 1rem;
+            line-height: 1.18;
+            margin: 0 0 14px;
+        }
+
+        body.contacto-page-layout .area-grid {
+            grid-template-columns: 1fr;
+            gap: 8px;
+            max-height: min(55svh, 460px);
+            padding-right: 4px;
+            overflow-y: auto;
+        }
+
+        body.contacto-page-layout .area-btn {
+            min-height: 42px;
+            padding: 10px 38px 10px 14px;
+            border-radius: 10px;
+            font-size: 0.86rem;
+            line-height: 1.12;
+            background: rgba(255, 255, 255, 0.018);
+        }
+
+        body.contacto-page-layout .area-btn::after {
+            right: 13px;
+            opacity: 0.52;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        body.contacto-page-layout .area-btn:hover {
+            transform: none;
+        }
+
+        body.contacto-page-layout .form-group {
+            margin-bottom: 14px;
+        }
+
+        body.contacto-page-layout .form-label {
+            margin-bottom: 6px;
+            font-size: 0.8rem;
+        }
+
+        body.contacto-page-layout .form-control {
+            min-height: 48px;
+            padding: 14px 15px;
+            border-radius: 10px;
+            font-size: 0.94rem;
+        }
+
+        body.contacto-page-layout textarea.form-control {
+            min-height: 124px;
+            max-height: 36svh;
+        }
+
+        body.contacto-page-layout .character-counter {
+            font-size: 0.7rem;
+            line-height: 1.22;
+        }
+
+        body.contacto-page-layout .contact-fields-row,
+        body.contacto-page-layout .contact-fields-row.name-row,
+        body.contacto-page-layout .contact-fields-row.contact-row {
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        body.contacto-page-layout .wizard-actions {
+            gap: 10px;
+            padding-top: 12px;
+        }
+
+        body.contacto-page-layout .btn-outline,
+        body.contacto-page-layout .btn-primary {
+            min-height: 44px;
+            padding: 11px 18px;
+            border-radius: 9px;
+            font-size: 0.9rem;
+        }
+
+        body.contacto-page-layout .btn-primary:disabled {
+            opacity: 0.34;
+            filter: saturate(0.55);
+        }
+
+        body.contacto-page-layout .contacto-form-feedback {
+            display: none;
+            margin: 0 0 14px;
+            padding: 11px 13px;
+            border-radius: 12px;
+            color: var(--texto-claro);
+            background: rgba(122, 31, 43, 0.28);
+            border: 1px solid rgba(197, 160, 89, 0.28);
+            font-size: 0.8rem;
+            line-height: 1.32;
+            text-align: center;
+        }
+
+        body.contacto-page-layout .contacto-form-feedback.active {
+            display: block;
+        }
+
+        body.contacto-page-layout .contacto-form-feedback.warning {
+            background: rgba(197, 160, 89, 0.14);
+        }
+
+        body.contacto-page-layout .contacto-mobile-security-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            background: rgba(10, 25, 47, 0.58);
+            backdrop-filter: blur(8px);
+        }
+
+        body.contacto-page-layout .contacto-mobile-security-modal.active {
+            display: flex;
+        }
+
+        body.contacto-page-layout .contacto-mobile-security-card {
+            width: min(100%, 340px);
+            border-radius: 18px;
+            padding: 20px 18px 18px;
+            background: linear-gradient(145deg, rgba(17, 34, 64, 0.98), rgba(10, 25, 47, 0.98));
+            border: 1px solid rgba(197, 160, 89, 0.34);
+            box-shadow: 0 24px 54px rgba(0, 0, 0, 0.38);
+            color: var(--texto-claro);
+            text-align: center;
+        }
+
+        body.contacto-page-layout .contacto-mobile-security-card h2 {
+            margin: 0 0 10px;
+            color: var(--dorado-firma);
+            font-size: 1.05rem;
+            line-height: 1.15;
+            font-weight: 800;
+        }
+
+        body.contacto-page-layout .contacto-mobile-security-card p {
+            margin: 0 0 16px;
+            color: rgba(245, 247, 250, 0.86);
+            font-size: 0.84rem;
+            line-height: 1.38;
+            font-weight: 400;
+        }
+
+        body.contacto-page-layout .contacto-mobile-security-actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        body.contacto-page-layout .contacto-mobile-security-primary {
+            width: 100%;
+            min-height: 42px;
+            border: 0;
+            border-radius: 10px;
+            background: var(--dorado-firma);
+            color: var(--azul-premium);
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 800;
+        }
+
+        body.contacto-page-layout .contacto-mobile-security-check {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: rgba(245, 247, 250, 0.76);
+            font-size: 0.76rem;
+            line-height: 1.2;
+        }
+
+        body.contacto-page-layout .contacto-mobile-security-check input {
+            width: 15px;
+            height: 15px;
+            accent-color: var(--dorado-firma);
+        }
+
+        body.contacto-page-layout.contacto-keyboard-active .contacto-page {
+            padding-top: 82px;
+        }
+
+        body.contacto-page-layout.contacto-keyboard-active .contacto-header {
+            margin-bottom: 8px;
+        }
+
+        body.contacto-page-layout.contacto-keyboard-active .contacto-limit-notice {
+            display: none;
+        }
+
+        body.contacto-page-layout.contacto-keyboard-active .wizard-container {
+            padding-top: 14px;
+        }
+
+        body.contacto-page-layout.contacto-keyboard-active textarea.form-control {
+            min-height: 104px;
+            max-height: 30svh;
+        }
+    }
+
+    @media (max-width: 420px) {
+        body.contacto-page-layout .contacto-page {
+            padding-top: 92px;
+        }
+
+        body.contacto-page-layout .contacto-header .contacto-instruction {
+            font-size: clamp(1.34rem, 6.2vw, 1.68rem);
+        }
+
+        body.contacto-page-layout .wizard-container {
+            padding: 15px 12px 17px;
+        }
+
+        body.contacto-page-layout .area-btn {
+            min-height: 40px;
+            font-size: 0.82rem;
+        }
+    }
+
+    @media (max-width: 900px) and (max-height: 700px) {
+        body.contacto-page-layout .contacto-page {
+            padding-top: 86px;
+        }
+
+        body.contacto-page-layout .contacto-header .contacto-instruction {
+            font-size: clamp(1.24rem, 5.6vw, 1.52rem);
+        }
+
+        body.contacto-page-layout .area-grid {
+            max-height: 48svh;
+        }
+
+        body.contacto-page-layout textarea.form-control {
+            min-height: 100px;
+        }
+    }
+
     /* Success State */
     .success-state {
         text-align: center;
@@ -628,6 +946,8 @@
                 <div class="progress-step" data-step="3">3</div>
             </div>
 
+            <div id="contacto-form-feedback" class="contacto-form-feedback" aria-live="polite"></div>
+
             <!-- Paso 1: Área -->
             <div class="wizard-step active" id="step-1">
                 <h2 class="step-title">¿Sobre qué tema necesitas información?</h2>
@@ -719,6 +1039,20 @@
     </div>
 </main>
 
+<div class="contacto-mobile-security-modal" id="contacto-mobile-security-modal" role="dialog" aria-modal="true" aria-labelledby="contacto-mobile-security-title" aria-hidden="true">
+    <div class="contacto-mobile-security-card">
+        <h2 id="contacto-mobile-security-title">Aviso de seguridad</h2>
+        <p>Para proteger el formulario y evitar uso automatizado, BCTA permite una solicitud mensual por usuario o conexión.</p>
+        <div class="contacto-mobile-security-actions">
+            <button type="button" class="contacto-mobile-security-primary" id="contacto-mobile-security-accept">Entendido</button>
+            <label class="contacto-mobile-security-check">
+                <input type="checkbox" id="contacto-mobile-security-never">
+                No mostrar de nuevo
+            </label>
+        </div>
+    </div>
+</div>
+
 {% if turnstile_site_key %}
 <script>
     window.onloadTurnstileCallback = function() {
@@ -754,6 +1088,102 @@
         3: 'Indícanos cómo podemos contactarte.'
     };
 
+    function esVistaMovilContacto() {
+        return window.matchMedia('(max-width: 900px)').matches;
+    }
+
+    function inicializarAvisoSeguridadMovil() {
+        const modal = document.getElementById('contacto-mobile-security-modal');
+        const boton = document.getElementById('contacto-mobile-security-accept');
+        const noMostrar = document.getElementById('contacto-mobile-security-never');
+
+        if (!modal || !boton || !esVistaMovilContacto()) {
+            return;
+        }
+
+        if (localStorage.getItem('bcta_info_aviso_seguridad_oculto') === '1') {
+            return;
+        }
+
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+
+        boton.addEventListener('click', function() {
+            if (noMostrar && noMostrar.checked) {
+                localStorage.setItem('bcta_info_aviso_seguridad_oculto', '1');
+            }
+
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+        });
+    }
+
+    function mostrarAvisoFormulario(mensaje, tipo = 'error') {
+        const aviso = document.getElementById('contacto-form-feedback');
+
+        if (!esVistaMovilContacto() || !aviso) {
+            alert(mensaje);
+            return;
+        }
+
+        aviso.textContent = mensaje;
+        aviso.className = 'contacto-form-feedback active ' + tipo;
+
+        window.requestAnimationFrame(() => {
+            aviso.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    }
+
+    function limpiarAvisoFormulario() {
+        const aviso = document.getElementById('contacto-form-feedback');
+        if (!aviso) {
+            return;
+        }
+
+        aviso.textContent = '';
+        aviso.className = 'contacto-form-feedback';
+    }
+
+    function ajustarVistaFormularioMovil() {
+        if (!esVistaMovilContacto()) {
+            return;
+        }
+
+        const wizard = document.querySelector('.wizard-container');
+        if (!wizard) {
+            return;
+        }
+
+        window.requestAnimationFrame(() => {
+            wizard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    function cerrarTecladoMovilActivo() {
+        const activo = document.activeElement;
+        if (!activo || !['INPUT', 'TEXTAREA', 'SELECT'].includes(activo.tagName)) {
+            return;
+        }
+
+        activo.blur();
+    }
+
+    if (window.visualViewport) {
+        const alturaInicialViewport = window.visualViewport.height;
+        const actualizarEstadoTecladoMovil = () => {
+            if (!esVistaMovilContacto()) {
+                document.body.classList.remove('contacto-keyboard-active');
+                return;
+            }
+
+            const tecladoActivo = window.visualViewport.height < alturaInicialViewport * 0.78;
+            document.body.classList.toggle('contacto-keyboard-active', tecladoActivo);
+        };
+
+        window.visualViewport.addEventListener('resize', actualizarEstadoTecladoMovil);
+        window.visualViewport.addEventListener('scroll', actualizarEstadoTecladoMovil);
+    }
+
     // Manejo del Paso 1 (Botones de Área)
     document.querySelectorAll('.area-btn').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -764,6 +1194,8 @@
     });
 
     function nextStep(step) {
+        cerrarTecladoMovilActivo();
+
         // Actualizar resumen
         if (step === 2) {
             document.querySelector('#summary-step-2 span').textContent = formData.area;
@@ -777,6 +1209,8 @@
         document.getElementById('step-' + step).classList.add('active');
         updateProgress(step);
         updateHeader(step);
+        limpiarAvisoFormulario();
+        ajustarVistaFormularioMovil();
     }
 
     function prevStep(step) {
@@ -784,6 +1218,8 @@
         document.getElementById('step-' + step).classList.add('active');
         updateProgress(step);
         updateHeader(step);
+        limpiarAvisoFormulario();
+        ajustarVistaFormularioMovil();
     }
 
     function updateProgress(step) {
@@ -884,7 +1320,7 @@
                 envioPendiente = false;
                 deshabilitarEnvio();
                 restaurarBotonEnviar();
-                alert("No pudimos iniciar la verificación de seguridad. Por favor recarga la página e intenta nuevamente.");
+                mostrarAvisoFormulario("No pudimos iniciar la verificación de seguridad. Por favor recarga la página e intenta nuevamente.");
             }
         });
     }
@@ -979,6 +1415,7 @@
     if (mensajeInput) {
         mensajeInput.addEventListener('input', actualizarContadorMensaje);
         mensajeInput.addEventListener('input', validarMensajePaso2);
+        mensajeInput.addEventListener('input', limpiarAvisoFormulario);
         actualizarContadorMensaje();
         validarMensajePaso2();
     }
@@ -987,13 +1424,17 @@
         const campo = document.getElementById(id);
         if (campo) {
             campo.addEventListener('input', validarContactoPaso3);
+            campo.addEventListener('input', limpiarAvisoFormulario);
         }
     });
 
     validarContactoPaso3();
     inicializarTurnstileInvisible();
+    inicializarAvisoSeguridadMovil();
 
     function enviarFormulario() {
+        cerrarTecladoMovilActivo();
+
         // Recolectar datos
         formData.mensaje = document.getElementById('mensaje').value.trim();
         formData.nombre = nombreCompletoFormulario();
@@ -1004,22 +1445,22 @@
 
         // Validación básica
         if(!mensajeEsValido()) {
-            alert("Por favor describe tu solicitud con al menos 30 caracteres útiles.");
+            mostrarAvisoFormulario("Por favor describe tu solicitud con al menos 30 caracteres útiles.");
             return;
         }
 
         if(!nombreEsValido()) {
-            alert("Por favor ingresa tu nombre y apellido paterno.");
+            mostrarAvisoFormulario("Por favor ingresa tu nombre y apellido paterno.");
             return;
         }
 
         if(!telefonoEsValido()) {
-            alert("Por favor ingresa un teléfono o WhatsApp válido.");
+            mostrarAvisoFormulario("Por favor ingresa un teléfono o WhatsApp válido.");
             return;
         }
 
         if(!correoEsValido()) {
-            alert("Por favor ingresa un correo válido.");
+            mostrarAvisoFormulario("Por favor ingresa un correo válido.");
             return;
         }
 
@@ -1037,7 +1478,7 @@
 
             envioPendiente = false;
             restaurarBotonEnviar();
-            alert("No pudimos iniciar la verificación de seguridad. Por favor recarga la página e intenta nuevamente.");
+            mostrarAvisoFormulario("No pudimos iniciar la verificación de seguridad. Por favor recarga la página e intenta nuevamente.");
             return;
         }
 
@@ -1072,9 +1513,9 @@
             restaurarBotonEnviar();
 
             if(resultado.data.status === 'limit') {
-                alert(resultado.data.message || "Ya registramos una solicitud desde esta conexión durante este mes.");
+                mostrarAvisoFormulario(resultado.data.message || "Ya registramos una solicitud desde esta conexión durante este mes.", "warning");
             } else {
-                alert("No pudimos enviar tu solicitud en este momento. Por favor intenta nuevamente en unos minutos.");
+                mostrarAvisoFormulario("No pudimos enviar tu solicitud en este momento. Por favor intenta nuevamente en unos minutos.");
             }
         })
         .catch(error => {
@@ -1086,7 +1527,7 @@
             }
 
             restaurarBotonEnviar();
-            alert("No pudimos enviar tu solicitud en este momento. Por favor intenta nuevamente en unos minutos.");
+            mostrarAvisoFormulario("No pudimos enviar tu solicitud en este momento. Por favor intenta nuevamente en unos minutos.");
         });
     }
 </script>

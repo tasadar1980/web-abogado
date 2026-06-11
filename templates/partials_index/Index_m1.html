@@ -12,7 +12,7 @@
         }
     }
 
-    @keyframes textReveal {
+@keyframes textReveal {
         0% {
             opacity: 0;
             transform: translateY(20px);
@@ -21,6 +21,16 @@
         100% {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+
+    @keyframes claimMobileSettle {
+        0% {
+            transform: translateY(9px) scale(0.985);
+        }
+
+        100% {
+            transform: translateY(0) scale(1);
         }
     }
 
@@ -357,34 +367,71 @@
 
     @media (max-width: 760px) {
         .ls-hero-fullscreen {
-            padding: 104px 0 56px;
+            min-height: 100svh;
+            padding: clamp(64px, 8.8svh, 78px) 0 clamp(34px, 5.8svh, 46px);
             align-items: flex-start !important;
         }
 
     .ls-hero-inner {
             width: min(88vw, 560px);
+            min-height: calc(100svh - clamp(98px, 14.6svh, 124px));
+            display: grid;
+            grid-template-rows: auto auto;
+            justify-items: center;
+            align-content: center;
             justify-content: center;
-            gap: 34px;
+            gap: 0;
+            padding-top: clamp(12px, 2.6svh, 24px);
+            padding-bottom: clamp(10px, 2svh, 18px);
+            box-sizing: border-box;
+            transform: none;
         }
 
     .ls-hero-brand {
-            flex: 1 1 100%;
+            flex: none;
             min-width: 0;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
         }
 
     .ls-hero-logo-main {
-            height: clamp(170px, 42vw, 230px);
-            margin-bottom: 18px;
+            height: clamp(116px, 31vw, 152px);
+            max-height: none;
+            width: auto;
+            margin-bottom: clamp(9px, 1.7svh, 13px);
+            -webkit-filter: none !important;
+            filter: none !important;
+            animation: heroMobileReveal 2.1s cubic-bezier(0.19, 1, 0.22, 1) 0.18s both;
         }
 
     .ls-hero-claim {
-            width: min(78vw, 330px);
+            width: min(50vw, 196px);
+            max-width: 100%;
+            opacity: 0;
+            animation: heroMobileReveal 2.1s cubic-bezier(0.19, 1, 0.22, 1) 0.78s both;
+        }
+
+    .ls-hero-claim::before {
+            content: none;
+        }
+
+    .ls-hero-claim img {
+            filter: none;
+            transform-origin: center center;
+            animation: none;
         }
 
     .ls-hero-copy {
-            flex: 1 1 100%;
+            flex: none;
             min-width: 0;
+            width: 100%;
+            margin-left: 0;
+            margin-top: clamp(32px, 5.4svh, 48px);
             text-align: center;
+            display: grid;
+            grid-template-rows: auto auto;
+            justify-items: center;
         }
 
     .ls-hero-copy-title,
@@ -392,15 +439,72 @@
             transform-origin: center center;
         }
 
+    .ls-hero-copy-title {
+            width: min(84vw, 390px);
+            max-width: 100%;
+        }
+
     .ls-hero-copy h1 {
-            font-size: clamp(2.35rem, 10vw, 3.35rem) !important;
-            letter-spacing: -1px !important;
+            max-width: 100%;
+            font-size: clamp(1.64rem, 7vw, 2.18rem) !important;
+            line-height: 1.12;
+            letter-spacing: 0 !important;
+            margin-bottom: 0;
+            animation: heroMobileTextReveal 2.05s cubic-bezier(0.19, 1, 0.22, 1) 1.28s both;
+        }
+
+    .ls-hero-copy-text {
+            width: min(92%, 470px);
+            margin-top: clamp(36px, 6.2svh, 54px);
+            padding: 0 clamp(2px, 1.2vw, 6px);
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            box-sizing: border-box;
         }
 
     .ls-hero-copy p {
             max-width: 100% !important;
-            font-size: 1.08rem !important;
-            margin-bottom: 30px !important;
+            font-size: clamp(0.9rem, 3.48vw, 1.02rem) !important;
+            line-height: 1.54;
+            margin-top: 0;
+            margin-bottom: 0 !important;
+            animation: heroMobileTextReveal 2.05s cubic-bezier(0.19, 1, 0.22, 1) 1.9s both;
+        }
+
+    .ls-hero-copy-actions {
+            display: none;
+        }
+
+    .ls-hero-copy-button {
+            min-width: 132px;
+            min-height: 44px;
+            padding: 11px 20px;
+            font-size: 0.84rem;
+        }
+
+        @keyframes heroMobileReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(14px) scale(0.994);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes heroMobileTextReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     }
 
@@ -413,12 +517,18 @@
 
 <div class="ls-hero-brand">
 <div class="ls-hero-submodule ls-hero-submodule-logo ls-hero-submodule-scale">
-                    <img src="{{ url_for('static', filename='img/Logo BCTA Vertical V1.svg') }}" alt="BCTA Abogados"
-                        class="ls-hero-logo-main">
+                    <picture>
+                        <source media="(max-width: 760px)" srcset="{{ url_for('static', filename='img/Logo BCTA Vertical Blanco V1.svg') }}">
+                        <img src="{{ url_for('static', filename='img/Logo BCTA Vertical V1.svg') }}" alt="BCTA Abogados"
+                            class="ls-hero-logo-main">
+                    </picture>
                 </div>
 <div class="ls-hero-submodule ls-hero-submodule-claim">
                     <div class="ls-hero-claim" aria-label="Pasión por el derecho">
-                        <img src="{{ url_for('static', filename='img/Pasion por el derecho.svg') }}" alt="Pasión por el derecho">
+                        <picture>
+                            <source media="(max-width: 760px)" srcset="{{ url_for('static', filename='img/Pasion con fondo.svg') }}">
+                            <img src="{{ url_for('static', filename='img/Pasion por el derecho.svg') }}" alt="Pasión por el derecho">
+                        </picture>
                     </div>
                 </div>
             </div>

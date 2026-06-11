@@ -942,6 +942,1553 @@
             }
         }
 
+
+
+        /* === SERVICIOS MÓVIL V13: SM1 + SM2 según referencia visual === */
+        @media (max-width: 560px) {
+            body.servicios-page-layout {
+                overflow-x: hidden;
+            }
+
+            .servicios-page {
+                min-height: auto;
+                overflow: visible;
+                padding-top: 66px;
+            }
+
+            .servicios-hero {
+                padding: 0;
+            }
+
+            .servicios-hero h1,
+            .servicios-hero p {
+                display: none;
+            }
+
+            .servicios-panel {
+                padding: 0 0 0;
+                align-items: flex-start;
+            }
+
+            .servicios-panel .container {
+                width: min(92%, 430px);
+                transform: none;
+            }
+
+            .servicios-layout {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .servicio-ficha {
+                order: 1;
+                width: 100%;
+                height: 244px;
+                min-height: 244px;
+                max-height: 244px;
+                padding: 13px 15px;
+                border-radius: 9px;
+                overflow: hidden;
+            }
+
+            .servicio-ficha::after {
+                border-radius: 8px;
+            }
+
+            .servicio-ficha.modo-inicial::after {
+                border-radius: 9px;
+            }
+
+            .ficha-inicial {
+                height: 100%;
+                min-height: 0;
+            }
+
+            .ficha-inicial-panel {
+                height: 100%;
+                min-height: 0;
+                padding: 22px 18px;
+            }
+
+            .ficha-inicial-texto h2 {
+                font-size: 0;
+                letter-spacing: -0.7px;
+            }
+
+            .ficha-inicial-texto h2::before {
+                content: "Esperando tu selección";
+                display: block;
+                color: var(--blanco);
+                font-size: clamp(1.36rem, 6.9vw, 1.72rem);
+                line-height: 1.12;
+                letter-spacing: -0.45px;
+            }
+
+            .ficha-linea-espera {
+                width: min(150px, 58%);
+                margin-top: 17px;
+            }
+
+            .ficha-grid {
+                height: 100%;
+                min-height: 0;
+                gap: 0;
+                justify-content: center;
+            }
+
+            .ficha-header,
+            .ficha-titulo {
+                display: none;
+            }
+
+            .ficha-cuerpo {
+                height: 100%;
+                min-height: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .ficha-media {
+                order: 0;
+                width: min(80%, 270px);
+                height: 78px;
+                max-height: 78px;
+                aspect-ratio: auto;
+                margin: 0 auto;
+                border-radius: 14px;
+            }
+
+            .ficha-media::after {
+                border-radius: 14px;
+            }
+
+            .ficha-contenido {
+                width: 100%;
+                min-height: 0;
+                align-items: stretch;
+                justify-content: flex-start;
+            }
+
+            .ficha-subtitulo {
+                margin: 0 0 6px;
+                font-size: 0.76rem;
+                line-height: 1.18;
+                text-align: center;
+            }
+
+            .ficha-lista {
+                font-size: 0.69rem;
+                line-height: 1.18;
+                padding-left: 15px;
+            }
+
+            .ficha-lista li {
+                margin-bottom: 2px;
+            }
+
+            .ficha-acciones {
+                margin-top: 8px;
+            }
+
+            .ficha-btn {
+                width: 100%;
+                min-width: 0;
+                min-height: 38px;
+                padding: 10px 14px;
+                font-size: 0.72rem;
+            }
+
+            .servicios-selector {
+                order: 2;
+                position: relative;
+                width: 100%;
+                height: 38px;
+                min-height: 38px;
+                max-height: 38px;
+                margin: 0 auto;
+                transform: none;
+                align-self: center;
+                box-sizing: border-box;
+                border-radius: 7px;
+                overflow: hidden;
+                touch-action: pan-y;
+            }
+
+            .servicios-selector::after {
+                content: "Seleccione su opción";
+                position: absolute;
+                left: 10px;
+                right: 10px;
+                top: 50%;
+                height: 22px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: translateY(-50%);
+                border: 1px solid rgba(197, 160, 89, 0.58);
+                border-radius: 999px;
+                background: rgba(10, 25, 47, 0.26);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+                color: rgba(245, 247, 250, 0.86);
+                font-size: 0.58rem;
+                font-weight: 800;
+                letter-spacing: 0.05px;
+                white-space: nowrap;
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .servicios-selector.selector-tocado::after {
+                content: "";
+            }
+
+            .servicios-selector::before {
+                z-index: 0;
+            }
+
+            .selector-header,
+            .selector-header span,
+            .selector-header span::after {
+                display: none;
+                content: none;
+            }
+
+            .selector-lista {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+                height: 38px;
+                min-height: 38px;
+                max-height: 38px;
+                gap: 0;
+                padding: 8px 10px;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                scroll-snap-type: y mandatory;
+                scroll-padding: 8px 0;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+                -webkit-mask-image: linear-gradient(
+                    to bottom,
+                    transparent 0%,
+                    rgba(0, 0, 0, 0.18) 16%,
+                    #000 38%,
+                    #000 62%,
+                    rgba(0, 0, 0, 0.18) 84%,
+                    transparent 100%
+                );
+                mask-image: linear-gradient(
+                    to bottom,
+                    transparent 0%,
+                    rgba(0, 0, 0, 0.18) 16%,
+                    #000 38%,
+                    #000 62%,
+                    rgba(0, 0, 0, 0.18) 84%,
+                    transparent 100%
+                );
+            }
+
+            .selector-lista::-webkit-scrollbar {
+                display: none;
+            }
+
+            .selector-item {
+                flex: 0 0 22px;
+                width: 100%;
+                height: 22px;
+                min-height: 22px;
+                max-height: 22px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                scroll-snap-align: center;
+                border-radius: 999px;
+                padding: 0 12px;
+                text-align: center;
+                font-size: 0.58rem;
+                line-height: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                color: transparent;
+                text-shadow: 0 0 10px rgba(245, 247, 250, 0.20);
+                opacity: 0.26;
+                transform: scale(0.88);
+                transition:
+                    opacity 0.24s ease,
+                    transform 0.24s ease,
+                    background-color 0.24s ease,
+                    border-color 0.24s ease,
+                    color 0.24s ease,
+                    text-shadow 0.24s ease;
+            }
+
+            .selector-item::after {
+                display: none;
+            }
+
+            .selector-item:hover {
+                transform: scale(0.88);
+                background: transparent;
+                border-color: transparent;
+                color: transparent;
+            }
+
+            .servicios-selector.selector-tocado .selector-item.selector-preview {
+                color: rgba(245, 247, 250, 0.86);
+                text-shadow: none;
+                opacity: 0.72;
+                transform: scale(0.96);
+            }
+
+            .selector-item.active {
+                width: 100%;
+                height: 22px;
+                min-height: 22px;
+                max-height: 22px;
+                color: var(--blanco);
+                text-shadow: none;
+                opacity: 1;
+                transform: scale(1);
+                background: transparent;
+                border-color: rgba(197, 160, 89, 0.54);
+                box-shadow: none;
+                padding-left: 12px;
+            }
+
+            .servicios-selector.selector-moviendo .selector-item.active:not(.selector-preview) {
+                opacity: 0.54;
+                transform: scale(0.94);
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V20: SM1 +20% vertical, SM2 mantiene distancia === */
+        @media (max-width: 560px) {
+            html,
+            body.servicios-page-layout {
+                height: 100svh;
+                height: 100dvh;
+                max-height: 100svh;
+                max-height: 100dvh;
+                overflow: hidden !important;
+            }
+
+            body.servicios-page-layout {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .servicios-page {
+                flex: 1 1 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 0 !important;
+                height: auto;
+                max-height: none;
+                overflow: hidden !important;
+                padding-top: clamp(72px, 10.5svh, 92px);
+                padding-top: clamp(72px, 10.5dvh, 92px);
+            }
+
+            .servicios-hero {
+                flex: 0 0 auto;
+                padding: 0;
+            }
+
+            .servicios-panel {
+                flex: 1 1 auto;
+                min-height: 0;
+                display: flex;
+                align-items: stretch;
+                padding: 0 0 clamp(6px, 1.3svh, 12px);
+                padding-bottom: clamp(6px, 1.3dvh, 12px);
+                overflow: hidden !important;
+            }
+
+            .servicios-panel .container {
+                width: min(92%, 430px);
+                height: 100%;
+                min-height: 0;
+                margin: 0 auto;
+                transform: none !important;
+                display: flex;
+            }
+
+            .servicios-layout {
+                width: 100%;
+                height: 100%;
+                min-height: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: center;
+                gap: clamp(7px, 1.35svh, 11px);
+                gap: clamp(7px, 1.35dvh, 11px);
+                overflow: hidden;
+            }
+
+            .servicio-ficha {
+                flex: 1 1 auto;
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                max-height: clamp(242px, 40.8svh, 293px);
+                max-height: clamp(242px, 40.8dvh, 293px);
+                padding: clamp(10px, 1.9svh, 13px) clamp(12px, 3.8vw, 15px);
+                padding-top: clamp(10px, 1.9dvh, 13px);
+                padding-bottom: clamp(10px, 1.9dvh, 13px);
+            }
+
+            .ficha-inicial,
+            .ficha-grid,
+            .ficha-cuerpo {
+                min-height: 0;
+            }
+
+            .ficha-inicial-panel {
+                min-height: 0;
+                padding: clamp(16px, 3.7svh, 22px) clamp(15px, 4.6vw, 18px);
+                padding-top: clamp(16px, 3.7dvh, 22px);
+                padding-bottom: clamp(16px, 3.7dvh, 22px);
+            }
+
+            .ficha-media {
+                width: min(80%, 270px);
+                height: clamp(56px, 11.6svh, 78px);
+                height: clamp(56px, 11.6dvh, 78px);
+                max-height: clamp(56px, 11.6svh, 78px);
+                max-height: clamp(56px, 11.6dvh, 78px);
+            }
+
+            .ficha-cuerpo {
+                gap: clamp(5px, 1.1svh, 8px);
+                gap: clamp(5px, 1.1dvh, 8px);
+            }
+
+            .ficha-subtitulo {
+                margin-bottom: clamp(3px, 0.85svh, 6px);
+                margin-bottom: clamp(3px, 0.85dvh, 6px);
+                font-size: clamp(0.68rem, 2.7vw, 0.76rem);
+            }
+
+            .ficha-lista {
+                font-size: clamp(0.6rem, 2.45vw, 0.69rem);
+                line-height: 1.16;
+            }
+
+            .ficha-lista li {
+                margin-bottom: clamp(0px, 0.35svh, 2px);
+                margin-bottom: clamp(0px, 0.35dvh, 2px);
+            }
+
+            .ficha-acciones {
+                margin-top: clamp(5px, 1.1svh, 8px);
+                margin-top: clamp(5px, 1.1dvh, 8px);
+            }
+
+            .ficha-btn {
+                min-height: clamp(32px, 5.6svh, 38px);
+                min-height: clamp(32px, 5.6dvh, 38px);
+                padding-top: clamp(8px, 1.5svh, 10px);
+                padding-bottom: clamp(8px, 1.5dvh, 10px);
+            }
+
+            .servicios-selector {
+                flex: 0 0 clamp(34px, 6.2svh, 42px);
+                flex-basis: clamp(34px, 6.2dvh, 42px);
+                height: clamp(34px, 6.2svh, 42px);
+                height: clamp(34px, 6.2dvh, 42px);
+                min-height: 0;
+                max-height: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .selector-lista {
+                height: 100%;
+                min-height: 0;
+                max-height: none;
+                padding: clamp(6px, 1.35svh, 9px) 10px;
+                padding-top: clamp(6px, 1.35dvh, 9px);
+                padding-bottom: clamp(6px, 1.35dvh, 9px);
+            }
+
+            .servicios-selector::after {
+                top: 50%;
+                left: 10px;
+                right: 10px;
+                height: clamp(21px, 3.9svh, 24px);
+                height: clamp(21px, 3.9dvh, 24px);
+            }
+        }
+
+        /* === SERVICIOS MOVIL VERTICAL: nuevo flujo bienvenida + seleccion + ficha === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-page {
+                padding-top: clamp(76px, 11svh, 96px);
+                padding-top: clamp(76px, 11dvh, 96px);
+            }
+
+            .servicios-mobile-welcome {
+                flex: 1 1 auto;
+                min-height: 0;
+                width: min(88%, 430px);
+                margin: 0 auto;
+                display: flex !important;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                color: var(--blanco);
+                padding: 0 0 clamp(12px, 2svh, 18px);
+                padding-bottom: clamp(12px, 2dvh, 18px);
+            }
+
+            .servicios-mobile-state-inicio .servicios-mobile-welcome {
+                transform: translateY(clamp(-42px, -6dvh, -24px));
+            }
+
+            .servicios-mobile-title {
+                margin: 0 0 12px;
+                color: var(--dorado-firma);
+                font-size: clamp(1.62rem, 8vw, 2.22rem);
+                line-height: 1.08;
+                letter-spacing: -0.4px;
+                text-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+            }
+
+            .servicios-mobile-copy {
+                margin: 0;
+                max-width: 330px;
+                color: rgba(245, 247, 250, 0.84);
+                font-size: clamp(0.86rem, 3.9vw, 1rem);
+                line-height: 1.48;
+            }
+
+            .servicios-mobile-open,
+            .servicios-mobile-reselect,
+            .servicios-mobile-back {
+                border: 1px solid rgba(197, 160, 89, 0.72);
+                border-radius: 8px;
+                font-family: inherit;
+                font-weight: 850;
+                letter-spacing: 0.12px;
+                cursor: pointer;
+            }
+
+            .servicios-mobile-open {
+                width: min(100%, 300px);
+                min-height: 46px;
+                margin-top: clamp(28px, 5.5svh, 42px);
+                margin-top: clamp(28px, 5.5dvh, 42px);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--dorado-firma);
+                color: var(--azul-premium);
+                font-size: 0.82rem;
+                text-transform: uppercase;
+                box-shadow: 0 16px 30px rgba(0, 0, 0, 0.22);
+            }
+
+            .servicios-mobile-state-inicio .servicios-panel {
+                display: none;
+            }
+
+            .servicios-mobile-state-ficha .servicios-mobile-welcome,
+            .servicios-mobile-state-selecting .servicios-mobile-welcome {
+                display: none !important;
+            }
+
+            .servicios-mobile-state-inicio .servicio-ficha {
+                display: none;
+            }
+
+            .servicios-mobile-state-ficha .servicios-panel,
+            .servicios-mobile-state-selecting .servicios-panel {
+                display: flex;
+            }
+
+            .servicios-mobile-state-inicio .servicios-selector,
+            .servicios-mobile-state-ficha .servicios-selector {
+                display: none;
+            }
+
+            .servicios-mobile-state-ficha .servicios-layout {
+                justify-content: center;
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha {
+                flex: 0 1 auto;
+                max-height: clamp(242px, 40.8dvh, 293px);
+            }
+
+            .servicios-mobile-reselect {
+                width: min(100%, 300px);
+                min-height: 40px;
+                margin: 0 auto;
+                align-items: center;
+                justify-content: center;
+                background: rgba(197, 160, 89, 0.14);
+                color: var(--blanco);
+                font-size: 0.72rem;
+                text-transform: uppercase;
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones .servicios-mobile-reselect {
+                display: inline-flex !important;
+            }
+
+            body.servicios-page-layout.servicios-mobile-overlay-active .ls-header,
+            body.servicios-page-layout.servicios-mobile-overlay-active .ls-footer {
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+
+            body.servicios-page-layout.servicios-mobile-overlay-active .ls-footer {
+                display: none !important;
+            }
+
+            body.servicios-page-layout.servicios-mobile-inicio-active .ls-footer {
+                display: none !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+
+            .servicios-mobile-state-selecting .servicio-ficha,
+            .servicios-mobile-state-selecting .ficha-inicial,
+            .servicios-mobile-state-selecting .ficha-grid,
+            .servicios-mobile-state-selecting .ficha-cuerpo,
+            .servicios-mobile-state-selecting .ficha-media,
+            .servicios-mobile-state-selecting .ficha-acciones,
+            .servicios-mobile-state-selecting .servicios-mobile-reselect {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            .servicios-mobile-state-selecting .servicios-selector {
+                position: fixed;
+                inset: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 2200;
+                width: 100%;
+                height: 100svh;
+                height: 100dvh;
+                min-height: 100vh;
+                min-height: 100svh;
+                min-height: 100dvh;
+                max-height: none;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: flex-start;
+                gap: clamp(10px, 1.9svh, 14px);
+                gap: clamp(10px, 1.9dvh, 14px);
+                margin: 0;
+                padding: clamp(30px, 6.4svh, 52px) clamp(18px, 5vw, 26px) max(32px, env(safe-area-inset-bottom));
+                padding-top: clamp(30px, 6.4dvh, 52px);
+                padding-bottom: max(32px, env(safe-area-inset-bottom));
+                border: 0;
+                border-radius: 0;
+                isolation: isolate;
+                box-sizing: border-box;
+                background-color: var(--azul-premium);
+                background:
+                    radial-gradient(circle at 18% 12%, rgba(197, 160, 89, 0.10), transparent 30%),
+                    linear-gradient(145deg, var(--azul-premium), var(--azul-secundario));
+                box-shadow: none;
+                overflow: hidden;
+                touch-action: auto;
+            }
+
+            .servicios-mobile-state-selecting .servicios-selector::before,
+            .servicios-mobile-state-selecting .servicios-selector::after {
+                content: none;
+            }
+
+            .servicios-mobile-state-selecting .selector-header,
+            .servicios-mobile-state-selecting .selector-header span {
+                display: none !important;
+            }
+
+            .servicios-mobile-state-selecting .selector-lista {
+                flex: 1 1 auto;
+                height: auto;
+                min-height: 0;
+                max-height: none;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                padding: 10px 8px 12px;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                scroll-snap-type: none;
+                -webkit-mask-image: none;
+                mask-image: none;
+                scrollbar-width: none;
+                border: 1px solid rgba(197, 160, 89, 0.16);
+                border-radius: 13px;
+                background: rgba(255, 255, 255, 0.025);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+            }
+
+            .servicios-mobile-state-selecting .selector-lista::-webkit-scrollbar {
+                display: none;
+            }
+
+            .servicios-mobile-state-selecting .selector-item {
+                flex: 0 0 auto;
+                width: 100%;
+                height: auto;
+                min-height: 36px;
+                max-height: none;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 8px 13px;
+                border-radius: 9px;
+                border: 1px solid rgba(197, 160, 89, 0.18);
+                background: rgba(255, 255, 255, 0.045);
+                color: rgba(245, 247, 250, 0.86);
+                text-align: left;
+                text-shadow: none;
+                font-size: 0.78rem;
+                line-height: 1.15;
+                white-space: normal;
+                opacity: 1;
+                transform: none;
+                scroll-snap-align: none;
+            }
+
+            .servicios-mobile-state-selecting .selector-item.pending {
+                border-color: rgba(197, 160, 89, 0.82);
+                background: rgba(197, 160, 89, 0.18);
+                color: var(--blanco);
+                box-shadow: inset 3px 0 0 var(--dorado-firma);
+            }
+
+            .servicios-mobile-state-selecting .selector-item.active:not(.pending) {
+                border-color: rgba(197, 160, 89, 0.34);
+                background: rgba(255, 255, 255, 0.055);
+                box-shadow: none;
+                padding-left: 14px;
+            }
+
+            .servicios-mobile-actions {
+                flex: 0 0 auto;
+                position: relative;
+                bottom: auto;
+                z-index: 2;
+                display: grid !important;
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin: 0 -2px;
+                padding: 6px 2px max(38px, env(safe-area-inset-bottom));
+                border-top: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .servicios-mobile-back {
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(255, 255, 255, 0.07);
+                border-color: rgba(197, 160, 89, 0.42);
+                color: var(--blanco);
+                font-size: 0.76rem;
+                text-transform: uppercase;
+                box-shadow: 0 12px 22px rgba(0, 0, 0, 0.18);
+            }
+
+            body.servicios-page-layout.servicios-mobile-ficha-active .ls-header,
+            body.servicios-page-layout.servicios-mobile-ficha-active .ls-footer {
+                display: none !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+
+            body.servicios-page-layout.servicios-mobile-ficha-active {
+                height: 100vh;
+                height: 100dvh;
+                overflow: hidden !important;
+            }
+
+            .servicios-mobile-state-selecting .selector-lista {
+                flex: 1 1 auto;
+                min-height: 0;
+                padding-bottom: clamp(10px, 2dvh, 16px);
+            }
+
+            .servicios-mobile-state-selecting .servicios-mobile-actions {
+                flex: 0 0 auto;
+                margin-top: 0;
+                padding-bottom: max(38px, env(safe-area-inset-bottom));
+            }
+
+            .servicios-mobile-state-ficha {
+                min-height: 100vh;
+                min-height: 100dvh;
+                padding-top: clamp(14px, 3dvh, 24px);
+                padding-bottom: max(24px, env(safe-area-inset-bottom));
+                overflow: hidden !important;
+            }
+
+            .servicios-mobile-state-ficha .servicios-panel {
+                flex: 1 1 auto;
+                min-height: 0;
+                padding: 0;
+                overflow: hidden !important;
+            }
+
+            .servicios-mobile-state-ficha .servicios-panel .container {
+                width: min(92%, 430px);
+                height: 100%;
+                min-height: 0;
+                display: flex;
+            }
+
+            .servicios-mobile-state-ficha .servicios-layout {
+                width: 100%;
+                height: 100%;
+                min-height: 0;
+                justify-content: stretch;
+                gap: 0;
+                overflow: hidden;
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha {
+                flex: 1 1 auto;
+                width: 100%;
+                height: 100%;
+                min-height: 0;
+                max-height: none;
+                display: flex;
+                align-items: stretch;
+                padding: clamp(16px, 3.8dvh, 24px) clamp(17px, 5vw, 24px);
+                border-radius: 14px;
+                overflow: hidden;
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha::after {
+                border-radius: 13px;
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid {
+                height: 100%;
+                min-height: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: clamp(7px, 1.35dvh, 11px);
+            }
+
+            .servicios-mobile-state-ficha .ficha-header {
+                display: flex;
+                flex: 0 0 auto;
+                justify-content: center;
+            }
+
+            .servicios-mobile-state-ficha .ficha-titulo {
+                display: block;
+                width: 100%;
+                color: var(--dorado-firma);
+                font-size: clamp(1.12rem, 5.65vw, 1.58rem);
+                line-height: 1.08;
+                letter-spacing: -0.2px;
+                text-align: center;
+                margin: 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-cuerpo {
+                flex: 1 1 auto;
+                min-height: 0;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 0;
+                overflow: hidden;
+            }
+
+            .servicios-mobile-state-ficha .ficha-contenido {
+                display: contents;
+            }
+
+            .servicios-mobile-state-ficha .ficha-subtitulo {
+                order: 1;
+                flex: 0 0 auto;
+                margin: 0 0 clamp(7px, 1.35dvh, 10px);
+                font-size: clamp(0.88rem, 3.9vw, 1rem);
+                line-height: 1.26;
+                text-align: center;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista {
+                order: 2;
+                flex: 1 1 auto;
+                min-height: 0;
+                margin: 0;
+                padding-left: 18px;
+                padding-right: 2px;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                color: rgba(245, 247, 250, 0.9);
+                font-size: clamp(0.8rem, 3.55vw, 0.98rem);
+                line-height: 1.33;
+                scrollbar-width: none;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista::-webkit-scrollbar {
+                display: none;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista li {
+                margin-bottom: clamp(4px, 0.85dvh, 6px);
+            }
+
+            .servicios-mobile-state-ficha .ficha-media {
+                order: 3;
+                flex: 0 0 clamp(78px, 13.6dvh, 106px);
+                width: min(82%, 292px);
+                height: clamp(78px, 13.6dvh, 106px);
+                max-height: clamp(78px, 13.6dvh, 106px);
+                aspect-ratio: 4 / 3;
+                display: block !important;
+                margin: clamp(8px, 1.3dvh, 11px) auto 0;
+                border-radius: 12px;
+                overflow: hidden;
+            }
+
+            .servicios-mobile-state-ficha .ficha-media::after {
+                border-radius: 12px;
+            }
+
+            .servicios-mobile-state-ficha .servicios-layout > .servicios-mobile-reselect,
+            .servicios-mobile-state-ficha .servicio-ficha > .servicios-mobile-reselect {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones {
+                order: 4;
+                flex: 0 0 auto;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 9px;
+                margin-top: clamp(8px, 1.45dvh, 12px);
+                padding-top: 0;
+                padding-bottom: max(10px, env(safe-area-inset-bottom));
+                border-top: 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-btn,
+            .servicios-mobile-state-ficha .servicios-mobile-reselect {
+                width: 100%;
+                min-width: 0;
+                min-height: 46px;
+                border-radius: 8px;
+                font-size: 0.76rem;
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones .servicios-mobile-reselect {
+                display: inline-flex !important;
+                margin: 0;
+                border-color: rgba(197, 160, 89, 0.42);
+                background: rgba(255, 255, 255, 0.065);
+                color: var(--blanco);
+                box-shadow: none;
+            }
+
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .ficha-titulo {
+                    font-size: clamp(1.06rem, 5.25vw, 1.44rem);
+                }
+
+                .servicios-mobile-state-ficha .ficha-subtitulo {
+                    font-size: clamp(0.84rem, 3.55vw, 0.94rem);
+                }
+
+                .servicios-mobile-state-ficha .ficha-lista {
+                    font-size: clamp(0.77rem, 3.35vw, 0.9rem);
+                    line-height: 1.28;
+                }
+
+                .servicios-mobile-state-ficha .ficha-media {
+                    flex-basis: clamp(64px, 11dvh, 84px);
+                    height: clamp(64px, 11dvh, 84px);
+                    max-height: clamp(64px, 11dvh, 84px);
+                    width: min(76%, 264px);
+                }
+
+                .servicios-mobile-state-selecting .servicios-selector {
+                    padding-top: clamp(24px, 5.2dvh, 40px);
+                    padding-bottom: max(28px, env(safe-area-inset-bottom));
+                }
+
+                .servicios-mobile-state-selecting .selector-item {
+                    min-height: 34px;
+                    padding-top: 7px;
+                    padding-bottom: 7px;
+                }
+            }
+
+        }
+
+        /* === SERVICIOS MÓVIL V27: cierre premium ficha + gesto home === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-inicio .servicios-mobile-welcome {
+                transform: translateY(clamp(-54px, -7.2dvh, -34px));
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha {
+                position: relative;
+                isolation: isolate;
+                padding: clamp(18px, 4.2dvh, 26px) clamp(18px, 5vw, 24px);
+                background:
+                    linear-gradient(145deg, rgba(10, 25, 47, 0.90), rgba(17, 34, 64, 0.88)),
+                    var(--servicio-fondo, none) center / cover no-repeat;
+                box-shadow:
+                    0 22px 48px rgba(0, 0, 0, 0.34),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha::before {
+                opacity: 0.28;
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha::after {
+                inset: 1px;
+                border-radius: 13px;
+                background:
+                    linear-gradient(180deg, rgba(10, 25, 47, 0.80) 0%, rgba(10, 25, 47, 0.90) 42%, rgba(10, 25, 47, 0.96) 100%),
+                    radial-gradient(circle at 20% 10%, rgba(197, 160, 89, 0.12), transparent 28%),
+                    var(--servicio-fondo, none) center / cover no-repeat;
+                filter: saturate(0.82) contrast(1.02);
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid {
+                position: relative;
+                z-index: 2;
+                gap: clamp(9px, 1.55dvh, 13px);
+            }
+
+            .servicios-mobile-state-ficha .ficha-titulo {
+                font-size: clamp(1.08rem, 5.2vw, 1.46rem);
+                line-height: 1.08;
+                text-align: center;
+                text-shadow: 0 14px 30px rgba(0, 0, 0, 0.34);
+            }
+
+            .servicios-mobile-state-ficha .ficha-subtitulo {
+                margin-bottom: clamp(8px, 1.45dvh, 11px);
+                font-size: clamp(0.9rem, 3.95vw, 1rem);
+                line-height: 1.28;
+                text-align: center;
+                text-shadow: 0 10px 22px rgba(0, 0, 0, 0.30);
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista {
+                padding-left: 20px;
+                padding-right: 4px;
+                font-size: clamp(0.82rem, 3.65vw, 0.98rem);
+                line-height: 1.34;
+                text-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista li {
+                margin-bottom: clamp(5px, 0.95dvh, 7px);
+            }
+
+            .servicios-mobile-state-ficha .ficha-media {
+                display: none !important;
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones {
+                gap: 9px;
+                margin-top: clamp(9px, 1.55dvh, 13px);
+                padding-top: 0;
+                padding-bottom: max(10px, env(safe-area-inset-bottom));
+                border-top: 0 !important;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .servicios-mobile-state-ficha .ficha-btn,
+            .servicios-mobile-state-ficha .servicios-mobile-reselect {
+                min-height: 45px;
+                backdrop-filter: blur(4px);
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid.animando .ficha-subtitulo,
+            .servicios-mobile-state-ficha .ficha-grid.animando .ficha-lista li {
+                animation-name: ficha-mobile-aparece-suave;
+                animation-duration: 0.72s;
+                animation-fill-mode: both;
+                animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid.animando .ficha-subtitulo { animation-delay: 0.10s; }
+            .servicios-mobile-state-ficha .ficha-grid.animando .ficha-lista li:nth-child(1) { animation-delay: 0.18s; }
+            .servicios-mobile-state-ficha .ficha-grid.animando .ficha-lista li:nth-child(2) { animation-delay: 0.26s; }
+            .servicios-mobile-state-ficha .ficha-grid.animando .ficha-lista li:nth-child(3) { animation-delay: 0.34s; }
+            .servicios-mobile-state-ficha .ficha-grid.animando .ficha-lista li:nth-child(4) { animation-delay: 0.42s; }
+            .servicios-mobile-state-ficha .ficha-grid.animando .ficha-lista li:nth-child(5) { animation-delay: 0.50s; }
+            .servicios-mobile-state-ficha .ficha-grid.animando .ficha-lista li:nth-child(6) { animation-delay: 0.58s; }
+
+            @keyframes ficha-mobile-aparece-suave {
+                from {
+                    opacity: 0;
+                    transform: translateY(8px);
+                    filter: blur(3px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                    filter: blur(0);
+                }
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .servicio-ficha {
+                    padding-top: clamp(15px, 3.4dvh, 22px);
+                    padding-bottom: clamp(14px, 3dvh, 20px);
+                }
+
+                .servicios-mobile-state-ficha .ficha-grid {
+                    gap: clamp(7px, 1.25dvh, 10px);
+                }
+
+                .servicios-mobile-state-ficha .ficha-titulo {
+                    font-size: clamp(1rem, 4.8vw, 1.32rem);
+                }
+
+                .servicios-mobile-state-ficha .ficha-lista {
+                    font-size: clamp(0.78rem, 3.45vw, 0.9rem);
+                    line-height: 1.29;
+                }
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V29: ficha final full-screen sin card + lista sin viñetas === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha {
+                padding-top: 0;
+                padding-bottom: 0;
+                background:
+                    linear-gradient(180deg, rgba(10, 25, 47, 0.86) 0%, rgba(10, 25, 47, 0.94) 48%, rgba(10, 25, 47, 0.98) 100%),
+                    var(--servicio-fondo, none) center / cover no-repeat;
+            }
+
+            .servicios-mobile-state-ficha .servicios-panel .container {
+                width: 100%;
+                max-width: none;
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha {
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                background:
+                    linear-gradient(180deg, rgba(10, 25, 47, 0.82) 0%, rgba(10, 25, 47, 0.90) 44%, rgba(10, 25, 47, 0.97) 100%),
+                    var(--servicio-fondo, none) center / cover no-repeat;
+                padding: clamp(36px, 6.2dvh, 52px) clamp(24px, 7vw, 34px) max(24px, env(safe-area-inset-bottom));
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha::before {
+                opacity: 0.18;
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha::after {
+                inset: 0;
+                border-radius: 0;
+                background:
+                    radial-gradient(circle at 50% 4%, rgba(197, 160, 89, 0.10), transparent 26%),
+                    linear-gradient(180deg, rgba(10, 25, 47, 0.72) 0%, rgba(10, 25, 47, 0.88) 45%, rgba(10, 25, 47, 0.98) 100%),
+                    var(--servicio-fondo, none) center / cover no-repeat;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista {
+                list-style: none;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista li {
+                padding-left: 0;
+                margin-bottom: clamp(7px, 1.1dvh, 10px);
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .servicio-ficha {
+                    padding-top: clamp(28px, 5dvh, 40px);
+                    padding-bottom: max(20px, env(safe-area-inset-bottom));
+                }
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V30: acciones ficha final siempre visibles en zona inferior segura === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha .servicio-ficha {
+                padding-bottom: 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid,
+            .servicios-mobile-state-ficha .ficha-cuerpo {
+                min-height: 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista {
+                flex: 1 1 auto;
+                min-height: 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones {
+                flex: 0 0 auto;
+                margin-top: auto;
+                gap: 8px;
+                padding-bottom: max(34px, env(safe-area-inset-bottom));
+            }
+
+            .servicios-mobile-state-ficha .ficha-btn,
+            .servicios-mobile-state-ficha .servicios-mobile-reselect {
+                min-height: 44px;
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .ficha-acciones {
+                    gap: 7px;
+                    padding-bottom: max(28px, env(safe-area-inset-bottom));
+                }
+
+                .servicios-mobile-state-ficha .ficha-btn,
+                .servicios-mobile-state-ficha .servicios-mobile-reselect {
+                    min-height: 42px;
+                }
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V31: ficha final en dos conjuntos independientes === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha .servicio-ficha {
+                padding: clamp(32px, 5.8dvh, 48px) clamp(24px, 7vw, 34px) 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid {
+                height: 100%;
+                min-height: 0;
+                display: flex;
+                flex-direction: column;
+                gap: clamp(10px, 1.7dvh, 14px);
+                padding-bottom: calc(126px + max(24px, env(safe-area-inset-bottom)));
+                box-sizing: border-box;
+            }
+
+            .servicios-mobile-state-ficha .ficha-header {
+                flex: 0 0 auto;
+            }
+
+            .servicios-mobile-state-ficha .ficha-cuerpo {
+                flex: 1 1 auto;
+                min-height: 0;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                overflow: hidden;
+            }
+
+            .servicios-mobile-state-ficha .ficha-contenido {
+                display: contents;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista {
+                flex: 1 1 auto;
+                min-height: 0;
+                overflow-y: auto;
+                padding-bottom: clamp(6px, 1.1dvh, 10px);
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones {
+                position: fixed;
+                left: clamp(24px, 7vw, 34px);
+                right: clamp(24px, 7vw, 34px);
+                bottom: max(24px, env(safe-area-inset-bottom));
+                z-index: 2400;
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 9px;
+                margin: 0;
+                padding: 0;
+                border: 0 !important;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .servicios-mobile-state-ficha .ficha-btn,
+            .servicios-mobile-state-ficha .servicios-mobile-reselect {
+                width: 100%;
+                min-width: 0;
+                min-height: 44px;
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .servicio-ficha {
+                    padding-top: clamp(26px, 4.8dvh, 38px);
+                }
+
+                .servicios-mobile-state-ficha .ficha-grid {
+                    gap: clamp(8px, 1.35dvh, 11px);
+                    padding-bottom: calc(116px + max(20px, env(safe-area-inset-bottom)));
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones {
+                    bottom: max(20px, env(safe-area-inset-bottom));
+                    gap: 8px;
+                }
+
+                .servicios-mobile-state-ficha .ficha-btn,
+                .servicios-mobile-state-ficha .servicios-mobile-reselect {
+                    min-height: 42px;
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha .ficha-grid {
+                    padding-bottom: calc(108px + max(18px, env(safe-area-inset-bottom)));
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones {
+                    bottom: max(18px, env(safe-area-inset-bottom));
+                    gap: 7px;
+                }
+
+                .servicios-mobile-state-ficha .ficha-btn,
+                .servicios-mobile-state-ficha .servicios-mobile-reselect {
+                    min-height: 40px;
+                }
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V32: SM1 reservado común + textos centrados === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha {
+                --servicios-sm1-alto: clamp(318px, 46dvh, 372px);
+                --servicios-sm1-titulo-alto: clamp(34px, 6.5dvh, 54px);
+            }
+
+            .servicios-mobile-state-ficha .ficha-header {
+                flex: 0 0 var(--servicios-sm1-titulo-alto);
+                min-height: var(--servicios-sm1-titulo-alto);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .servicios-mobile-state-ficha .ficha-cuerpo {
+                flex: 0 0 var(--servicios-sm1-alto);
+                height: var(--servicios-sm1-alto);
+                min-height: var(--servicios-sm1-alto);
+                max-height: var(--servicios-sm1-alto);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                overflow: hidden;
+            }
+
+            .servicios-mobile-state-ficha .ficha-subtitulo {
+                width: 100%;
+                color: #F5F7FA;
+                text-align: center;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista {
+                width: 100%;
+                flex: 0 1 auto;
+                min-height: 0;
+                max-height: calc(var(--servicios-sm1-alto) - clamp(38px, 7dvh, 58px));
+                margin: 0;
+                padding-left: 0;
+                padding-right: 0;
+                overflow-y: auto;
+                list-style: none;
+                color: #F5F7FA;
+                text-align: center;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista li {
+                padding-left: 0;
+                color: #F5F7FA;
+                text-align: center;
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm1-alto: clamp(286px, 44dvh, 328px);
+                    --servicios-sm1-titulo-alto: clamp(30px, 6dvh, 46px);
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm1-alto: clamp(258px, 42dvh, 292px);
+                    --servicios-sm1-titulo-alto: clamp(28px, 5.5dvh, 40px);
+                }
+            }
+        }
+
+        /* === SERVICIOS MÓVIL V33: SM2 independiente sin transform/animación de botones === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha {
+                --servicios-sm2-bottom: clamp(56px, 8dvh, 76px);
+                --servicios-sm2-reserva: calc(104px + var(--servicios-sm2-bottom));
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid.animando {
+                animation: none !important;
+                transform: none !important;
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid {
+                padding-bottom: var(--servicios-sm2-reserva);
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones {
+                position: fixed;
+                left: clamp(24px, 7vw, 34px);
+                right: clamp(24px, 7vw, 34px);
+                bottom: var(--servicios-sm2-bottom);
+                z-index: 2600;
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 9px;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: 0 !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                transform: none !important;
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones .ficha-btn,
+            .servicios-mobile-state-ficha .ficha-acciones .servicios-mobile-reselect {
+                width: 100%;
+                min-width: 0;
+                min-height: 44px;
+                transform: none !important;
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones .ficha-btn.boton-animando {
+                animation: none !important;
+                opacity: 1 !important;
+                filter: none !important;
+                transform: none !important;
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm2-bottom: clamp(50px, 7.6dvh, 68px);
+                    --servicios-sm2-reserva: calc(98px + var(--servicios-sm2-bottom));
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones {
+                    gap: 8px;
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones .ficha-btn,
+                .servicios-mobile-state-ficha .ficha-acciones .servicios-mobile-reselect {
+                    min-height: 42px;
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm2-bottom: clamp(44px, 7.2dvh, 60px);
+                    --servicios-sm2-reserva: calc(90px + var(--servicios-sm2-bottom));
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones {
+                    gap: 7px;
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones .ficha-btn,
+                .servicios-mobile-state-ficha .ficha-acciones .servicios-mobile-reselect {
+                    min-height: 40px;
+                }
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V41: alto útil para fichas largas Penal/Tributario === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha .servicios-layout:has(.selector-item.active[data-servicio="penal"]),
+            .servicios-mobile-state-ficha .servicios-layout:has(.selector-item.active[data-servicio="tributario"]) {
+                --servicios-sm1-cuerpo-alto: clamp(270px, 37dvh, 318px);
+                --servicios-sm1-centro-offset: clamp(
+                    108px,
+                    calc(50dvh - (var(--servicios-sm1-cuerpo-alto) / 2) - 10px),
+                    144px
+                );
+            }
+
+            .servicios-mobile-state-ficha .servicios-layout:has(.selector-item.active[data-servicio="penal"]) .ficha-lista,
+            .servicios-mobile-state-ficha .servicios-layout:has(.selector-item.active[data-servicio="tributario"]) .ficha-lista {
+                max-height: calc(var(--servicios-sm1-cuerpo-alto) - clamp(34px, 6dvh, 50px));
+                padding-bottom: clamp(6px, 1dvh, 10px);
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .servicios-layout:has(.selector-item.active[data-servicio="penal"]),
+                .servicios-mobile-state-ficha .servicios-layout:has(.selector-item.active[data-servicio="tributario"]) {
+                    --servicios-sm1-cuerpo-alto: clamp(244px, 36dvh, 284px);
+                    --servicios-sm1-centro-offset: clamp(
+                        88px,
+                        calc(50dvh - (var(--servicios-sm1-cuerpo-alto) / 2) - 10px),
+                        118px
+                    );
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha .servicios-layout:has(.selector-item.active[data-servicio="penal"]),
+                .servicios-mobile-state-ficha .servicios-layout:has(.selector-item.active[data-servicio="tributario"]) {
+                    --servicios-sm1-cuerpo-alto: clamp(218px, 35dvh, 248px);
+                    --servicios-sm1-centro-offset: clamp(
+                        60px,
+                        calc(50dvh - (var(--servicios-sm1-cuerpo-alto) / 2) - 10px),
+                        86px
+                    );
+                }
+            }
+        }
+
+
+
+
         @media (prefers-reduced-motion: reduce) {
             .servicio-ficha::before,
             .ficha-grid.animando .ficha-titulo,
@@ -1352,9 +2899,398 @@
                 padding: 9px 16px;
             }
         }
+
+
+        /* === SERVICIOS MÓVIL V34: SM1 compacto + SM2 elevado según referencia visual === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha {
+                --servicios-sm1-cuerpo-alto: clamp(214px, 31dvh, 250px);
+                --servicios-sm2-bottom: clamp(78px, 11dvh, 104px);
+                --servicios-sm2-reserva: 0px;
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha {
+                padding-top: clamp(34px, 6.2dvh, 52px);
+                padding-bottom: 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid {
+                height: 100%;
+                min-height: 0;
+                padding-bottom: 0 !important;
+                gap: clamp(7px, 1.2dvh, 10px);
+                justify-content: flex-start;
+                box-sizing: border-box;
+            }
+
+            .servicios-mobile-state-ficha .ficha-header {
+                flex: 0 0 auto;
+                min-height: 0;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .servicios-mobile-state-ficha .ficha-cuerpo {
+                flex: 0 0 var(--servicios-sm1-cuerpo-alto);
+                height: var(--servicios-sm1-cuerpo-alto);
+                min-height: var(--servicios-sm1-cuerpo-alto);
+                max-height: var(--servicios-sm1-cuerpo-alto);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista {
+                flex: 0 1 auto;
+                max-height: calc(var(--servicios-sm1-cuerpo-alto) - clamp(42px, 7dvh, 60px));
+                overflow-y: auto;
+                padding-bottom: 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones {
+                bottom: var(--servicios-sm2-bottom) !important;
+                left: clamp(29px, 8vw, 42px);
+                right: clamp(29px, 8vw, 42px);
+                gap: 9px;
+            }
+
+            .servicios-mobile-state-ficha .ficha-acciones .ficha-btn,
+            .servicios-mobile-state-ficha .ficha-acciones .servicios-mobile-reselect {
+                min-height: 44px;
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm1-cuerpo-alto: clamp(198px, 30dvh, 228px);
+                    --servicios-sm2-bottom: clamp(70px, 10.4dvh, 92px);
+                }
+
+                .servicios-mobile-state-ficha .servicio-ficha {
+                    padding-top: clamp(30px, 5.5dvh, 44px);
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones {
+                    gap: 8px;
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones .ficha-btn,
+                .servicios-mobile-state-ficha .ficha-acciones .servicios-mobile-reselect {
+                    min-height: 42px;
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm1-cuerpo-alto: clamp(184px, 29dvh, 210px);
+                    --servicios-sm2-bottom: clamp(64px, 10dvh, 82px);
+                }
+
+                .servicios-mobile-state-ficha .servicio-ficha {
+                    padding-top: clamp(26px, 5dvh, 38px);
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones {
+                    gap: 7px;
+                }
+
+                .servicios-mobile-state-ficha .ficha-acciones .ficha-btn,
+                .servicios-mobile-state-ficha .ficha-acciones .servicios-mobile-reselect {
+                    min-height: 40px;
+                }
+            }
+        }
+
+        /* === SERVICIOS MÓVIL V35: centrado vertical de SM1 fase 3 === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha .ficha-grid {
+                padding-top: clamp(14px, 2.7dvh, 24px);
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .ficha-grid {
+                    padding-top: clamp(10px, 2.2dvh, 18px);
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha .ficha-grid {
+                    padding-top: clamp(7px, 1.8dvh, 14px);
+                }
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V36: baja visualmente SM1 sin tocar SM2 === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha .ficha-grid {
+                padding-top: clamp(34px, 6.2dvh, 54px);
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .ficha-grid {
+                    padding-top: clamp(24px, 5dvh, 40px);
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha .ficha-grid {
+                    padding-top: clamp(16px, 4dvh, 30px);
+                }
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V37: baja SM1 un poco más sin tocar SM2 === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha .ficha-grid {
+                padding-top: clamp(46px, 7.6dvh, 68px);
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .ficha-grid {
+                    padding-top: clamp(34px, 6.2dvh, 52px);
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha .ficha-grid {
+                    padding-top: clamp(22px, 4.9dvh, 38px);
+                }
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V38: baja SM1 real sin tocar SM2 === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha .ficha-header {
+                margin-top: clamp(28px, 4.4dvh, 40px);
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha .ficha-header {
+                    margin-top: clamp(18px, 3.4dvh, 30px);
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha .ficha-header {
+                    margin-top: clamp(10px, 2.6dvh, 22px);
+                }
+            }
+        }
+
+
+        /* === SERVICIOS MÓVIL V39: centro matemático SM1 sin tocar SM2 === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha {
+                --servicios-sm1-centro-offset: clamp(
+                    128px,
+                    calc(50dvh - (var(--servicios-sm1-cuerpo-alto) / 2) - 10px),
+                    156px
+                );
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid {
+                padding-top: var(--servicios-sm1-centro-offset) !important;
+            }
+
+            .servicios-mobile-state-ficha .ficha-header {
+                margin-top: 0 !important;
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm1-centro-offset: clamp(
+                        104px,
+                        calc(50dvh - (var(--servicios-sm1-cuerpo-alto) / 2) - 10px),
+                        130px
+                    );
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm1-centro-offset: clamp(
+                        72px,
+                        calc(50dvh - (var(--servicios-sm1-cuerpo-alto) / 2) - 10px),
+                        96px
+                    );
+                }
+            }
+        }
+
+        /* === SERVICIOS MOVIL V44: tipografia SM1 uniforme y legible === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha {
+                --servicios-sm2-alto-real: 96px;
+                --servicios-sm1-sm2-aire: clamp(18px, 3dvh, 28px);
+            }
+
+            .servicios-mobile-state-ficha .servicio-ficha {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .servicios-mobile-state-ficha .ficha-grid {
+                width: 100%;
+                height: calc(100dvh - var(--servicios-sm2-bottom) - var(--servicios-sm2-alto-real) - var(--servicios-sm1-sm2-aire));
+                min-height: 0;
+                max-height: none;
+                padding-top: clamp(8px, 1.7dvh, 14px) !important;
+                padding-bottom: 0 !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: clamp(9px, 1.45dvh, 13px);
+                overflow: visible;
+                box-sizing: border-box;
+            }
+
+            .servicios-mobile-state-ficha .ficha-header {
+                flex: 0 0 auto;
+                min-height: 0;
+                height: auto;
+            }
+
+            .servicios-mobile-state-ficha .ficha-titulo {
+                font-size: clamp(1.16rem, 5.45vw, 1.54rem);
+                line-height: 1.08;
+                letter-spacing: -0.18px;
+            }
+
+            .servicios-mobile-state-ficha .ficha-cuerpo {
+                flex: 0 0 auto;
+                height: auto;
+                min-height: 0;
+                max-height: none !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                overflow: visible !important;
+            }
+
+            .servicios-mobile-state-ficha .ficha-contenido {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .servicios-mobile-state-ficha .ficha-subtitulo {
+                margin-bottom: clamp(8px, 1.2dvh, 11px);
+                font-size: clamp(0.9rem, 3.85vw, 1rem);
+                line-height: 1.24;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista {
+                flex: 0 0 auto;
+                max-height: none !important;
+                overflow: visible !important;
+                padding-bottom: 0 !important;
+                font-size: clamp(0.79rem, 3.35vw, 0.91rem);
+                line-height: 1.3;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista::-webkit-scrollbar {
+                display: none;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista li {
+                margin-bottom: clamp(4px, 0.65dvh, 6px);
+            }
+
+            @media (max-height: 700px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm2-alto-real: 92px;
+                    --servicios-sm1-sm2-aire: clamp(16px, 2.7dvh, 24px);
+                }
+
+                .servicios-mobile-state-ficha .ficha-grid {
+                    padding-top: clamp(5px, 1.25dvh, 10px) !important;
+                    gap: clamp(7px, 1.15dvh, 10px);
+                }
+
+                .servicios-mobile-state-ficha .ficha-titulo {
+                    font-size: clamp(1.1rem, 5.15vw, 1.44rem);
+                    line-height: 1.07;
+                }
+
+                .servicios-mobile-state-ficha .ficha-subtitulo {
+                    margin-bottom: clamp(6px, 0.95dvh, 8px);
+                    font-size: clamp(0.86rem, 3.6vw, 0.94rem);
+                    line-height: 1.2;
+                }
+
+                .servicios-mobile-state-ficha .ficha-lista {
+                    font-size: clamp(0.74rem, 3.12vw, 0.84rem);
+                    line-height: 1.23;
+                }
+
+                .servicios-mobile-state-ficha .ficha-lista li {
+                    margin-bottom: clamp(3px, 0.45dvh, 5px);
+                }
+            }
+
+            @media (max-height: 620px) {
+                .servicios-mobile-state-ficha {
+                    --servicios-sm2-alto-real: 88px;
+                    --servicios-sm1-sm2-aire: clamp(14px, 2.4dvh, 20px);
+                }
+
+                .servicios-mobile-state-ficha .ficha-grid {
+                    padding-top: clamp(3px, 0.9dvh, 7px) !important;
+                    gap: clamp(5px, 0.9dvh, 8px);
+                }
+
+                .servicios-mobile-state-ficha .ficha-titulo {
+                    font-size: clamp(1.04rem, 4.85vw, 1.34rem);
+                    line-height: 1.06;
+                }
+
+                .servicios-mobile-state-ficha .ficha-subtitulo {
+                    margin-bottom: clamp(4px, 0.7dvh, 6px);
+                    font-size: clamp(0.8rem, 3.35vw, 0.88rem);
+                    line-height: 1.18;
+                }
+
+                .servicios-mobile-state-ficha .ficha-lista {
+                    font-size: clamp(0.7rem, 2.95vw, 0.78rem);
+                    line-height: 1.18;
+                }
+
+                .servicios-mobile-state-ficha .ficha-lista li {
+                    margin-bottom: clamp(2px, 0.3dvh, 4px);
+                }
+            }
+        }
+
+        /* === SERVICIOS MOVIL V48: ajuste fino SM1 desde V47 === */
+        @media (max-width: 560px) and (orientation: portrait) {
+            .servicios-mobile-state-ficha .ficha-titulo {
+                font-size: clamp(1.166rem, 5.616vw, 1.577rem) !important;
+                line-height: 1.06 !important;
+            }
+
+            .servicios-mobile-state-ficha .ficha-subtitulo {
+                font-size: clamp(0.972rem, 4.266vw, 1.08rem) !important;
+                line-height: 1.18 !important;
+            }
+
+            .servicios-mobile-state-ficha .ficha-lista {
+                font-size: clamp(0.836rem, 3.723vw, 1rem) !important;
+                line-height: 1.24 !important;
+            }
+        }
+
 </style>
 
-    <main class="servicios-page">
+    <main class="servicios-page servicios-mobile-state-inicio">
         <section class="servicios-hero">
             <div class="container">
                 <h1>Servicios</h1>
@@ -1363,6 +3299,14 @@
                     Cada servicio muestra sus principales materias de apoyo y permite avanzar directamente a una consulta.
                 </p>
             </div>
+        </section>
+
+        <section class="servicios-mobile-welcome" aria-label="Bienvenida a Servicios" style="display: none;">
+            <h2 class="servicios-mobile-title">Bienvenido a Servicios</h2>
+            <p class="servicios-mobile-copy">
+                Por favor, pinche el boton y seleccione para obtener orientacion e informacion de nuestros servicios.
+            </p>
+            <button class="servicios-mobile-open" type="button">Seleccionar servicio</button>
         </section>
 
         <section class="servicios-panel">
@@ -1388,13 +3332,17 @@
                             <button class="selector-item" type="button" data-servicio="herencias">Herencias y Sucesiones</button>
                             <button class="selector-item" type="button" data-servicio="compliance">Compliance y Delitos Económicos</button>
                         </div>
+
+                        <div class="servicios-mobile-actions" style="display: none;">
+                            <button class="servicios-mobile-back" type="button">Volver</button>
+                        </div>
                     </aside>
 
                     <article class="servicio-ficha modo-inicial" id="servicio-ficha" aria-live="polite">
                         <div class="ficha-inicial" id="ficha-inicial">
                             <div class="ficha-inicial-panel">
                                 <div class="ficha-inicial-texto">
-                                    <h2>Esperando tu elección</h2>
+                                    <h2>Selecciona</h2>
                                     <div class="ficha-linea-espera"></div>
                                 </div>
                             </div>
@@ -1418,6 +3366,7 @@
                                 </ul>
                                 <div class="ficha-acciones">
                                     <a href="/contacto" class="ficha-btn">Agenda tu consulta</a>
+                                    <button class="servicios-mobile-reselect" type="button" style="display: none;">Seleccionar otro servicio</button>
                                 </div>
                             </div>
 
@@ -1435,6 +3384,7 @@
                             </div>
                         </div>
                     </article>
+
                 </div>
             </div>
         </section>
@@ -1644,6 +3594,11 @@
             if (!fichaBoton) return;
 
             fichaBoton.classList.remove("boton-animando", ...animacionesBoton);
+
+            if (window.matchMedia("(max-width: 560px) and (orientation: portrait)").matches) {
+                return;
+            }
+
             void fichaBoton.offsetWidth;
 
             let animacionesDisponibles = animacionesBoton.filter(function(animacion) {
@@ -1681,6 +3636,10 @@
             fichaImagen.src = servicio.imagen;
             fichaImagen.alt = servicio.alt;
             fichaImagen.style.opacity = "1";
+
+            if (servicioFicha && servicio.imagen) {
+                servicioFicha.style.setProperty("--servicio-fondo", "url('" + servicio.imagen + "')");
+            }
         }
 
         function cambiarServicio(servicioId) {
@@ -1715,15 +3674,470 @@
             }, 80);
         }
 
+        const selectorLista = document.querySelector(".selector-lista");
+        const selectorCaja = document.querySelector(".servicios-selector");
+        const selectorMovilQuery = window.matchMedia("(max-width: 560px)");
+        const selectorMovilVerticalQuery = window.matchMedia("(max-width: 560px) and (orientation: portrait)");
+        const serviciosPage = document.querySelector(".servicios-page");
+        const botonAbrirSelectorMovil = document.querySelector(".servicios-mobile-open");
+        const botonVolverSelectorMovil = document.querySelector(".servicios-mobile-back");
+        const botonReselectorMovil = document.querySelector(".servicios-mobile-reselect");
+        let selectorMovilScrollProgramado = false;
+        let selectorMovilTimer = null;
+        let selectorMovilUsuarioInteractuo = false;
+
+        function esFlujoMovilVertical() {
+            return selectorMovilVerticalQuery.matches;
+        }
+
+        function aplicarEstadoServiciosMovil(estado) {
+            if (!serviciosPage || !esFlujoMovilVertical()) return;
+
+            serviciosPage.classList.remove(
+                "servicios-mobile-state-inicio",
+                "servicios-mobile-state-selecting",
+                "servicios-mobile-state-ficha"
+            );
+            serviciosPage.classList.add("servicios-mobile-state-" + estado);
+            document.body.classList.remove(
+                "servicios-mobile-inicio-active",
+                "servicios-mobile-overlay-active",
+                "servicios-mobile-ficha-active"
+            );
+
+            if (estado === "inicio") {
+                document.body.classList.add("servicios-mobile-inicio-active");
+            }
+
+            if (estado === "selecting") {
+                document.body.classList.add("servicios-mobile-overlay-active");
+            }
+
+            if (estado === "ficha") {
+                document.body.classList.add("servicios-mobile-ficha-active");
+            }
+        }
+
+        if (esFlujoMovilVertical()) {
+            aplicarEstadoServiciosMovil("inicio");
+        }
+
+        let serviciosAplicandoHistorial = false;
+        let serviciosHistorialInicializado = false;
+        let serviciosSaliendoAHome = false;
+
+        function esRutaServiciosActual() {
+            return window.location.pathname === "/servicios";
+        }
+
+        function puedeUsarHistorialServiciosMovil() {
+            return Boolean(
+                esRutaServiciosActual() &&
+                esFlujoMovilVertical() &&
+                window.history &&
+                typeof window.history.pushState === "function" &&
+                typeof window.history.replaceState === "function"
+            );
+        }
+
+        function obtenerServicioActivoMovil() {
+            const activo = document.querySelector(".selector-item.active");
+            return activo ? activo.dataset.servicio : null;
+        }
+
+        function crearEstadoHistorialServicios(fase, servicioId) {
+            return {
+                bctaServicios: true,
+                fase: fase,
+                servicioId: servicioId || null
+            };
+        }
+
+        function obtenerEstadoHistorialServicios() {
+            const estado = window.history && window.history.state;
+            return estado && estado.bctaServicios ? estado : null;
+        }
+
+        function estadosServiciosIguales(a, b) {
+            return Boolean(
+                a &&
+                b &&
+                a.bctaServicios &&
+                b.bctaServicios &&
+                a.fase === b.fase &&
+                (a.servicioId || null) === (b.servicioId || null)
+            );
+        }
+
+        function registrarHistorialServiciosMovil(fase, modo, servicioId) {
+            if (!puedeUsarHistorialServiciosMovil() || serviciosAplicandoHistorial) return;
+
+            const nuevoEstado = crearEstadoHistorialServicios(fase, servicioId);
+            const estadoActual = obtenerEstadoHistorialServicios();
+
+            if (estadosServiciosIguales(estadoActual, nuevoEstado)) return;
+
+            if (modo === "replace") {
+                window.history.replaceState(nuevoEstado, "", window.location.href);
+                return;
+            }
+
+            window.history.pushState(nuevoEstado, "", window.location.href);
+        }
+
+        function cerrarMenuGlobalServiciosMovil() {
+            const offcanvas = document.getElementById("ls-offcanvas");
+            if (offcanvas) {
+                offcanvas.classList.remove("active");
+            }
+
+            document.body.classList.remove("menu-open", "offcanvas-open", "modal-open");
+        }
+
+        function salirAHomeServiciosMovil() {
+            if (serviciosSaliendoAHome) return;
+
+            serviciosSaliendoAHome = true;
+            cerrarMenuGlobalServiciosMovil();
+            window.location.href = "/home";
+        }
+
+        function aplicarEstadoDesdeHistorialServicios(estado) {
+            if (!estado || !estado.bctaServicios || !esRutaServiciosActual() || !esFlujoMovilVertical()) return;
+
+            serviciosAplicandoHistorial = true;
+            cerrarMenuGlobalServiciosMovil();
+            limpiarPendienteServiciosMovil();
+
+            if (estado.fase === "salida") {
+                salirAHomeServiciosMovil();
+                serviciosAplicandoHistorial = false;
+                return;
+            }
+
+            if (estado.fase === "inicio") {
+                aplicarEstadoServiciosMovil("inicio");
+            }
+
+            if (estado.fase === "selecting") {
+                aplicarEstadoServiciosMovil("selecting");
+            }
+
+            if (estado.fase === "ficha") {
+                const servicioId = estado.servicioId || obtenerServicioActivoMovil();
+                const item = servicioId ? document.querySelector('.selector-item[data-servicio="' + servicioId + '"]') : null;
+
+                if (item) {
+                    seleccionarServicioDesdeItem(item, false, "auto");
+                    aplicarEstadoServiciosMovil("ficha");
+                } else {
+                    aplicarEstadoServiciosMovil("selecting");
+                }
+            }
+
+            serviciosAplicandoHistorial = false;
+        }
+
+        function iniciarHistorialServiciosMovil() {
+            if (!puedeUsarHistorialServiciosMovil() || serviciosHistorialInicializado) return;
+
+            window.history.replaceState(
+                crearEstadoHistorialServicios("salida", null),
+                "",
+                window.location.href
+            );
+            window.history.pushState(
+                crearEstadoHistorialServicios("inicio", null),
+                "",
+                window.location.href
+            );
+            serviciosHistorialInicializado = true;
+        }
+
+        function volverHistorialServiciosMovil() {
+            if (!puedeUsarHistorialServiciosMovil()) return false;
+
+            const estadoActual = obtenerEstadoHistorialServicios();
+            if (!estadoActual || estadoActual.fase === "inicio") return false;
+
+            window.history.back();
+            return true;
+        }
+
+        iniciarHistorialServiciosMovil();
+
+        window.addEventListener("popstate", function(event) {
+            if (!esRutaServiciosActual() || !esFlujoMovilVertical()) return;
+            if (!event.state || !event.state.bctaServicios) return;
+
+            aplicarEstadoDesdeHistorialServicios(event.state);
+        });
+
+        if (selectorMovilVerticalQuery.addEventListener) {
+            selectorMovilVerticalQuery.addEventListener("change", function(event) {
+                if (event.matches) {
+                    iniciarHistorialServiciosMovil();
+                }
+            });
+        } else if (selectorMovilVerticalQuery.addListener) {
+            selectorMovilVerticalQuery.addListener(function(event) {
+                if (event.matches) {
+                    iniciarHistorialServiciosMovil();
+                }
+            });
+        }
+
+        function limpiarPendienteServiciosMovil() {
+            selectorItems.forEach(function(item) {
+                item.classList.remove("pending");
+            });
+        }
+
+        function abrirSelectorServiciosMovil() {
+            if (!esFlujoMovilVertical()) return;
+
+            if (serviciosPage && serviciosPage.classList.contains("servicios-mobile-state-ficha")) {
+                if (volverHistorialServiciosMovil()) return;
+            }
+
+            limpiarPendienteServiciosMovil();
+            aplicarEstadoServiciosMovil("selecting");
+            registrarHistorialServiciosMovil("selecting", "push", null);
+        }
+
+        function volverSelectorServiciosMovil() {
+            if (!esFlujoMovilVertical()) return;
+
+            if (volverHistorialServiciosMovil()) return;
+
+            limpiarPendienteServiciosMovil();
+            aplicarEstadoServiciosMovil("inicio");
+            registrarHistorialServiciosMovil("inicio", "replace", null);
+        }
+
+        function abrirFichaServiciosMovil(item) {
+            if (!item || !esFlujoMovilVertical()) return;
+
+            seleccionarServicioDesdeItem(item, false, "auto");
+            limpiarPendienteServiciosMovil();
+            aplicarEstadoServiciosMovil("ficha");
+            registrarHistorialServiciosMovil("ficha", "push", item.dataset.servicio);
+        }
+
+        function marcarInteraccionSelectorMovil() {
+            if (esFlujoMovilVertical()) return;
+            if (!selectorMovilQuery.matches || !selectorCaja) return;
+
+            selectorMovilUsuarioInteractuo = true;
+            selectorCaja.classList.add("selector-tocado");
+        }
+
+        function limpiarPreviewSelectorMovil() {
+            selectorItems.forEach(function(item) {
+                item.classList.remove("selector-preview");
+            });
+        }
+
+        function obtenerItemCentradoMovil() {
+            if (!selectorLista) return null;
+
+            const listaRect = selectorLista.getBoundingClientRect();
+            const centroLista = listaRect.top + (listaRect.height / 2);
+            let itemMasCercano = null;
+            let distanciaMasCercana = Infinity;
+
+            selectorItems.forEach(function(item) {
+                const itemRect = item.getBoundingClientRect();
+                const centroItem = itemRect.top + (itemRect.height / 2);
+                const distancia = Math.abs(centroItem - centroLista);
+
+                if (distancia < distanciaMasCercana) {
+                    distanciaMasCercana = distancia;
+                    itemMasCercano = item;
+                }
+            });
+
+            return itemMasCercano;
+        }
+
+        function actualizarPreviewSelectorMovil() {
+            if (esFlujoMovilVertical()) return;
+            if (!selectorMovilQuery.matches || !selectorMovilUsuarioInteractuo) return;
+
+            const itemCentrado = obtenerItemCentradoMovil();
+            limpiarPreviewSelectorMovil();
+
+            if (itemCentrado) {
+                itemCentrado.classList.add("selector-preview");
+            }
+        }
+
+        function centrarItemSelectorMovil(item, comportamiento) {
+            if (esFlujoMovilVertical()) return;
+            if (!item || !selectorLista || !selectorMovilQuery.matches) return;
+
+            selectorMovilScrollProgramado = true;
+            item.scrollIntoView({
+                block: "center",
+                inline: "nearest",
+                behavior: comportamiento || "smooth"
+            });
+
+            window.setTimeout(function() {
+                selectorMovilScrollProgramado = false;
+                if (selectorCaja) {
+                    selectorCaja.classList.remove("selector-moviendo");
+                }
+            }, 420);
+        }
+
+        function seleccionarServicioDesdeItem(item, centrarEnMovil, comportamiento) {
+            if (!item) return;
+
+            selectorItems.forEach(function(btn) {
+                btn.classList.remove("active");
+            });
+
+            limpiarPreviewSelectorMovil();
+            item.classList.add("active");
+            cambiarServicio(item.dataset.servicio);
+
+            if (centrarEnMovil && selectorMovilQuery.matches) {
+                centrarItemSelectorMovil(item, comportamiento);
+            }
+        }
+
+        function cerrarSeleccionMovilPorCentro() {
+            if (!selectorMovilQuery.matches || selectorMovilScrollProgramado || !selectorMovilUsuarioInteractuo) return;
+
+            const itemCentrado = obtenerItemCentradoMovil();
+            if (!itemCentrado) return;
+
+            seleccionarServicioDesdeItem(itemCentrado, true, "smooth");
+        }
+
         selectorItems.forEach(function(item) {
             item.addEventListener("click", function() {
-                selectorItems.forEach(function(btn) {
-                    btn.classList.remove("active");
-                });
+                if (esFlujoMovilVertical()) {
+                    abrirFichaServiciosMovil(item);
+                    return;
+                }
 
-                item.classList.add("active");
-                cambiarServicio(item.dataset.servicio);
+                marcarInteraccionSelectorMovil();
+                seleccionarServicioDesdeItem(item, true, "smooth");
             });
         });
+
+
+
+        let serviciosInicioTouchY = 0;
+        let serviciosInicioTouchX = 0;
+        let serviciosInicioRedirigiendo = false;
+        let serviciosInicioTouchDesdeBorde = false;
+
+        function esEstadoInicioServiciosMovil() {
+            return Boolean(
+                serviciosPage &&
+                serviciosPage.classList.contains("servicios-mobile-state-inicio") &&
+                esFlujoMovilVertical()
+            );
+        }
+
+        function activarRetornoHomeServiciosMovil() {
+            if (!serviciosPage) return;
+
+            serviciosPage.addEventListener("touchstart", function(event) {
+                if (!esEstadoInicioServiciosMovil() || serviciosInicioRedirigiendo) return;
+                const toque = event.touches && event.touches[0];
+                if (!toque) return;
+                serviciosInicioTouchY = toque.clientY;
+                serviciosInicioTouchX = toque.clientX;
+                serviciosInicioTouchDesdeBorde = toque.clientY < 150;
+            }, { passive: true });
+
+            serviciosPage.addEventListener("touchmove", function(event) {
+                if (!esEstadoInicioServiciosMovil() || serviciosInicioRedirigiendo) return;
+                if (!serviciosInicioTouchDesdeBorde) return;
+                const toque = event.touches && event.touches[0];
+                if (!toque) return;
+
+                const desplazamientoY = toque.clientY - serviciosInicioTouchY;
+                const desplazamientoX = Math.abs(toque.clientX - serviciosInicioTouchX);
+
+                if (desplazamientoY > 78 && desplazamientoX < 52) {
+                    serviciosInicioRedirigiendo = true;
+                    salirAHomeServiciosMovil();
+                }
+            }, { passive: true });
+
+            serviciosPage.addEventListener("touchend", function(event) {
+                if (!esEstadoInicioServiciosMovil() || serviciosInicioRedirigiendo) return;
+                if (!serviciosInicioTouchDesdeBorde) return;
+                const toque = event.changedTouches && event.changedTouches[0];
+                if (!toque) return;
+
+                const desplazamientoY = toque.clientY - serviciosInicioTouchY;
+                const desplazamientoX = Math.abs(toque.clientX - serviciosInicioTouchX);
+                serviciosInicioTouchDesdeBorde = false;
+
+                if (desplazamientoY > 86 && desplazamientoX < 56) {
+                    serviciosInicioRedirigiendo = true;
+                    salirAHomeServiciosMovil();
+                }
+            }, { passive: true });
+        }
+
+        if (botonAbrirSelectorMovil) {
+            botonAbrirSelectorMovil.addEventListener("click", abrirSelectorServiciosMovil);
+        }
+
+        if (botonReselectorMovil) {
+            botonReselectorMovil.addEventListener("click", abrirSelectorServiciosMovil);
+        }
+
+        if (botonVolverSelectorMovil) {
+            botonVolverSelectorMovil.addEventListener("click", volverSelectorServiciosMovil);
+        }
+
+        if (selectorLista) {
+            selectorLista.addEventListener("touchstart", function() {
+                if (esFlujoMovilVertical()) return;
+                marcarInteraccionSelectorMovil();
+                if (selectorCaja) {
+                    selectorCaja.classList.add("selector-moviendo");
+                }
+            }, { passive: true });
+
+            selectorLista.addEventListener("pointerdown", function() {
+                if (esFlujoMovilVertical()) return;
+                marcarInteraccionSelectorMovil();
+                if (selectorCaja) {
+                    selectorCaja.classList.add("selector-moviendo");
+                }
+            });
+
+            selectorLista.addEventListener("scroll", function() {
+                if (esFlujoMovilVertical()) return;
+                if (!selectorMovilQuery.matches) return;
+
+                if (selectorCaja && selectorMovilUsuarioInteractuo) {
+                    selectorCaja.classList.add("selector-moviendo");
+                }
+
+                actualizarPreviewSelectorMovil();
+
+                window.clearTimeout(selectorMovilTimer);
+                selectorMovilTimer = window.setTimeout(function() {
+                    if (selectorCaja) {
+                        selectorCaja.classList.remove("selector-moviendo");
+                    }
+
+                    cerrarSeleccionMovilPorCentro();
+                }, 210);
+            }, { passive: true });
+        }
+
+        activarRetornoHomeServiciosMovil();
+
 </script>
 {% endblock %}
